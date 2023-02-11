@@ -21,12 +21,7 @@
     * The user will be able to save and load their games.
     * The user will be able to undo their moves if they choose to.
 
- > ## Phase II
- > In addition to completing the "Class Diagram" section below, you will need to:
- > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
- > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
- >   * Break down the "Epics" into smaller actionable user stories (i.e. smaller development tasks). Convert them into issues and assign them to team members. Place these in the `TODO` column.
- >   * These cards should represent roughly 7 days worth of development time for your team. Then, once the sprint is over you should be repeating these steps to plan a new sprint, taking you until your second scrum meeting with the reader in phase III.
+
 ## Class Diagram
 <img src="https://i.imgur.com/EbOJZ2s.png" width="860" height="800">
 Inheritance: 
