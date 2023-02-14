@@ -2,7 +2,7 @@
  
 # Chrono Checkers: Battle Through Time
  
- Authors: [Alvin Van De Geijn](https://github.com/avan046), [Ethan Ortega](https://github.com/YoungsterEthan), [Dalton Witt](https://github.com/citrushappy), [Agora Ngelale](https://github.com/AgoraNgelale)
+ Authors: [Alvin Van De Geijn](https://github.com/avan046), [Ethan Ortega](https://github.com/YoungsterEthan), [Dalton Witt](https://github.com/citrushappy), [Agora Ngelale](https://github.com/AgoraNgelale), [Arhum Shahid](https://github.com/codingwitharhum)
 
 ## Project Description
   * Why is it important or interesting to you?
