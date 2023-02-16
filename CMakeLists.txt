@@ -1,28 +1,9 @@
-cmake_minimum_required(VERSION 3.23)
-project(ChronoCheckers)
+﻿# CMakeList.txt : Top-level CMake project file, do global configuration
+# and include sub-projects here.
+#
+cmake_minimum_required (VERSION 3.8)
 
-set(CMAKE_CXX_STANDARD 14)
+project ("CheckersEngine")
 
-include_directories(
-        ${CMAKE_SOURCE_DIR}/SDL2/include/
-        ${CMAKE_SOURCE_DIR}/SDL2_image-2.0.1/include/
-)
-
-
-add_executable(ChronoCheckers
-        Src/Collision.cpp
-        Src/Game.cpp
-        Src/GameObject.cpp
-        Src/main.cpp
-        Src/Map.cpp
-        Src/TextureManager.cpp
-        Src/Vector2D.cpp
-
-        Src/ECS/ColliderComponent.h
-        Src/ECS/Components.h
-        Src/ECS/ECS.h
-        Src/ECS/KeyboardController.h
-        Src/ECS/SpriteComponent.h
-        Src/ECS/TileComponent.h
-        Src/ECS/TransformComponent.h
-        )
+# Include sub-projects.
+add_subdirectory ("CheckersEngine")

@@ -1,0 +1,9 @@
+# ninja log v5
+23	567	6982949603579695	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/Vector2D.cpp.obj	1407db221fe9af19
+13	634	6982949604269847	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/main.cpp.obj	b9cb26618ebc198c
+10	658	6982949604489896	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/GameObject.cpp.obj	95b087d610c6733
+20	663	6982949604549904	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/TextureManager.cpp.obj	e5b0274e4cae3b83
+16	671	6982949604639928	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/Map.cpp.obj	6e1312e3fbc6e92b
+4	809	6982949606000239	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/Collision.cpp.obj	5dccae349b2c07e7
+8	826	6982949606160272	CheckersEngine/CMakeFiles/CheckersEngine.dir/Src/Game.cpp.obj	4fe9368a07e4336c
+826	2158	6982949608190758	CheckersEngine/CheckersEngine.exe	98545e83fde45836
