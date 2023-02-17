@@ -66,7 +66,7 @@ There are no Checker, Board, or Player objects instantiated without a Game objec
  > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
- <img src="https://imgur.com/a/3XxQtYF" width="860" height="800">
+ <img src="https://imgur.com/gallery/3XxQtYF" width="860" height="800">
  ## Installation/Usage
  > Instructions on installing and running your application
  ## Testing
