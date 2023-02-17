@@ -23,14 +23,14 @@
 
 
 ## Class Diagram
-<img src="https://i.imgur.com/EbOJZ2s.png" width="860" height="800">
+<img src="https://i.imgur.com/6sl2MQ5.png" width="860" height="800">
 Inheritance: 
 
 The AI class inherits from the Player class. makeMove() is overridden.
 
 Aggregation: 
 
-Checker, Board, and Player classes aggregate to form the game class
+Checker, Board, and Player classes aggregate to form the game class. The game class controls all aspects of game updates through frames.
 
 Composition:
 
