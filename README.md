@@ -23,7 +23,7 @@
 
 
 ## Class Diagram
-<img src="https://i.imgur.com/EbOJZ2s.png" width="860" height="800">
+<img src="https://i.imgur.com/lI0hO01.png" width="860" height="800">
 Inheritance: 
 
 The AI class inherits from the Player class. makeMove() is overridden.
