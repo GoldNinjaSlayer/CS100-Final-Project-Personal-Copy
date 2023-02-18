@@ -29,5 +29,7 @@ private:
 	bool isRunning = false;
 	int cnt = 0;
 	SDL_Window *window;
+
+	Board *board = new Board(8); // creates board object
 	
 };
