@@ -61,6 +61,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//black.addComponent<ColliderComponent>("black");
 	red.addComponent<TileComponent>(165, 105, 60, 61, 1);
 	red.addComponent<ColliderComponent>("red");
+	red.addComponent<MouseController>();
 	
 
 
