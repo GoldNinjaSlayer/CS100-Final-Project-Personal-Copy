@@ -65,9 +65,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	red.addComponent<TileComponent>(65, 105, 60, 61, 1);
 	red.addComponent<ColliderComponent>("red2");
 	
-	for(int i = 0; i < board->ROWS; i++){
-		for(int j = 0; j < board->COLS; j++){
-			if(board->checkers[i][j]->getColor() == 'R'){
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			if(board->getchecker(i,j)->getColor() == 'R'){
 				red.addComponent<TileComponent>(165+(10 * i), 105, 60, 61, 1);
 				red.addComponent<ColliderComponent>("red" + i);
 			}
