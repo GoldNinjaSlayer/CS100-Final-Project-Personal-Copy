@@ -23,6 +23,11 @@ public:
 		transform = &entity->getComponent<TransformComponent>();
 
 		Game::colliders.push_back(this);
+
+		if (tag == "tile")
+		{
+			Game::tileColliders.push_back(this);
+		}
 	}
 
 	void update() override
