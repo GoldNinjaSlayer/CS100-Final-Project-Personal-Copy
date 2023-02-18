@@ -18,11 +18,11 @@ std::vector<ColliderComponent*> Game::colliders;
 //auto& player(manager.addEntity());
 //auto& wall(manager.addEntity());
 //
-//auto& tile0(manager.addEntity());
-//auto& tile1(manager.addEntity());
-//auto& tile2(manager.addEntity());
-auto& checkboard(manager.addEntity());
+auto& black(manager.addEntity());
 
+
+auto& checkboard(manager.addEntity());
+auto& red(manager.addEntity());
 Game::Game()
 {}
 
@@ -54,15 +54,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//map = new Map();
 	
 	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
-	checkboard.addComponent<SpriteComponent>("assets/Checkers.png");
+	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
 
 
-	//tile0.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	//tile0.addComponent<ColliderComponent>("white");
-	//tile1.addComponent<TileComponent>(250, 250, 32, 32, 1);
-	//tile1.addComponent<ColliderComponent>("red");
-	//tile2.addComponent<TileComponent>(150, 150, 32, 32, 2);
-	//tile2.addComponent<ColliderComponent>("black");
+	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
+	//black.addComponent<ColliderComponent>("black");
+	red.addComponent<TileComponent>(165, 105, 60, 61, 1);
+	red.addComponent<ColliderComponent>("red");
+	
 
 
 

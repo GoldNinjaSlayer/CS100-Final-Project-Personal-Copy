@@ -21,7 +21,6 @@ include_directories(
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
-file(COPY "${CMAKE_SOURCE_DIR}/CheckersEngine/assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
 
 
@@ -47,9 +46,23 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/ECS/SpriteComponent.h"
         "CheckersEngine/Src/ECS/TileComponent.h"
         "CheckersEngine/Src/ECS/TransformComponent.h")
+
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
-target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
-        ${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
+#target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
+        #${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
+
+# Set the asset source directory and build directory
+set(ASSET_SOURCE_DIR "${CMAKE_SOURCE_DIR}/CheckersEngine/assets")
+set(ASSET_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/assets")
+
+
+
+# Copy the assets from the source directory to the build directory using a custom command
+add_custom_command(
+    TARGET ${PROJECT_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${ASSET_SOURCE_DIR} ${ASSET_BUILD_DIR}
+)
+
 
 
 if (WIN32)
