@@ -1,3 +1,0 @@
-C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/out/build/x64-debug/CMakeFiles/CheckersEngine.dir
-C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
