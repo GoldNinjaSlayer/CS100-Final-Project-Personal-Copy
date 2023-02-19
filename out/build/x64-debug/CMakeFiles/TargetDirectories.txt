@@ -1,3 +1,0 @@
-C:/Users/GoldN/OneDrive/Desktop/School/CS 100/Final Project/out/build/x64-debug/CMakeFiles/CheckersEngine.dir
-C:/Users/GoldN/OneDrive/Desktop/School/CS 100/Final Project/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/Users/GoldN/OneDrive/Desktop/School/CS 100/Final Project/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
