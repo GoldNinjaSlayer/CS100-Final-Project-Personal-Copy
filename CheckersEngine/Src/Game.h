@@ -21,6 +21,7 @@ public:
 	bool running() { return isRunning; }
 	void render();
 	void clean();
+	void setBoard(Board* board);
 
 	static SDL_Renderer* renderer;
 	static SDL_Event event;

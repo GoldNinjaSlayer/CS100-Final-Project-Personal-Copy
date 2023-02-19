@@ -440,7 +440,7 @@ double AI::getHeuristic(Board board) {
 
 
     if (getColor() == 'B') {
-        cout << (king_weight * numBlackKings + numBlack) - (king_weight * numRedKings + numRed) << endl;
+       // cout << (king_weight * numBlackKings + numBlack) - (king_weight * numRedKings + numRed) << endl;
         return (king_weight * numBlackKings + numBlack) - (king_weight * numRedKings + numRed);
     }
     return (king_weight * numRedKings + numRed) - (king_weight * numBlackKings + numBlack);

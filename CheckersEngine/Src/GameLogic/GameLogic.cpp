@@ -1,9 +1,9 @@
-#include "Game.h"
+#include "GameLogic.h"
 #include "Board.h"
 
 using namespace std;
 
-Game::Game(){// constructor builds the player
+GameLogic::GameLogic(){// constructor builds the player
     player.setColor('R');
     bot.setColor('B');
 
@@ -12,7 +12,7 @@ Game::Game(){// constructor builds the player
 
 }
 
-void Game::changeTurns(){// changes turns by switching the current player
+void GameLogic::changeTurns(){// changes turns by switching the current player
     if(currPlayer == 'R'){
         currPlayer = 'B';
     } else{
@@ -20,7 +20,7 @@ void Game::changeTurns(){// changes turns by switching the current player
     }
 }
 
-int Game::update(){// checks if there is a winner at the end of each turn
+int GameLogic::update(){// checks if there is a winner at the end of each turn
  
     vector<Checker*> blackPieces = board->getInstances('B');
     vector<Checker*> redPieces = board->getInstances('R');
@@ -40,7 +40,7 @@ int Game::update(){// checks if there is a winner at the end of each turn
 
 
 
-void Game::Play(){
+void GameLogic::Play(){
     cout << "Address in main: " << board << endl;
     do{
         board->Display();

@@ -52,8 +52,8 @@ add_executable (CheckersEngine
         "CheckersEngine/SRC/GameLogic/Checker.h"
         "CheckersEngine/SRC/GameLogic/Player.cpp"
         "CheckersEngine/SRC/GameLogic/Player.h"
-        "CheckersEngine/SRC/GameLogic/Game.cpp"
-        "CheckersEngine/SRC/GameLogic/Game.h"
+        "CheckersEngine/SRC/GameLogic/GameLogic.cpp"
+        "CheckersEngine/SRC/GameLogic/GameLogic.h"
         )
 
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)

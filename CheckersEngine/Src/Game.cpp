@@ -63,11 +63,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
 			if(board->getchecker(i,j)->getColor() == 'R'){
-				red.addComponent<TileComponent>(550-(55* j), 770 - (55 * i), 60, 61, 1);
+				red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
 				red.addComponent<ColliderComponent>("red");
 			}
 			if(board->getchecker(i,j)->getColor() == 'B'){
-				black.addComponent<TileComponent>(550 - (55* j), 220 - (55 * i), 60, 61, 0);
+				black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
 				black.addComponent<ColliderComponent>("black");
 			}
 		}
@@ -117,8 +117,6 @@ void Game::render()
 	//map->DrawMap();
 	manager.draw();
 	SDL_RenderPresent(renderer);
-
-
 }
 
 void Game::clean()
@@ -126,4 +124,8 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+}
+
+void Game::setBoard(Board* board){
+	this->board = board;
 }
