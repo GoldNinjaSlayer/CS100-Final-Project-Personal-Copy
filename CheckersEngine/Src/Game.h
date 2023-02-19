@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SDL_image.h" 
 #include <vector> 
+#include "GameLogic/Board.h"
 
 class ColliderComponent;
 

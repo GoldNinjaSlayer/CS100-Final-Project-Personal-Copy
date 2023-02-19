@@ -4,8 +4,6 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
-#include "GameLogic/Board.h"
-
 
 Map* map;
 
@@ -19,11 +17,12 @@ std::vector<ColliderComponent*> Game::colliders;
 //auto& player(manager.addEntity());
 //auto& wall(manager.addEntity());
 //
-auto& black(manager.addEntity());
+
 
 
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
+auto& black(manager.addEntity());
 Game::Game()
 {}
 
@@ -60,20 +59,19 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
 	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
 	//black.addComponent<ColliderComponent>("black");
-	red.addComponent<TileComponent>(165, 105, 60, 61, 1);
-	red.addComponent<ColliderComponent>("red");
-	red.addComponent<TileComponent>(65, 105, 60, 61, 1);
-	red.addComponent<ColliderComponent>("red2");
 	
 	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
 			if(board->getchecker(i,j)->getColor() == 'R'){
-				red.addComponent<TileComponent>(165+(10 * i), 105, 60, 61, 1);
-				red.addComponent<ColliderComponent>("red" + i);
+				red.addComponent<TileComponent>(550-(55* j), 770 - (55 * i), 60, 61, 1);
+				red.addComponent<ColliderComponent>("red");
+			}
+			if(board->getchecker(i,j)->getColor() == 'B'){
+				black.addComponent<TileComponent>(550 - (55* j), 220 - (55 * i), 60, 61, 0);
+				black.addComponent<ColliderComponent>("black");
 			}
 		}
 	}
-
 
 	//player.addComponent<TransformComponent>();
 	//player.addComponent<SpriteComponent>("assets/lucas.png");
