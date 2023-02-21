@@ -26,6 +26,7 @@ public:
 
 	static void AddChecker(int id, int x, int y, int num);
 	static void AddTile(int x, int y, int id );
+	static void initTiles();
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<ColliderComponent*> tileColliders;
@@ -37,7 +38,7 @@ private:
 	int cnt = 0;
 	SDL_Window *window;
 
-	Board *board = new Board(8); // creates board object
+	Board* board; // creates board object
 	
 };
 

@@ -28,7 +28,7 @@ public:
 		switch (tileID)
 		{
 		case 0:
-			path = "../assets/checkersPieces/blackPieceNormal.png";
+			path = "C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/assets/checkersPieces/blackPieceNormal.png";
 			break;
 		case 1:
 			path = "C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/assets/checkersPieces/redPieceNormal.png";

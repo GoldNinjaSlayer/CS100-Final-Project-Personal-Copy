@@ -60,27 +60,19 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	
 	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
 	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+	initTiles();
+	board = new Board(8);
 
 
 	int x = 0;
 	int y = 0;
 
-	//Draws red checker pieces to the board
-	for (int i = 0; i < 4; i++) {
-		AddChecker(1, 220+ (i * 110), 105, y++);
-		AddTile(228 + (i * 113), 110, x++);
-	}
-	
-	for (int i = 0; i < 4; i++) {
-		//AddChecker(1,165+(i * 110), 160);
-		AddTile(172 + (i * 113), 172, x++);
-	}
 
-	for (int i = 0; i < 4; i++) {
-		
-		AddTile(228 + (i * 111), 226, x++);
-		//AddChecker(1, 220 + (i * 110), 215, y++);
-	}
+
+
+
+
+
 	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
 	//black.addComponent<ColliderComponent>("black");
 	
@@ -168,4 +160,49 @@ void Game::AddTile(int x, int y, int id)
 
 void Game::setBoard(Board* board){
 	this->board = board;
+}
+
+void Game::initTiles()
+{
+	int x = 0;
+	//draws first 3
+	for (int i = 0; i < 4; i++) {
+		AddTile(228 + (i * 113), 110, x++);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		AddTile(172 + (i * 113), 172, x++);
+	}
+
+	for (int i = 0; i < 4; i++) {
+
+		AddTile(228 + (i * 111), 226, x++);
+	}
+
+	//Draws middle 2
+
+	for (int i = 0; i < 4; i++) {
+		AddTile(172 + (i * 113), 280, x++);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		AddTile(228 + (i * 113), 337, x++);
+	}
+
+
+
+
+	//Draws last 3
+	for (int i = 0; i < 4; i++) {
+		AddTile(172 + (i * 113), 390, x++);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		AddTile(228 + (i * 113), 446, x++);
+	}
+
+	for (int i = 0; i < 4; i++) {
+
+		AddTile(172 + (i * 111), 508, x++);
+	}
 }

@@ -1,6 +1,8 @@
 #include "Board.h"
 #include <iostream>
 #include <string>
+#include "..\TextureManager.h"
+#include "..\Game.h"
 using namespace std;
 
 Board::Board(Board &b){
@@ -36,19 +38,22 @@ Board::Board(int n){
         //Declare a memory block of size COLS (n since a checker board is square)
         checkers[i] = new Checker*[COLS];
     }
-
+    cout << "NEW BOARD CREATED" << endl;
+    int x = 0;
     for(int i = 0;i < ROWS; i++){   // follows the rows
         for(int j = 0; j < ROWS; j++){  //follows the columns
             if(i < 3){                  // creating the black checkers
             if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'B');
+                    Game::AddChecker(1, 220 + (j * 50), 105 + (i*59), x++);
                 } else{
                     checkers[i][j] = new Checker(i,j, '0');
                 }
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'B');
+                    Game::AddChecker(1, (-63 * (i%2)) + 220 + (j * 50), 105 + (i*59), x++);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                 }
@@ -57,12 +62,14 @@ Board::Board(int n){
            if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'R');
+                    Game::AddChecker(0, 220 + (j * 50), 350 + ((i-4) * 59), x++);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                 }
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'R');
+                    Game::AddChecker(0, (-63 * (i % 2)) + 220 + (j * 50), 350 + ((i-4) * 59), x++);
                 } else{
                    checkers[i][j] = new Checker(i,j, '0');
                 }
@@ -71,7 +78,6 @@ Board::Board(int n){
                 checkers[i][j] = new Checker(i,j, '0');
             }
 
-                listCheckers.push_back(checkers[i][j]);
             }
             
         }
