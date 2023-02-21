@@ -1,11 +1,11 @@
-#include "CheckerController.h"
+#include "CheckerLocker.h"
 #include "ColliderComponent.h"
 #include "MouseController.h"
 #include "TransformComponent.h"
 #include <iostream>
 
 using namespace std;
-void CheckerController::init() 
+void CheckerLocker::init()
 {
     collider = &entity->getComponent<ColliderComponent>();
 
@@ -14,7 +14,7 @@ void CheckerController::init()
     //cout << "In checkercontroller: " << collider->collider.x << endl;
 }
 
-void CheckerController::update() 
+void CheckerLocker::update()
 {
 
     // Check if this checker is being dragged by the mouse

@@ -5,6 +5,7 @@
 #include "SDL_image.h" 
 #include <vector> 
 #include "ECS/ECS.h"
+#include "GameLogic/Board.h"
 
 class ColliderComponent;
 
@@ -21,9 +22,10 @@ public:
 	bool running() { return isRunning; }
 	void render();
 	void clean();
+	void setBoard(Board* board);
 
-	static void AddChecker(int id, int x, int y);
-	static void AddTile(int x, int y, int id);
+	static void AddChecker(int id, int x, int y, int num);
+	static void AddTile(int x, int y, int id );
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<ColliderComponent*> tileColliders;
@@ -34,6 +36,8 @@ private:
 	bool isRunning = false;
 	int cnt = 0;
 	SDL_Window *window;
+
+	Board *board = new Board(8); // creates board object
 	
 };
 

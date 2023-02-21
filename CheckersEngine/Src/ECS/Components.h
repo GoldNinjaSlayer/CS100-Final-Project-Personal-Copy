@@ -6,4 +6,4 @@
 #include "ColliderComponent.h"
 #include "TileComponent.h"
 #include "MouseController.h"
-#include "CheckerController.h"
+#include "CheckerLocker.h"

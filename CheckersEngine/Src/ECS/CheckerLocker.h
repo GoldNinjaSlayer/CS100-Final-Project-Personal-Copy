@@ -8,7 +8,7 @@
 using namespace std;
 
 
-class CheckerController : public Component
+class CheckerLocker : public Component
 {
 private:
     ColliderComponent* collider;

@@ -19,6 +19,7 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& black(manager.addEntity());
 
 
+
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
@@ -62,10 +63,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
 
 	int x = 0;
+	int y = 0;
 
 	//Draws red checker pieces to the board
 	for (int i = 0; i < 4; i++) {
-		//AddChecker(1, 220+ (i * 110), 105);
+		AddChecker(1, 220+ (i * 110), 105, y++);
 		AddTile(228 + (i * 113), 110, x++);
 	}
 	
@@ -77,8 +79,28 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	for (int i = 0; i < 4; i++) {
 		
 		AddTile(228 + (i * 111), 226, x++);
-		AddChecker(1, 220 + (i * 110), 215);
+		//AddChecker(1, 220 + (i * 110), 215, y++);
 	}
+	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
+	//black.addComponent<ColliderComponent>("black");
+	
+	//for(int i = 0; i < 8; i++){
+	//	for(int j = 0; j < 8; j++){
+	//		if(board->getchecker(i,j)->getColor() == 'R'){
+	//			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
+	//			red.addComponent<ColliderComponent>("red");
+	//		}
+	//		if(board->getchecker(i,j)->getColor() == 'B'){
+	//			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
+	//			black.addComponent<ColliderComponent>("black");
+	//		}
+	//	}
+	//}
+
+	//player.addComponent<TransformComponent>();
+	//player.addComponent<SpriteComponent>("assets/lucas.png");
+	//player.addComponent<KeyboardController>();
+	//player.addComponent<ColliderComponent>("player");
 
 
 }
@@ -114,8 +136,6 @@ void Game::render()
 	//map->DrawMap();
 	manager.draw();
 	SDL_RenderPresent(renderer);
-
-
 }
 
 void Game::clean()
@@ -123,14 +143,15 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+	delete[] board;
 }
 
-void Game::AddChecker(int id, int x, int y) {
+void Game::AddChecker(int id, int x, int y, int num) {
 	auto& piece(manager.addEntity());
 	piece.addComponent<TileComponent>(x, y, 60, 61, id);
 	piece.addComponent<MouseController>();
-	piece.addComponent<ColliderComponent>("piece");
-	piece.addComponent<CheckerController>();
+	piece.addComponent<ColliderComponent>("piece " + to_string(num));
+	piece.addComponent<CheckerLocker>();
 }
 
 void Game::AddTile(int x, int y, int id)
@@ -145,4 +166,6 @@ void Game::AddTile(int x, int y, int id)
 
 }
 
-
+void Game::setBoard(Board* board){
+	this->board = board;
+}
