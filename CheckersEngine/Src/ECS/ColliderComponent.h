@@ -2,6 +2,9 @@
 #include <string>
 #include "SDL.h"
 #include "Components.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 class ColliderComponent : public Component
 {
@@ -24,8 +27,9 @@ public:
 
 		Game::colliders.push_back(this);
 
-		if (tag == "tile")
+		if (!tag.find("tile"))
 		{
+			cout << tag << " added to tile colliders" << endl;
 			Game::tileColliders.push_back(this);
 		}
 	}
@@ -39,3 +43,4 @@ public:
 
 	}
 };
+

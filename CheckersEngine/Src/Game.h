@@ -23,7 +23,7 @@ public:
 	void clean();
 
 	static void AddChecker(int id, int x, int y);
-	static void AddTile(int x, int y);
+	static void AddTile(int x, int y, int id);
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<ColliderComponent*> tileColliders;

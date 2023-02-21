@@ -5,7 +5,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
-
+using namespace std;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -61,22 +61,22 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
 
 
-	
+	int x = 0;
 
 	//Draws red checker pieces to the board
 	for (int i = 0; i < 4; i++) {
 		//AddChecker(1, 220+ (i * 110), 105);
-		AddTile(220 + (i * 110), 105);
+		AddTile(228 + (i * 113), 110, x++);
 	}
 	
 	for (int i = 0; i < 4; i++) {
 		//AddChecker(1,165+(i * 110), 160);
-		AddTile(165 + (i * 110), 160);
+		AddTile(172 + (i * 113), 172, x++);
 	}
 
 	for (int i = 0; i < 4; i++) {
 		
-		AddTile(220 + (i * 110), 215);
+		AddTile(228 + (i * 111), 226, x++);
 		AddChecker(1, 220 + (i * 110), 215);
 	}
 
@@ -104,7 +104,6 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	
 }
 
 auto& tiles(manager.getGroup(groupTiles));
@@ -134,13 +133,14 @@ void Game::AddChecker(int id, int x, int y) {
 	piece.addComponent<CheckerController>();
 }
 
-void Game::AddTile(int x, int y)
+void Game::AddTile(int x, int y, int id)
 {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TransformComponent>(x, y, 60, 60, 1);
-	tile.addComponent<SpriteComponent>("assets/blackTile.png");
-	tile.addComponent<ColliderComponent>("tile");
-	tile.addGroup(groupTiles);
+	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
+	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	tile.addComponent<ColliderComponent>("tile " + to_string(id));
+	cout << tile.getComponent<ColliderComponent>().tag << endl;
+	//tile.addGroup(groupTiles);
 	
 
 }

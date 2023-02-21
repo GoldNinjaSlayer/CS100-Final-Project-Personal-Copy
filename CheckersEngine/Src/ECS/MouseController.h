@@ -8,11 +8,13 @@ class MouseController : public Component
 {
 public:
 	TransformComponent* transform;
+	ColliderComponent* collider;
 	bool isMouseDragging;
 	int lastMouseX, lastMouseY;
 	void init() override
 	{
 		transform = &entity->getComponent<TransformComponent>();
+		collider = &entity->getComponent<ColliderComponent>();
 		isMouseDragging = false;
 		lastMouseX = 0;
 		lastMouseY = 0;
