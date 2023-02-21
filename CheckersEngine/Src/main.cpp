@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	game = new Game();
 	game->init("GameWindow", 800, 640, false);
 
-	while (game->running())
+	while (gameLogic.update() != 0)
 	{
 		frameStart = SDL_GetTicks();
 		game->handleEvents();
@@ -28,21 +28,27 @@ int main(int argc, char *argv[])
 			SDL_Delay(frameDelay - frameTime);
 		}
 
-		gameLogic.getBoard()->Display();
-		
+		gameLogic.getBoard()->Display(); // Displays board in terminal
+
+
         cout << "Num Black: " << gameLogic.getBoard()->getInstances('B').size() << endl;
         cout << "Num Red: " << gameLogic.getBoard()->getInstances('R').size() << endl;
 
-        if(gameLogic.getCurrPlayer() == 'R')
+        if(gameLogic.getCurrPlayer() == 'R'){
             gameLogic.getPlayer().makeMove(gameLogic.getBoard());
-        else
+		}
+        else{
             gameLogic.getBot().makeMove(gameLogic.getBoard());
+		}
 
         gameLogic.changeTurns();
 
-		game->setBoard(gameLogic.getBoard());
+		game->setBoard(gameLogic.getBoard()); // Updates visual board based on terminal board
 	
 	}
 	game->clean();
+
+	delete game;
+
 	return 0;
 }

@@ -60,7 +60,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
 	//black.addComponent<ColliderComponent>("black");
 	
-	for(int i = 0; i < 8; i++){
+	/*for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
 			if(board->getchecker(i,j)->getColor() == 'R'){
 				red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
@@ -71,7 +71,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 				black.addComponent<ColliderComponent>("black");
 			}
 		}
-	}
+	}*/
 
 	//player.addComponent<TransformComponent>();
 	//player.addComponent<SpriteComponent>("assets/lucas.png");
