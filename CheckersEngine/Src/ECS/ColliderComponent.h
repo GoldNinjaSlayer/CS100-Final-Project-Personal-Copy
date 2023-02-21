@@ -2,9 +2,6 @@
 #include <string>
 #include "SDL.h"
 #include "Components.h"
-#include <string>
-#include <iostream>
-using namespace std;
 
 class ColliderComponent : public Component
 {
@@ -26,12 +23,6 @@ public:
 		transform = &entity->getComponent<TransformComponent>();
 
 		Game::colliders.push_back(this);
-
-		if (!tag.find("tile"))
-		{
-			cout << tag << " added to tile colliders" << endl;
-			Game::tileColliders.push_back(this);
-		}
 	}
 
 	void update() override
@@ -43,4 +34,3 @@ public:
 
 	}
 };
-
