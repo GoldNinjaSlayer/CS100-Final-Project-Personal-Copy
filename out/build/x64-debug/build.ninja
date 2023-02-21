@@ -105,6 +105,22 @@ build CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Vector2D.cpp.obj: CXX_COM
   TARGET_COMPILE_PDB = CMakeFiles\CheckersEngine.dir\
   TARGET_PDB = CheckersEngine.pdb
 
+build CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS\ECS.cpp.obj: CXX_COMPILER__CheckersEngine_Debug C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\CheckersEngine\Src\ECS\ECS.cpp || cmake_object_order_depends_target_CheckersEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\include -IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\include -external:IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\include -external:IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\cmake\..\include -external:W0
+  OBJECT_DIR = CMakeFiles\CheckersEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS
+  TARGET_COMPILE_PDB = CMakeFiles\CheckersEngine.dir\
+  TARGET_PDB = CheckersEngine.pdb
+
+build CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS\CheckerController.cpp.obj: CXX_COMPILER__CheckersEngine_Debug C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\CheckersEngine\Src\ECS\CheckerController.cpp || cmake_object_order_depends_target_CheckersEngine
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++20
+  INCLUDES = -IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\include -IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\include -external:IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\include -external:IC:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\cmake\..\include -external:W0
+  OBJECT_DIR = CMakeFiles\CheckersEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS
+  TARGET_COMPILE_PDB = CMakeFiles\CheckersEngine.dir\
+  TARGET_PDB = CheckersEngine.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CheckersEngine
@@ -113,7 +129,7 @@ build CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Vector2D.cpp.obj: CXX_COM
 #############################################
 # Link the executable CheckersEngine.exe
 
-build CheckersEngine.exe: CXX_EXECUTABLE_LINKER__CheckersEngine_Debug CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Collision.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Game.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\GameObject.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\main.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Map.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\TextureManager.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Vector2D.cpp.obj | C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2.lib C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2main.lib C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\cmake\..\lib\x64\SDL2_image.lib
+build CheckersEngine.exe: CXX_EXECUTABLE_LINKER__CheckersEngine_Debug CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Collision.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Game.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\GameObject.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\main.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Map.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\TextureManager.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\Vector2D.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS\ECS.cpp.obj CMakeFiles\CheckersEngine.dir\CheckersEngine\Src\ECS\CheckerController.cpp.obj | C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2.lib C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2main.lib C$:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\cmake\..\lib\x64\SDL2_image.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = C:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2.lib  C:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2\cmake\..\lib\x64\SDL2main.lib  C:\Users\Ethan\Documents\GitHub\final-project-cs100-final-project\SDL2_image\cmake\..\lib\x64\SDL2_image.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

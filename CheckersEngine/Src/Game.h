@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SDL_image.h" 
 #include <vector> 
+#include "ECS/ECS.h"
 
 class ColliderComponent;
 
@@ -21,9 +22,13 @@ public:
 	void render();
 	void clean();
 
+	static void AddChecker(int id, int x, int y);
+	static void AddTile(int x, int y, int id);
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static std::vector<ColliderComponent*> tileColliders;
 	static std::vector<ColliderComponent*> colliders;
+	
 
 private:
 	bool isRunning = false;
@@ -31,3 +36,5 @@ private:
 	SDL_Window *window;
 	
 };
+
+

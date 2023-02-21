@@ -5,7 +5,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
-
+using namespace std;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -13,16 +13,20 @@ SDL_Renderer* Game::renderer = nullptr;
 Manager manager;
 SDL_Event Game::event;
 
+std::vector<ColliderComponent*> Game::tileColliders;
 std::vector<ColliderComponent*> Game::colliders;
 
-//auto& player(manager.addEntity());
-//auto& wall(manager.addEntity());
-//
 auto& black(manager.addEntity());
 
 
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
+
+enum groupLabels : std::size_t
+{
+	groupTiles,
+};
+
 Game::Game()
 {}
 
@@ -57,22 +61,25 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
 
 
-	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	//black.addComponent<ColliderComponent>("black");
-	red.addComponent<TileComponent>(165, 105, 60, 61, 1);
-	red.addComponent<ColliderComponent>("red");
+	int x = 0;
+
+	//Draws red checker pieces to the board
+	for (int i = 0; i < 4; i++) {
+		//AddChecker(1, 220+ (i * 110), 105);
+		AddTile(228 + (i * 113), 110, x++);
+	}
 	
+	for (int i = 0; i < 4; i++) {
+		//AddChecker(1,165+(i * 110), 160);
+		AddTile(172 + (i * 113), 172, x++);
+	}
 
+	for (int i = 0; i < 4; i++) {
+		
+		AddTile(228 + (i * 111), 226, x++);
+		AddChecker(1, 220 + (i * 110), 215);
+	}
 
-
-	//player.addComponent<TransformComponent>();
-	//player.addComponent<SpriteComponent>("assets/lucas.png");
-	//player.addComponent<KeyboardController>();
-	//player.addComponent<ColliderComponent>("player");
-
-	//wall.addComponent<TransformComponent>(300.0f, 300.0f, 100, 100, 1);
-	//wall.addComponent<SpriteComponent>("assets/blackTile.png");
-	//wall.addComponent<ColliderComponent>("wall");
 
 }
 
@@ -96,12 +103,10 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-	//for (auto cc : colliders)
-	//{
-	//	Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-	//
-	//}
+
 }
+
+auto& tiles(manager.getGroup(groupTiles));
 
 void Game::render()
 {
@@ -119,3 +124,25 @@ void Game::clean()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 }
+
+void Game::AddChecker(int id, int x, int y) {
+	auto& piece(manager.addEntity());
+	piece.addComponent<TileComponent>(x, y, 60, 61, id);
+	piece.addComponent<MouseController>();
+	piece.addComponent<ColliderComponent>("piece");
+	piece.addComponent<CheckerController>();
+}
+
+void Game::AddTile(int x, int y, int id)
+{
+	auto& tile(manager.addEntity());
+	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
+	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	tile.addComponent<ColliderComponent>("tile " + to_string(id));
+	cout << tile.getComponent<ColliderComponent>().tag << endl;
+	//tile.addGroup(groupTiles);
+	
+
+}
+
+
