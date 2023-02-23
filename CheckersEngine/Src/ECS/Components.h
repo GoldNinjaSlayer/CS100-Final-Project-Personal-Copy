@@ -7,3 +7,5 @@
 #include "TileComponent.h"
 #include "MouseController.h"
 #include "CheckerLocker.h"
+#include "CheckerLinker.h"
+#include "TileLinker.h"

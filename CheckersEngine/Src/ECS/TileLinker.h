@@ -8,22 +8,21 @@
 using namespace std;
 
 //Class controls logic to automatically snap pieces into a tile
-class CheckerLinker : public Component
+class TileLinker : public Component
 {
 private:
-    Checker* piece;
-    
+    coord pos;
 public:
 
-
-    CheckerLinker(Checker* piece)
+    TileLinker(int x, int y)
     {
-        this->piece = piece;
+        pos.x = x;
+        pos.y = y;
     }
 
-    Checker* getPiece() const
+    coord getPos() const
     {
-        return piece;
+        return pos;
     }
 };
 

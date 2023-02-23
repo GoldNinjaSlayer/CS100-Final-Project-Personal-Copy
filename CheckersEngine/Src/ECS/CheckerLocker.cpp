@@ -11,11 +11,14 @@ void CheckerLocker::init()
 
     transform = &entity->getComponent<TransformComponent>();
     mouse = &entity->getComponent<MouseController>();
+    position = &entity->getComponent<CheckerLinker>();
+    
     //cout << "In checkercontroller: " << collider->collider.x << endl;
 }
 
 void CheckerLocker::update()
 {
+
 
     // Check if this checker is being dragged by the mouse
     if (!mouse->isMouseDragging)

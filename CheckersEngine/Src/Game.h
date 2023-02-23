@@ -24,8 +24,8 @@ public:
 	void clean();
 	void setBoard(Board* board);
 
-	static void AddChecker(int id, int x, int y, int num);
-	static void AddTile(int x, int y, int id );
+	static void AddChecker(int id, int x, int y, int num, Checker* p);
+	static void AddTile(int x, int y, int id, int i, int j);
 	static void initTiles();
 	static SDL_Renderer* renderer;
 	static SDL_Event event;

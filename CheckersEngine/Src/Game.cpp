@@ -62,6 +62,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
 	initTiles();
 	board = new Board(8);
+	board->allowedMoves(board->getInstances('B'));
+	board->allowedMoves(board->getInstances('R'));
+
 
 
 	int x = 0;
@@ -138,21 +141,23 @@ void Game::clean()
 	delete[] board;
 }
 
-void Game::AddChecker(int id, int x, int y, int num) {
+void Game::AddChecker(int id, int x, int y, int num, Checker* p) {
 	auto& piece(manager.addEntity());
 	piece.addComponent<TileComponent>(x, y, 60, 61, id);
 	piece.addComponent<MouseController>();
 	piece.addComponent<ColliderComponent>("piece " + to_string(num));
+	piece.addComponent<CheckerLinker>(p);
 	piece.addComponent<CheckerLocker>();
+
 }
 
-void Game::AddTile(int x, int y, int id)
+void Game::AddTile(int x, int y, int id, int i, int j)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
-	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	tile.addComponent<SpriteComponent>("assets/blackTile.png");
 	tile.addComponent<ColliderComponent>("tile " + to_string(id));
-	cout << tile.getComponent<ColliderComponent>().tag << endl;
+	tile.addComponent<TileLinker>(i, j);
 	//tile.addGroup(groupTiles);
 	
 
@@ -167,26 +172,26 @@ void Game::initTiles()
 	int x = 0;
 	//draws first 3
 	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 110, x++);
+		AddTile(172 + (i * 113), 110, x++, 0,i);
 	}
 
 	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 172, x++);
+		AddTile(228 + (i * 113), 172, x++, 1, i);
 	}
 
 	for (int i = 0; i < 4; i++) {
 
-		AddTile(228 + (i * 111), 226, x++);
+		AddTile(172 + (i * 111), 226, x++, 2, i);
 	}
 
 	//Draws middle 2
 
 	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 280, x++);
+		AddTile(228 + (i * 113), 280, x++, 3, i);
 	}
 
 	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 337, x++);
+		AddTile(172 + (i * 113), 337, x++, 4, i);
 	}
 
 
@@ -194,15 +199,15 @@ void Game::initTiles()
 
 	//Draws last 3
 	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 390, x++);
+		AddTile(228 + (i * 113), 390, x++, 5, i);
 	}
 
 	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 446, x++);
+		AddTile(172 + (i * 113), 446, x++, 6, i);
 	}
 
 	for (int i = 0; i < 4; i++) {
 
-		AddTile(172 + (i * 111), 508, x++);
+		AddTile(228 + (i * 111), 508, x++, 7, i);
 	}
 }

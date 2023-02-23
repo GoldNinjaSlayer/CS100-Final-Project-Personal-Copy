@@ -2,6 +2,8 @@
 #include "ECS.h"
 #include "../Collision.h"
 #include "ColliderComponent.h"
+#include <vector>
+#include "CheckerLinker.h"
 
 //#include "../Game.h"
 //#include <iostream>
@@ -14,6 +16,10 @@ private:
     ColliderComponent* collider;
     TransformComponent* transform;
     MouseController* mouse;
+    CheckerLinker* position;
+    ColliderComponent* currentTile;
+    vector<ColliderComponent*> available;
+
 public:
     void init() override;
     void update() override;
