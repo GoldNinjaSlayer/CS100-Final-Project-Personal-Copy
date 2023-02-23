@@ -5,6 +5,7 @@
 #include "SDL_image.h" 
 #include <vector> 
 #include "GameLogic/Board.h"
+#include "ECS/ECS.h"
 
 class ColliderComponent;
 
@@ -22,7 +23,7 @@ public:
 	void render();
 	void clean();
 	void setBoard(Board* board);
-
+	void clearPieces();
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<ColliderComponent*> colliders;
@@ -33,5 +34,7 @@ private:
 	SDL_Window *window;
 
 	Board *board = new Board(8); // creates board object
+	vector<Component> tileComponent; //WIP
+	vector<Component> colliderComponent; //WIP
 	
 };

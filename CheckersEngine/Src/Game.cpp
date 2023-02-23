@@ -20,7 +20,7 @@ std::vector<ColliderComponent*> Game::colliders;
 
 
 
-auto& checkboard(manager.addEntity());
+auto& checkboard = manager.addEntity();
 auto& red(manager.addEntity());
 auto& black(manager.addEntity());
 Game::Game()
@@ -60,18 +60,30 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
 	//black.addComponent<ColliderComponent>("black");
 	
-	/*for(int i = 0; i < 8; i++){
+	for(int i = 0; i < 8; i++){
 		for(int j = 0; j < 8; j++){
 			if(board->getchecker(i,j)->getColor() == 'R'){
-				red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-				red.addComponent<ColliderComponent>("red");
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 3));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red king"));
+				}
+				else{
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red"));
+				}
 			}
 			if(board->getchecker(i,j)->getColor() == 'B'){
-				black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-				black.addComponent<ColliderComponent>("black");
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 2));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black king"));
+				}
+				else{
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black"));
+				}
 			}
 		}
-	}*/
+	}
 
 	//player.addComponent<TransformComponent>();
 	//player.addComponent<SpriteComponent>("assets/lucas.png");
@@ -116,7 +128,54 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			if(board->getchecker(i,j)->getColor() == 'R'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 3));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red king"));
+				}
+				else{
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red"));
+				}
+			}
+			if(board->getchecker(i,j)->getColor() == 'B'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 2));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black king"));
+				}
+				else{
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black"));
+				}
+			}
+		}
+	}
+
 	SDL_RenderPresent(renderer);
+}
+
+void Game::clearPieces(){ //WIP
+	/*
+	delete &red;
+	delete &black;
+	auto& red(manager.addEntity());
+	auto& blacK(manager.addEntity());
+	tileComponent.erase(tileComponent.begin(),tileComponent.end());
+	colliderComponent.erase(colliderComponent.begin(),colliderComponent.end());
+	tileComponent.resize(0);
+	colliderComponent.resize(0);
+	*/
+
+	for(int i = 0; i < tileComponent.size(); i++){
+		delete &tileComponent.at(i);
+		delete &colliderComponent.at(i);
+	}
+	tileComponent.resize(0);
+	colliderComponent.resize(0);
+	red.clearComponents();
+	black.clearComponents();
 }
 
 void Game::clean()

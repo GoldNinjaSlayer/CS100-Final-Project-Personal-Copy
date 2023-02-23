@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
 			SDL_Delay(frameDelay - frameTime);
 		}
 
-		gameLogic.getBoard()->Display(); // Displays board in terminal
-
-
+		//gameLogic.getBoard()->Display(); // Displays board in terminal
+		game->setBoard(gameLogic.getBoard()); // Updates visual board based on terminal board
+		
         cout << "Num Black: " << gameLogic.getBoard()->getInstances('B').size() << endl;
         cout << "Num Red: " << gameLogic.getBoard()->getInstances('R').size() << endl;
 
@@ -41,14 +41,17 @@ int main(int argc, char *argv[])
             gameLogic.getBot().makeMove(gameLogic.getBoard());
 		}
 
+		//game->clearPieces(); //WIP
         gameLogic.changeTurns();
 
-		game->setBoard(gameLogic.getBoard()); // Updates visual board based on terminal board
 	
 	}
 	game->clean();
 
 	delete game;
 
+	/*string test; //testing purposes
+	cout << "type anything to close window" << endl;
+	cin >> test;*/
 	return 0;
 }

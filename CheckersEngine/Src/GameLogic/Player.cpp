@@ -14,9 +14,11 @@ void Player::makeMove(Board *b){
         }
 
     vector<Checker*> pieces = canCapt?attackers:allowed;
-    Checker* piece = choosePiece(pieces);
+    //Checker* piece = choosePiece(pieces);
+    Checker* piece = pieces[0]; // testing purposes
     cout << "YOU CHOSE " << piece->getPosition() << endl;
-    coord move = chooseDestination(piece);
+    //coord move = chooseDestination(piece);
+    coord move = *piece->moves.begin(); // testing purposes
     if(canCapt){
         b->capture(piece, b->getchecker(move.x, move.y));
     } else{
