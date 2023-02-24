@@ -50,11 +50,6 @@ private:
 	ComponentBitSet componenetBitSet;
 
 public:
-	void clearComponents() //WIP
-	{
-		components.resize(0);
-
-	}
 	void update()
 	{
 		for (auto& c : components) c->update();

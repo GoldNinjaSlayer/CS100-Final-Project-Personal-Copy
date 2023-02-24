@@ -34,7 +34,5 @@ private:
 	SDL_Window *window;
 
 	Board *board = new Board(8); // creates board object
-	vector<Component> tileComponent; //WIP
-	vector<Component> colliderComponent; //WIP
 	
 };

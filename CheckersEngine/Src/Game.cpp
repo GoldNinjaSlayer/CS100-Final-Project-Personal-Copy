@@ -18,7 +18,8 @@ std::vector<ColliderComponent*> Game::colliders;
 //auto& wall(manager.addEntity());
 //
 
-
+vector<Component> tileComponent; //WIP
+vector<ColliderComponent> colliderComponent; //WIP
 
 auto& checkboard = manager.addEntity();
 auto& red(manager.addEntity());
@@ -157,25 +158,11 @@ void Game::render()
 }
 
 void Game::clearPieces(){ //WIP
-	/*
-	delete &red;
-	delete &black;
-	auto& red(manager.addEntity());
-	auto& blacK(manager.addEntity());
-	tileComponent.erase(tileComponent.begin(),tileComponent.end());
-	colliderComponent.erase(colliderComponent.begin(),colliderComponent.end());
-	tileComponent.resize(0);
-	colliderComponent.resize(0);
-	*/
 
 	for(int i = 0; i < tileComponent.size(); i++){
-		delete &tileComponent.at(i);
-		delete &colliderComponent.at(i);
+		colliderComponent.at(i).transform->position.x = 1000;
+		colliderComponent.at(i).transform->position.y = 1000;
 	}
-	tileComponent.resize(0);
-	colliderComponent.resize(0);
-	red.clearComponents();
-	black.clearComponents();
 }
 
 void Game::clean()

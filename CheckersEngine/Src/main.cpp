@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "GameLogic/GameLogic.h"
+#include <chrono>
+#include <thread>
 
 Game *game = nullptr;
 GameLogic gameLogic;
@@ -14,13 +16,14 @@ int main(int argc, char *argv[])
 
 	game = new Game();
 	game->init("GameWindow", 800, 640, false);
-
+	game->handleEvents();
+	game->update();
 	while (gameLogic.update() != 0)
 	{
 		frameStart = SDL_GetTicks();
-		game->handleEvents();
-		game->update();
-		game->render();
+	//	game->handleEvents();
+	//	game->update();
+		//game->render();
 
 		frameTime = SDL_GetTicks() - frameStart;
 
@@ -41,17 +44,25 @@ int main(int argc, char *argv[])
             gameLogic.getBot().makeMove(gameLogic.getBoard());
 		}
 
-		//game->clearPieces(); //WIP
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		game->clearPieces(); //WIP
+		game->handleEvents();
+		
+		game->render();
+		game->update();
         gameLogic.changeTurns();
 
 	
 	}
+
+	string test; //testing purposes
+	cout << "type anything to close window" << endl;
+	cin >> test;
+
 	game->clean();
 
 	delete game;
 
-	/*string test; //testing purposes
-	cout << "type anything to close window" << endl;
-	cin >> test;*/
 	return 0;
 }
