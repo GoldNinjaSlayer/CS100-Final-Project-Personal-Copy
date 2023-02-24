@@ -65,10 +65,11 @@ Board::Board(int n){
                     Game::AddChecker(0, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
+                    
                 }
             } else{
                 if(j % 2 == 1){
-                    checkers[i][j] = new Checker(i,j,'R');
+                    checkers[i][j] = new Checker(i,j,'R');                                                                                                                                                                                 
                     Game::AddChecker(0, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                    checkers[i][j] = new Checker(i,j, '0');

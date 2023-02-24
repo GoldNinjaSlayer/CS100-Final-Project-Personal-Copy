@@ -8,6 +8,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture)
 	if (tex == NULL)
 	{
 		std::cout << "Image couldnt load file from path: " << texture << "Error: " << IMG_GetError() << std::endl;
+	
 	}
 	return tex;
 }

@@ -13,7 +13,7 @@ SDL_Renderer* Game::renderer = nullptr;
 Manager manager;
 SDL_Event Game::event;
 
-std::vector<ColliderComponent*> Game::tileColliders;
+std::vector<Entity*> Game::tiles;
 std::vector<ColliderComponent*> Game::colliders;
 
 auto& black(manager.addEntity());
@@ -61,6 +61,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
 	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
 	initTiles();
+	tiles = manager.getGroup(groupTiles);
 	board = new Board(8);
 	board->allowedMoves(board->getInstances('B'));
 	board->allowedMoves(board->getInstances('R'));
@@ -123,10 +124,14 @@ void Game::update()
 
 }
 
-auto& tiles(manager.getGroup(groupTiles));
+
+
 
 void Game::render()
 {
+
+
+
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
@@ -151,14 +156,14 @@ void Game::AddChecker(int id, int x, int y, int num, Checker* p) {
 
 }
 
-void Game::AddTile(int x, int y, int id, int i, int j)
+void Game::AddTile(int x, int y, int i, int j)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
 	tile.addComponent<SpriteComponent>("assets/blackTile.png");
-	tile.addComponent<ColliderComponent>("tile " + to_string(id));
+	tile.addComponent<ColliderComponent>("tile " + to_string((i*8) + j));
 	tile.addComponent<TileLinker>(i, j);
-	//tile.addGroup(groupTiles);
+	tile.addGroup(groupTiles);
 	
 
 }
@@ -169,45 +174,11 @@ void Game::setBoard(Board* board){
 
 void Game::initTiles()
 {
-	int x = 0;
-	//draws first 3
-	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 110, x++, 0,i);
-	}
-
-	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 172, x++, 1, i);
-	}
-
-	for (int i = 0; i < 4; i++) {
-
-		AddTile(172 + (i * 111), 226, x++, 2, i);
-	}
-
-	//Draws middle 2
-
-	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 280, x++, 3, i);
-	}
-
-	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 337, x++, 4, i);
-	}
-
-
-
-
-	//Draws last 3
-	for (int i = 0; i < 4; i++) {
-		AddTile(228 + (i * 113), 390, x++, 5, i);
-	}
-
-	for (int i = 0; i < 4; i++) {
-		AddTile(172 + (i * 113), 446, x++, 6, i);
-	}
-
-	for (int i = 0; i < 4; i++) {
-
-		AddTile(228 + (i * 111), 508, x++, 7, i);
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			AddTile((-56 * ((i + 1) % 2) + 228 + (j * 113)), 110 + (i * 57), i, j * 2 + (i % 2));
+		}
 	}
 }
