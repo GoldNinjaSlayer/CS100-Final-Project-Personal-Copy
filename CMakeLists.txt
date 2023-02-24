@@ -17,10 +17,8 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/SDL2/include/
         ${CMAKE_SOURCE_DIR}/SDL2_image/include/
 )
-
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-
 
 
 
@@ -42,6 +40,7 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/ECS/ColliderComponent.h"
         "CheckersEngine/Src/ECS/Components.h"
         "CheckersEngine/Src/ECS/ECS.h"
+        "CheckersEngine/Src/ECS/ECS.cpp"
         "CheckersEngine/Src/ECS/KeyboardController.h"
         "CheckersEngine/Src/ECS/SpriteComponent.h"
         "CheckersEngine/Src/ECS/TileComponent.h"
@@ -58,7 +57,8 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/GameLogic/GameLogic.cpp"
         "CheckersEngine/Src/GameLogic/GameLogic.h"
         "CheckersEngine/Src/ECS/CheckerLinker.h"
-        "CheckersEngine/Src/ECS/TileLinker.h" "UnitTests.cpp")
+        "CheckersEngine/Src/ECS/TileLinker.h" 
+       )
 
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
 #target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll

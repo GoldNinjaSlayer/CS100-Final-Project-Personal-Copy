@@ -27,11 +27,11 @@ public:
 
 		Game::colliders.push_back(this);
 
-		if (!tag.find("tile"))
-		{
-			cout << tag << " added to tile colliders" << endl;
-			Game::tileColliders.push_back(this);
-		}
+	//	if (!tag.find("tile"))
+	//	{
+	//		cout << tag << " added to tile colliders" << endl;
+	//		Game::tileColliders.push_back(this);
+	//	}
 	}
 
 	void update() override
