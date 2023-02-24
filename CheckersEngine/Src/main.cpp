@@ -33,9 +33,8 @@ int main(int argc, char *argv[])
 
 		//gameLogic.getBoard()->Display(); // Displays board in terminal
 		game->setBoard(gameLogic.getBoard()); // Updates visual board based on terminal board
-
 		
-  /*      cout << "Num Black: " << gameLogic.getBoard()->getInstances('B').size() << endl;
+        cout << "Num Black: " << gameLogic.getBoard()->getInstances('B').size() << endl;
         cout << "Num Red: " << gameLogic.getBoard()->getInstances('R').size() << endl;
 
         if(gameLogic.getCurrPlayer() == 'R'){
@@ -53,6 +52,7 @@ int main(int argc, char *argv[])
 		game->render();
 		game->update();
         gameLogic.changeTurns();
+
 	
 	}
 
