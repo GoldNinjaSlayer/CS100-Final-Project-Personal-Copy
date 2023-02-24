@@ -34,6 +34,12 @@ public:
 			path = "C:/Users/Ethan/Documents/GitHub/final-project-cs100-final-project/assets/checkersPieces/redPieceNormal.png";
 			break;
 		case 2:
+			path = "../assets/checkersPieces/blackPieceKing.png";
+			break;
+		case 3:
+			path = "../assets/checkersPieces/redPieceKing.png";
+			break;
+		case 4:
 			path = "assets/blackTile.png";
 			break;
 		default:

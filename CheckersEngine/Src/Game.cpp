@@ -18,9 +18,10 @@ std::vector<ColliderComponent*> Game::colliders;
 
 auto& black(manager.addEntity());
 
+vector<Component> tileComponent; //WIP
+vector<ColliderComponent> colliderComponent; //WIP
 
-
-auto& checkboard(manager.addEntity());
+auto& checkboard = manager.addEntity();
 auto& red(manager.addEntity());
 
 enum groupLabels : std::size_t
@@ -79,18 +80,31 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
 	//black.addComponent<ColliderComponent>("black");
 	
-	//for(int i = 0; i < 8; i++){
-	//	for(int j = 0; j < 8; j++){
-	//		if(board->getchecker(i,j)->getColor() == 'R'){
-	//			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-	//			red.addComponent<ColliderComponent>("red");
-	//		}
-	//		if(board->getchecker(i,j)->getColor() == 'B'){
-	//			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-	//			black.addComponent<ColliderComponent>("black");
-	//		}
-	//	}
-	//}
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			if(board->getchecker(i,j)->getColor() == 'R'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 3));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red king"));
+				}
+				else{
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red"));
+				}
+			}
+			if(board->getchecker(i,j)->getColor() == 'B'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 2));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black king"));
+				}
+				else{
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black"));
+				}
+			}
+		}
+	}
+
 
 	//player.addComponent<TransformComponent>();
 	//player.addComponent<SpriteComponent>("assets/lucas.png");
@@ -130,7 +144,40 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 8; j++){
+			if(board->getchecker(i,j)->getColor() == 'R'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 3));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red king"));
+				}
+				else{
+					tileComponent.push_back(red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1));
+					colliderComponent.push_back(red.addComponent<ColliderComponent>("red"));
+				}
+			}
+			if(board->getchecker(i,j)->getColor() == 'B'){
+				if(board->getchecker(i,j)->getisKinged() == true){
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 2));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black king"));
+				}
+				else{
+					tileComponent.push_back(black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0));
+					colliderComponent.push_back(black.addComponent<ColliderComponent>("black"));
+				}
+			}
+		}
+	}
+
 	SDL_RenderPresent(renderer);
+}
+
+void Game::clearPieces(){ //WIP
+
+	for(int i = 0; i < tileComponent.size(); i++){
+		colliderComponent.at(i).transform->position.x = 1000;
+		colliderComponent.at(i).transform->position.y = 1000;
+	}
 }
 
 void Game::clean()
