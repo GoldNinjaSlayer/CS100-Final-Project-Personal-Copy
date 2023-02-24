@@ -4,6 +4,7 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
+#include "ECS/ButtonComponent.h"
 
 using namespace std;
 Map* map;
@@ -55,6 +56,21 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
+    //display main menu
+    auto& buttonStart(manager.addEntity());
+    buttonStart.addComponent<TransformComponent>(75, 10, 112, 508, 1);
+    buttonStart.addComponent<SpriteComponent>();
+    //buttonStart.addComponent<TextComponent>("Start Game");
+    buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button");
+
+
+
+    //gameloop, while the game has not been quit
+    /*
+    while(!QUIT){
+
+    }
+     */
 	
 	//map = new Map();
 	
