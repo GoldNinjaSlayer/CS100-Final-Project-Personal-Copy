@@ -15,7 +15,7 @@ using namespace std;
 class GameLogic{
     
     private:
-    Board *board = new Board(8);    // creates board object
+        Board* board;    // creates board object
     Player player;       //initialize player structs
     AI bot;
     char currPlayer;

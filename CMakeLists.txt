@@ -10,8 +10,8 @@ project ("CheckersEngine")
 #
 cmake_minimum_required (VERSION 3.8)
 
-list(APPEND CMAKE_PREFIX_PATH "SDL2/cmake")
-list(APPEND CMAKE_PREFIX_PATH "SDL2_image/cmake")
+list(APPEND CMAKE_PREFIX_PATH "../SDL2/cmake")
+list(APPEND CMAKE_PREFIX_PATH "../SDL2_image/cmake")
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/SDL2/include/
@@ -45,20 +45,24 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/ECS/KeyboardController.h"
         "CheckersEngine/Src/ECS/SpriteComponent.h"
         "CheckersEngine/Src/ECS/TileComponent.h"
+        "CheckersEngine/Src/ECS/MouseController.h"
         "CheckersEngine/Src/ECS/TransformComponent.h"
-        "CheckersEngine/SRC/GameLogic/Board.cpp"
-        "CheckersEngine/SRC/GameLogic/Board.h"
-        "CheckersEngine/SRC/GameLogic/Checker.cpp"
-        "CheckersEngine/SRC/GameLogic/Checker.h"
-        "CheckersEngine/SRC/GameLogic/Player.cpp"
-        "CheckersEngine/SRC/GameLogic/Player.h"
-        "CheckersEngine/SRC/GameLogic/GameLogic.cpp"
-        "CheckersEngine/SRC/GameLogic/GameLogic.h"
-        )
+        "CheckersEngine/Src/ECS/CheckerLocker.h"
+        "CheckersEngine/Src/ECS/CheckerLocker.cpp"
+        "CheckersEngine/Src/GameLogic/Board.cpp"
+        "CheckersEngine/Src/GameLogic/Board.h"
+        "CheckersEngine/Src/GameLogic/Checker.cpp"
+        "CheckersEngine/Src/GameLogic/Checker.h"
+        "CheckersEngine/Src/GameLogic/Player.cpp"
+        "CheckersEngine/Src/GameLogic/Player.h"
+        "CheckersEngine/Src/GameLogic/GameLogic.cpp"
+        "CheckersEngine/Src/GameLogic/GameLogic.h"
+        "CheckersEngine/Src/ECS/CheckerLinker.h"
+        "CheckersEngine/Src/ECS/TileLinker.h" "UnitTests.cpp")
 
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
-target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
-        ${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
+#target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
+        #${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
 
 # Set the asset source directory and build directory
 set(ASSET_SOURCE_DIR "${CMAKE_SOURCE_DIR}/CheckersEngine/assets")

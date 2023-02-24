@@ -1,6 +1,8 @@
 #include "Board.h"
 #include <iostream>
 #include <string>
+#include "..\TextureManager.h"
+#include "..\Game.h"
 using namespace std;
 
 Board::Board(Board &b){
@@ -36,19 +38,22 @@ Board::Board(int n){
         //Declare a memory block of size COLS (n since a checker board is square)
         checkers[i] = new Checker*[COLS];
     }
-
+    cout << "NEW BOARD CREATED" << endl;
+    int x = 0;
     for(int i = 0;i < ROWS; i++){   // follows the rows
         for(int j = 0; j < ROWS; j++){  //follows the columns
             if(i < 3){                  // creating the black checkers
             if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'B');
+                    Game::AddChecker(1, 172 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j, '0');
                 }
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'B');
+                    Game::AddChecker(1, (-63 * (i%2)) + 228 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                 }
@@ -57,12 +62,14 @@ Board::Board(int n){
            if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'R');
+                    Game::AddChecker(0, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                 }
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'R');
+                    Game::AddChecker(0, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                    checkers[i][j] = new Checker(i,j, '0');
                 }
@@ -71,7 +78,6 @@ Board::Board(int n){
                 checkers[i][j] = new Checker(i,j, '0');
             }
 
-                listCheckers.push_back(checkers[i][j]);
             }
             
         }
@@ -101,6 +107,8 @@ Board::~Board(){
       delete [] checkers;              //To delete the outer array
                               //which contained the pointers
                               //of all the inner arrays
+      cout << "stuff was deleted" << endl;
+
 }
 
 void Board::Display(){
@@ -211,35 +219,8 @@ bool Board::isAllowed(Checker *checker){
     Checker *checkerP = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y + 1);
     Checker *checkerM = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y -1);
    
-//    cout << checker->getPosition() << endl;
-//    cout << "Left: "; 
-//    if(checkerM){cout << *checkerM<< endl;}
-//    cout << "Right: ";
-//    if(checkerP){cout << *checkerP<< endl;}
 
     bool canMove = false;
-
-    // if(checkerP){
-    //     //If the pointer points to a zero, then there is an open spaxe
-    //     if(checkerP->getColor() == '0'){
-    //         checker->addMove(checkerP->getPosition());
-    //         canMove = true;
-    //         //If the pointer points to something that is not a zero, and it is the opposite color
-    //     }else if(checkerP->getColor() != checker->getColor() && checkerP->getColor() != '0' ){
-    //         // We need to check if the space after that is open
-    //         Checker *checkp2 = getchecker(checkerP->getPosition().x + checker->direction,checkerP->getPosition().y + 1);
-    //         // if checkerp2 is in bounds
-    //         if(checkp2){
-    //             //if checkerp2 is open
-    //         if(checkp2->getColor() == '0'){
-    //             checker->canCapture = true;
-    //             checker->moves.clear();
-    //             checker->addMove(checkerP->getPosition());
-    //             canMove = true;
-    //         }
-    //         }
-    // }
-    // }
 
     if(checkerP){
         //If the pointer points to a zero, then there is an open spaxe
