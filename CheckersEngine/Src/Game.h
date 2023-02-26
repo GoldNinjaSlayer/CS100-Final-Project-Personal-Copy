@@ -27,11 +27,11 @@ public:
 	void clearPieces();
 
 	static void AddChecker(int id, int x, int y, int num, Checker* p);
-	static void AddTile(int x, int y, int id, int i, int j);
+	static void AddTile(int x, int y, int i, int j);
 	static void initTiles();
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
-	static std::vector<ColliderComponent*> tileColliders;
+	static std::vector<Entity*> tiles;
 	static std::vector<ColliderComponent*> colliders;
 	
 

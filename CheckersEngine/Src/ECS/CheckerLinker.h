@@ -7,7 +7,7 @@
 #include <iostream>
 using namespace std;
 
-//Class controls logic to automatically snap pieces into a tile
+
 class CheckerLinker : public Component
 {
 private:

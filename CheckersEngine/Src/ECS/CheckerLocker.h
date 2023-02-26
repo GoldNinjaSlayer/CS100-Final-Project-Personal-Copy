@@ -17,8 +17,7 @@ private:
     TransformComponent* transform;
     MouseController* mouse;
     CheckerLinker* position;
-    ColliderComponent* currentTile;
-    vector<ColliderComponent*> available;
+    Entity* currentTile;
 
 public:
     void init() override;
