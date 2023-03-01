@@ -16,13 +16,7 @@ Checker::Checker(int x, int y, char col){
     }
 }
 
-// Checker::Checker(int x, int y, char col){
-//     pos.x = x;
-//     pos.y = y;
-//     color = col;
 
-//     isKinged = false;
-// }
 
 ostream& operator<<(ostream& os, const Checker& check){
     os << check.color;
