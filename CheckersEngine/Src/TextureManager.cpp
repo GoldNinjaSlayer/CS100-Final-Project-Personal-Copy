@@ -1,18 +1,13 @@
-#include "TextureManager.h"
+#include "Game.h"
 
-SDL_Texture* TextureManager::LoadTexture(const char* texture)
-{
+SDL_Texture* TextureManager::LoadTexture(const char* filename) {
 
-	SDL_Texture* tex = NULL;
-	tex = IMG_LoadTexture(Game::renderer, texture);
-	if (tex == NULL)
-	{
-		std::cout << "Image couldnt load file from path: " << texture << "Error: " << IMG_GetError() << std::endl;
-	}
+	SDL_Surface* tmpSurface = IMG_Load(filename);
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
+	SDL_FreeSurface(tmpSurface);
 	return tex;
-}
 
-void TextureManager::Draw(SDL_Texture* text, SDL_Rect src, SDL_Rect dest)
-{
-	SDL_RenderCopy(Game::renderer, text, &src, &dest);
+}
+void TextureManager::Draw(SDL_Texture* tex, SDL_Rect srcR, SDL_Rect destR) {
+	SDL_RenderCopy(Game::renderer, tex, &srcR, &destR);
 }

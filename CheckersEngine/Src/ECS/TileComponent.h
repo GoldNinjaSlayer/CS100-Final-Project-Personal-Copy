@@ -1,55 +1,28 @@
 #pragma once
-
-#include "ECS.h"
 #include "TransformComponent.h"
-#include "SpriteComponent.h"
 #include "SDL.h"
+#include "SpriteComponent.h"
 
-
-class TileComponent : public Component
-{
+class TileComponent :public Component {
 public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 
 	SDL_Rect tileRect;
-	int tileID;
-	const char* path;
+	//TileComponent() = default;
 
-	TileComponent() = default;
-
-	TileComponent(int x, int y, int w, int h, int id)
-	{
+	TileComponent(int x, int y, int w, int h) {
 		tileRect.x = x;
 		tileRect.y = y;
 		tileRect.w = w;
 		tileRect.h = h;
-		tileID = id;
-		switch (tileID)
-		{
-		case 0:
-			path = "assets/black-piece.png";
-			break;
-		case 1:
-			path = "assets/red-piece.png";
-			break;
-		case 2:
-			path = "assets/blackTile.png";
-			break;
-		default:
-			break;
-		}
-	}
-	~TileComponent()
-	{
 	}
 
-	void init() override
-	{
-		entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 1);
+	void init() {
+		entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h);
 		transform = &entity->getComponent<TransformComponent>();
 
-		entity->addComponent<SpriteComponent>(path);
+		entity->addComponent<SpriteComponent>("C:/Users/User/source/repos/GameLoop1/GameLoop1/assets/WhiteTile.png");
 		sprite = &entity->getComponent<SpriteComponent>();
 	}
 };

@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include "SDL.h"
-#include "Components.h"
+#include "ECS.h"
+#include "../Game.h"
 
 class ColliderComponent : public Component
 {
@@ -16,7 +17,7 @@ public:
 	}
 	void init() override
 	{
-		if (!entity->hasComponenet<TransformComponent>())
+		if (!entity->hasComponent<TransformComponent>())
 		{
 			entity->addComponent<TransformComponent>();
 		}

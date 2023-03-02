@@ -1,84 +1,66 @@
 #include "Map.h"
 #include "TextureManager.h"
+#include "ECS/ColliderComponent.h"
+#include "ECS/ECS.h"
 
-int lvl1[20][25] = {
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
-	{0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0},
-	{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
+int lvl1[11][11] = {
+	{0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,1,1,1,1,1,0,0,0},
+	{0,0,0,1,1,1,1,1,0,0,0},
+	{0,0,0,1,1,1,1,1,0,0,0},
+	{0,0,0,1,1,1,1,1,0,0,0},
+	{0,0,0,1,1,1,1,1,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,0,0,0}
+
 };
-Map::Map()
-{
-	black = TextureManager::LoadTexture("assets/blackTile.png");
-	white = TextureManager::LoadTexture("assets/whiteTile.png");
-	red = TextureManager::LoadTexture("assets/redTile.png");
-
+Map::Map() {
+	text1 = TextureManager::LoadTexture("C:/Users/User/source/repos/GameLoop1/GameLoop1/assets/blackTile.png");
+	text2 = TextureManager::LoadTexture("C:/Users/User/source/repos/GameLoop1/GameLoop1/assets/redTile.png");
+	text3 = TextureManager::LoadTexture("C:/Users/User/source/repos/GameLoop1/GameLoop1/assets/WhiteTile.png");
 	LoadMap(lvl1);
-	src.x = src.y = 0;
-	src.w = dest.w = 32;
-	src.h = dest.h = 32;
-	dest.x = dest.y = 0;
-
-
+	srcR.w = srcR.h = 32;
+	srcR.x = srcR.y = 0;
+	destR.h = 75;
+	destR.w = 75;
+	destR.x = destR.y = 0;
 }
-Map::~Map()
-{
-	SDL_DestroyTexture(black);
-	SDL_DestroyTexture(white);
-	SDL_DestroyTexture(red);
-
+Map::~Map() {
+	SDL_DestroyTexture(text1);
+	SDL_DestroyTexture(text2);
 }
-
-void Map::LoadMap(int arr[20][25])
-{
-	for (int row = 0; row < 20; row++) {
-		for (int col = 0; col < 25; col++) {
+void Map::LoadMap(int arr[11][11]) {
+	for (int row = 0;row < 10;row++) {
+		for (int col = 0;col < 10;col++) {
 			map[row][col] = arr[row][col];
 		}
 	}
+
 }
-
-void Map::DrawMap()
-{
+void Map::DrawMap() {
 	int type = 0;
-
-	for (int row = 0; row < 20; row++) {
-		for (int col = 0; col < 25; col++) {
+	for (int row = 0;row < 10;row++) {
+		for (int col = 0;col < 10;col++) {
 			type = map[row][col];
-
-			dest.x = col * 32;
-			dest.y = row * 32;
-
-			switch (type)
-			{
-			case 0:
-				TextureManager::Draw(black, src, dest);
-				break;
+			destR.x = col * destR.w;
+			destR.y = row * destR.h;
+			switch (type) {
 			case 1:
-				TextureManager::Draw(white, src, dest);
+				//Game::AddTile((2 * destR.x + destR.w) / 2, (2 * destR.y + destR.h) / 2);
+				//TextureManager::Draw(text1,srcR, destR);
 				break;
-			case 2:
-				TextureManager::Draw(red, src, dest);
+			case 0:
+				//TextureManager::Draw(text2, srcR, destR);
+				break;
 			default:
 				break;
-			}
 
+			}
 		}
 	}
+
+
 }

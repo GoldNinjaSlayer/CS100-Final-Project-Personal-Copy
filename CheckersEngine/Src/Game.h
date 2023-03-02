@@ -1,33 +1,30 @@
 #pragma once
-
+#ifndef Game_h
+#define Game_h
 #include "SDL.h"
+#include "SDL_image.h"
+#include "Map.h"
+#include "ECS/Components.h"
 #include <iostream>
-#include "SDL_image.h" 
-#include <vector> 
-
+#include <vector>;
 class ColliderComponent;
-
-class Game
-{
+class Game {
 public:
 	Game();
 	~Game();
-
-	void init(const char* title, int width, int height, bool fullscreen);
-
+	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void handleEvents();
 	void update();
-	bool running() { return isRunning; }
 	void render();
 	void clean();
-
+	bool isRunning();
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static void AddTile(int x, int y);
 	static std::vector<ColliderComponent*> colliders;
-
 private:
-	bool isRunning = false;
-	int cnt = 0;
-	SDL_Window *window;
-	
+	bool running;
+	SDL_Window* window;
+
 };
+#endif 

@@ -1,52 +1,45 @@
 #pragma once
-#include "Components.h"
-#include "SDL.h"
+#include "TransformComponent.h"
 #include "../TextureManager.h"
-
-class SpriteComponent : public Component
-{
+class SpriteComponent : public Component {
 private:
-	TransformComponent *transform;
-	SDL_Texture *texture;
-	SDL_Rect srcRect, destRect;
-
+	TransformComponent* transform;
+	SDL_Texture* texture;
+	SDL_Rect srcR, destR;
 public:
 	SpriteComponent() = default;
-	SpriteComponent(const char* path)
-	{
-		setTex(path);
-	}
+	SpriteComponent(const char* texturePath) {
 
-	~SpriteComponent()
-	{
+		setTex(texturePath, 32, 32);
+	}
+	~SpriteComponent() {
 		SDL_DestroyTexture(texture);
 	}
-
-	void setTex(const char* path)
-	{
-		texture = TextureManager::LoadTexture(path);
-	}
-
-	void init() override
-	{
+	void init()override {
+		if (!entity->hasComponent<TransformComponent>()) {
+			entity->addComponent<TransformComponent>();
+		}
 		transform = &entity->getComponent<TransformComponent>();
-		srcRect.x = srcRect.y = 0;
-		srcRect.w = transform->width;
-		srcRect.h = transform->height;
-		destRect.w = destRect.h = 64;
+		srcR.x = srcR.y = 0;
+		destR.w = transform->width;
+		destR.h = transform->height;
+	}
+	void setTex(const char* newTex, int srcwidth, int srcheight) {// sets new source height and width to read in size of new textures. Also sets new texture path
+		texture = TextureManager::LoadTexture(newTex);
+		srcR.w = srcwidth;
+		srcR.h = srcheight;
 
 	}
-
-	void update() override
-	{
-		destRect.x = static_cast<int>(transform->position.x);
-		destRect.y = static_cast<int>(transform->position.y);
-		destRect.h = transform->height * transform->scale;
-		destRect.w = transform->width * transform->scale;
-
+	void update()override {//TransformComponent is added to manager first so it is updated first and then the SpriteComponenet updates based on its new positions given by the transformation
+		destR.x = static_cast<int>(transform->getXPos());
+		destR.y = static_cast<int>(transform->getYPos());
+		destR.w = transform->width;
+		destR.h = transform->height;
 	}
-	void draw() override
-	{
-		TextureManager::Draw(texture, srcRect, destRect);
+	void draw()override {
+		TextureManager::Draw(texture, srcR, destR);
 	}
+
+
 };
+
