@@ -3,7 +3,7 @@
 #include "Components.h"
 
 #include "../Game.h"
-#include "../GameLogic/GameLogic.h"
+
 #include <iostream>
 using namespace std;
 
@@ -19,6 +19,7 @@ public:
     CheckerLinker(Checker* piece)
     {
         this->piece = piece;
+        //piece->guiChecker = &this->entity->getComponent<SpriteComponent>();
     }
 
     Checker* getPiece() const

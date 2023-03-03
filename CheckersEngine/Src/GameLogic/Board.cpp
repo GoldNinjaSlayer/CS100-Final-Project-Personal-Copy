@@ -219,6 +219,8 @@ bool Board::isAllowed(Checker *checker){
     //Creating pointers to checker pieces that are in the reach of the checker piece we want to test
     Checker *checkerP = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y + 1);
     Checker *checkerM = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y -1);
+    checker->moves.clear();
+    checker->canCapture = false;
    
 
     bool canMove = false;
