@@ -1,7 +1,6 @@
 #pragma once
 #include "ECS.h"
 #include "Components.h"
-
 #include "../Game.h"
 
 #include <iostream>
