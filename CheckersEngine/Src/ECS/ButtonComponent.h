@@ -24,6 +24,11 @@ private:
     ButtonState currentState;
     std::string texture;
 
+    bool isInButton = false;
+
+    void (Game::*CallBack)();
+    Game* game;
+
 
 public:
     ButtonComponent(std::string path){
@@ -32,37 +37,53 @@ public:
     };
     ~ButtonComponent() {};
 
+    void addCallback(Game* g, void (Game::*function)()){
+        CallBack = function;
+        game = g;
+    }
+
     void init() override {
         sprite = &entity->getComponent<SpriteComponent>();
         transform = &entity->getComponent<TransformComponent>();
     }
 
     void update() override {
-        //pressed
-        if(Game::event.type == SDL_MOUSEBUTTONDOWN){
-            currentState = PRESSED;
+
+        if(Game::event.type == SDL_MOUSEMOTION){
+            //mouse position is only captured if it is in motion
+            int mouseX = Game::event.motion.x;
+            int mouseY = Game::event.motion.y;
+            int buttonWidth = transform->width;
+            int buttonHeight = transform->height;
+            float buttonX = transform->position.x;
+            float buttonY = transform->position.y;
+
+            isInButton = (mouseX >= buttonX && mouseX <= buttonX + buttonWidth) &&
+                         (mouseY >= buttonY && mouseY <= buttonY + buttonHeight);
         }
 
-        //released
-        if(Game::event.type == SDL_MOUSEBUTTONUP){
-            currentState = NORMAL;
-        }
+        if(isInButton){
+            if(Game::event.type == SDL_MOUSEBUTTONDOWN){
+                //pressed
+                currentState = PRESSED;
 
-        //hovering
-        int mouseX = Game::event.motion.x;
-        int mouseY = Game::event.motion.y;
-        int buttonWidth = transform->width;
-        int buttonHeight = transform->height;
-        float buttonX = transform->position.x;
-        float buttonY = transform->position.y;
-        /*
-        if((mouseX >= buttonX && mouseX <= buttonX + buttonWidth) &&
-                (mouseY >= buttonY && mouseY <= buttonY + buttonHeight)) {
-            currentState = HOVERED;
-        }else{
+            }
+            else if(Game::event.type == SDL_MOUSEBUTTONUP){
+                //released
+                currentState = NORMAL;
+                if(CallBack != nullptr){
+                    (game->*CallBack)();
+                }
+            }
+            else if(currentState != PRESSED){
+                //hovering
+                currentState = HOVERED;
+            }
+        }
+        else{
+            //not within button
             currentState = NORMAL;
         }
-         */
 
         sprite->setTex((texture + to_string(currentState) + ".png").c_str());
     }

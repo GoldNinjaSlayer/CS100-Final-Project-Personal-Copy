@@ -39,7 +39,10 @@ private:
 	SDL_Window *window;
 
 	Board* board; // creates board object
-	
+
+    void startGame();
+
+    void resetScreen();
 };
 
 

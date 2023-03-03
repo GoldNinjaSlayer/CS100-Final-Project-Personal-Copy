@@ -46,6 +46,7 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/ECS/TileComponent.h"
         "CheckersEngine/Src/ECS/MouseController.h"
         "CheckersEngine/Src/ECS/TransformComponent.h"
+        "CheckersEngine/Src/ECS/ButtonComponent.h"
         "CheckersEngine/Src/ECS/CheckerLocker.h"
         "CheckersEngine/Src/ECS/CheckerLocker.cpp"
         "CheckersEngine/Src/GameLogic/Board.cpp"

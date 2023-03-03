@@ -20,14 +20,14 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& black(manager.addEntity());
 
 
-
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
-enum groupLabels : std::size_t
-{
-	groupTiles,
-};
+
+int groupTiles = 0;
+int groupMainMenu = 999;
+
+vector<int> groupIds = {groupTiles, groupMainMenu};
 
 Game::Game()
 {}
@@ -58,69 +58,16 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
     //display main menu
     auto& buttonStart(manager.addEntity());
-    buttonStart.addComponent<TransformComponent>(75, 10, 112, 508, 1);
+    buttonStart.addComponent<TransformComponent>(width/2 - 508/2, height/2 + 20, 112, 508, 1);
     buttonStart.addComponent<SpriteComponent>();
     //buttonStart.addComponent<TextComponent>("Start Game");
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button");
-
-
-
-    //gameloop, while the game has not been quit
-    /*
-    while(!QUIT){
-
-    }
-     */
-	
-	//map = new Map();
-	
-	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
-	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
-	initTiles();
-	tiles = manager.getGroup(groupTiles);
-	board = new Board(8);
-	board->allowedMoves(board->getInstances('B'));
-	board->allowedMoves(board->getInstances('R'));
-
-
-
-	int x = 0;
-	int y = 0;
-
-
-
-
-
-
-
-	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	//black.addComponent<ColliderComponent>("black");
-	
-	//for(int i = 0; i < 8; i++){
-	//	for(int j = 0; j < 8; j++){
-	//		if(board->getchecker(i,j)->getColor() == 'R'){
-	//			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-	//			red.addComponent<ColliderComponent>("red");
-	//		}
-	//		if(board->getchecker(i,j)->getColor() == 'B'){
-	//			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-	//			black.addComponent<ColliderComponent>("black");
-	//		}
-	//	}
-	//}
-
-	//player.addComponent<TransformComponent>();
-	//player.addComponent<SpriteComponent>("assets/lucas.png");
-	//player.addComponent<KeyboardController>();
-	//player.addComponent<ColliderComponent>("player");
-
-
+    buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::startGame);
+    buttonStart.addGroup(groupMainMenu);
 }
 
 void Game::handleEvents()
 {
-
-
 	SDL_PollEvent(&event);
 
 	switch (event.type)
@@ -145,9 +92,6 @@ void Game::update()
 
 void Game::render()
 {
-
-
-
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
@@ -197,4 +141,51 @@ void Game::initTiles()
 			AddTile((-56 * ((i + 1) % 2) + 228 + (j * 113)), 110 + (i * 57), i, j * 2 + (i % 2));
 		}
 	}
+}
+
+void Game::startGame() {
+    //map = new Map();
+    resetScreen();
+
+    checkboard.addComponent<TransformComponent>(140,80,500,500,1);
+    checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+    initTiles();
+    tiles = manager.getGroup(groupTiles);
+    board = new Board(8);
+    board->allowedMoves(board->getInstances('B'));
+    board->allowedMoves(board->getInstances('R'));
+
+    int x = 0;
+    int y = 0;
+
+    //black.addComponent<TileComponent>(200, 200, 32, 32, 0);
+    //black.addComponent<ColliderComponent>("black");
+
+    //for(int i = 0; i < 8; i++){
+    //	for(int j = 0; j < 8; j++){
+    //		if(board->getchecker(i,j)->getColor() == 'R'){
+    //			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
+    //			red.addComponent<ColliderComponent>("red");
+    //		}
+    //		if(board->getchecker(i,j)->getColor() == 'B'){
+    //			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
+    //			black.addComponent<ColliderComponent>("black");
+    //		}
+    //	}
+    //}
+
+    //player.addComponent<TransformComponent>();
+    //player.addComponent<SpriteComponent>("assets/lucas.png");
+    //player.addComponent<KeyboardController>();
+    //player.addComponent<ColliderComponent>("player");
+}
+
+void Game::resetScreen() {
+    cout << "clearing screen..." << endl;
+    for(int i = 0; i < groupIds.size(); i++){
+        vector<Entity *> entities = manager.getGroup(groupIds[i]); //main menu
+        for(auto &entity : entities){
+            entity->destroy();
+        }
+    }
 }
