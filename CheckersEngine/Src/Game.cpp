@@ -57,8 +57,13 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	}
 
     //display main menu
+    auto& menuBG(manager.addEntity());
+    menuBG.addComponent<TransformComponent>(-10, 0, 2560, 2560, 0.32);
+    menuBG.addComponent<SpriteComponent>("assets/menu.png");
+    menuBG.addGroup(groupMainMenu);
+
     auto& buttonStart(manager.addEntity());
-    buttonStart.addComponent<TransformComponent>(width/2 - 508/2, height/2 + 20, 112, 508, 1);
+    buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
     buttonStart.addComponent<SpriteComponent>();
     //buttonStart.addComponent<TextComponent>("Start Game");
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button");
