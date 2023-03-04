@@ -196,7 +196,12 @@ void Board::swap(Checker *check1, Checker *check2){
     // cout << "Check 1 new position: " << check1->getPosition() << endl;
     // cout << "Check 2 new position: " << check2->getPosition() << endl;
 
-
+    if(currentTurn == 'B'){
+        currentTurn = 'R';
+    }
+    else{
+        currentTurn = 'B';
+    }
 }
 
  vector<Checker*> Board::getInstances(char color){   // returns vectors of instances of color

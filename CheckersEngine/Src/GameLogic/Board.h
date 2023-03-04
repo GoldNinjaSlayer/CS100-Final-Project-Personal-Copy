@@ -16,7 +16,7 @@ class Board{
     private:
     int ROWS;
     Checker ***checkers; //Handles the 2D array dynamically
-        
+    char currentTurn = 'B';    
 
 
     public:
@@ -35,7 +35,7 @@ class Board{
         vector<Checker*> allowedMoves(vector<Checker*> instances); // returns a list of checkers that can move
         void swap(Checker *check1, Checker *check2);            // moves a checkerpiece in given direction
         void capture(Checker *check1, Checker *check2);
-
+        char getTurn(){return currentTurn;};
 };
 
 
