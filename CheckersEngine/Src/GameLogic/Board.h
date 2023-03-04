@@ -16,7 +16,7 @@ class Board{
     private:
     int ROWS;
     Checker ***checkers; //Handles the 2D array dynamically
-    char currentTurn = 'B';    
+    char currentTurn = 'R';    
 
 
     public:
@@ -36,6 +36,7 @@ class Board{
         void swap(Checker *check1, Checker *check2, bool doubleJump);            // moves a checkerpiece in given direction
         void capture(Checker *check1, Checker *check2);
         char getTurn(){return currentTurn;};
+        void changeTurn();
 };
 
 
