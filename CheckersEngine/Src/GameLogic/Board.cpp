@@ -169,7 +169,7 @@ Checker *Board::getchecker(int x, int y){
 
 
 
-void Board::swap(Checker *check1, Checker *check2){
+void Board::swap(Checker *check1, Checker *check2, bool doubleJump){
     // cout << "Check 1 old position: " << check1->getPosition() << endl;
     // cout << "Check 2 old position: " << check2->getPosition() << endl;
     // cout << "SWAP DONE IN BOARD #" << boardNum << endl;
@@ -196,11 +196,13 @@ void Board::swap(Checker *check1, Checker *check2){
     // cout << "Check 1 new position: " << check1->getPosition() << endl;
     // cout << "Check 2 new position: " << check2->getPosition() << endl;
 
-    if(currentTurn == 'B'){
-        currentTurn = 'R';
-    }
-    else{
-        currentTurn = 'B';
+    if(!doubleJump){
+        if(currentTurn == 'B'){
+            currentTurn = 'R';
+        }
+        else{
+            currentTurn = 'B';
+        }
     }
 }
 
@@ -370,7 +372,7 @@ void Board::capture(Checker *check1, Checker *check2){
     int calcx = check2->getPosition().x - check1->getPosition().x;
     int calcy = check2->getPosition().y - check1->getPosition().y;
 
-    swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy));
+    swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy), true);
     // check1->canCapture = false;
 
     // if(isAllowed(check1)){

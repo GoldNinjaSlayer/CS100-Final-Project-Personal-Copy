@@ -48,7 +48,7 @@ bool CheckerLocker::checkCollision(Entity* tile)
 void CheckerLocker::swapPiece(Entity* tile)
 {
 
-    Game::board->swap(position->getPiece(), Game::board->getchecker(tile->getComponent<TileLinker>().getPos().x, tile->getComponent<TileLinker>().getPos().y));
+    Game::board->swap(position->getPiece(), Game::board->getchecker(tile->getComponent<TileLinker>().getPos().x, tile->getComponent<TileLinker>().getPos().y), false);
 
     Game::board->allowedMoves(Game::board->getInstances('B'));
     Game::board->allowedMoves(Game::board->getInstances('R'));
