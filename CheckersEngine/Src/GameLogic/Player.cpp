@@ -20,7 +20,7 @@ void Player::makeMove(Board *b){
     if(canCapt){
         b->capture(piece, b->getchecker(move.x, move.y));
     } else{
-        b->swap(piece, b->getchecker(move.x, move.y));
+        b->swap(piece, b->getchecker(move.x, move.y), false);
     }
 
     for(auto x: allowed){
@@ -117,7 +117,7 @@ void AI::makeMove(Board *b){
     else{
         cout << "swapped for ai" << endl;
         cout << "Address in makemove = " << b << endl;
-        b->swap(move.piece,  b->getchecker(move.dest.x, move.dest.y));
+        b->swap(move.piece,  b->getchecker(move.dest.x, move.dest.y), false);
     }
 }
 
@@ -192,7 +192,7 @@ Move AI::minimaxStart(Board b, char col, bool maximizing){
             }
             else{
                 // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
-                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y));
+                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y), false);
                 // cout << "AI SWAP MOVE IN MINIMAXSTART" << endl;
                 
             }
@@ -309,7 +309,7 @@ double AI::minimax(Board b, char col, bool maximizing, int depth, int alpha, int
             }
             else{
                 // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
-                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y));
+                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y), false);
                 // cout << "AI SWAP MOVE IN MINIMAX MAXIMIZING" << endl;
             }
             // cout << "TEMP BOARD MINIMAX" << endl;
@@ -353,7 +353,7 @@ double AI::minimax(Board b, char col, bool maximizing, int depth, int alpha, int
             }
             else{
                 // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
-                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y));
+                tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y), false);
                 // cout << "AI SWAP MOVE IN MINIMAX MINIMIZING" << endl;
                 
             }

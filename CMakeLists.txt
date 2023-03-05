@@ -58,11 +58,12 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/GameLogic/GameLogic.h"
         "CheckersEngine/Src/ECS/CheckerLinker.h"
         "CheckersEngine/Src/ECS/TileLinker.h" 
-       )
+        # "CheckersEngine/Src/ECS/LogicHandler.h"
+         )
 
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
-#target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
-        #${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll
+        ${CMAKE_SOURCE_DIR}/SDL2_image/lib/x64/SDL2_image.dll)
 
 # Set the asset source directory and build directory
 set(ASSET_SOURCE_DIR "${CMAKE_SOURCE_DIR}/CheckersEngine/assets")

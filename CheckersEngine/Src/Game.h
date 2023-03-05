@@ -30,7 +30,9 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<Entity*> tiles;
+	static std::vector<Entity*> checkersEntities;
 	static std::vector<ColliderComponent*> colliders;
+	static Board* board; // creates board object
 	
 
 private:
@@ -38,7 +40,7 @@ private:
 	int cnt = 0;
 	SDL_Window *window;
 
-	Board* board; // creates board object
+	
 	
 };
 

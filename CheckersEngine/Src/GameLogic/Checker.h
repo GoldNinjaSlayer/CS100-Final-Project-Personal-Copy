@@ -1,11 +1,12 @@
+
+
+#pragma once
 #include <iostream>
 #include <vector>
 #include <stack>
 #include <set>
+//#include "../ECS/Components.h"
 using namespace std;
-
-#ifndef CHECKER_H
-#define CHECKER_H
 
 struct coord{
     int x;
@@ -32,6 +33,8 @@ struct coord{
     }
 };
 
+
+
 class Checker{
     private:
         coord pos;  // checkers x,y position
@@ -43,6 +46,7 @@ class Checker{
         
 
     public:
+        //SpriteComponent* guiChecker;
         int direction;  //the direction the piece is moving
         bool canCapture;    //if piece is able to capture another piece
         set<coord> moves;   //list of possible moves for the piece
@@ -66,4 +70,4 @@ class Checker{
 };
 
 
-#endif /* CHECKER_H */
+//#endif /* CHECKER_H */
