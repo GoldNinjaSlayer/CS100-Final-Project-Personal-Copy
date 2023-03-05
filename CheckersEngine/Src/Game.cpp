@@ -9,11 +9,13 @@ using namespace std;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
-
+Board* Game::board = nullptr;
 Manager manager;
 SDL_Event Game::event;
 
 std::vector<Entity*> Game::tiles;
+
+std::vector<Entity*> Game::checkersEntities;
 std::vector<ColliderComponent*> Game::colliders;
 
 auto& black(manager.addEntity());
@@ -27,6 +29,7 @@ auto& red(manager.addEntity());
 enum groupLabels : std::size_t
 {
 	groupTiles,
+	groupCheckers,
 };
 
 Game::Game()
@@ -64,6 +67,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	initTiles();
 	tiles = manager.getGroup(groupTiles);
 	board = new Board(8);
+	checkersEntities = manager.getGroup(groupCheckers);
 	board->allowedMoves(board->getInstances('B'));
 	board->allowedMoves(board->getInstances('R'));
 
@@ -200,14 +204,14 @@ void Game::AddChecker(int id, int x, int y, int num, Checker* p) {
 	piece.addComponent<ColliderComponent>("piece " + to_string(num));
 	piece.addComponent<CheckerLinker>(p);
 	piece.addComponent<CheckerLocker>();
-
+	piece.addGroup(groupCheckers);
 }
 
 void Game::AddTile(int x, int y, int i, int j)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
-	tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
 	tile.addComponent<ColliderComponent>("tile " + to_string((i*8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
