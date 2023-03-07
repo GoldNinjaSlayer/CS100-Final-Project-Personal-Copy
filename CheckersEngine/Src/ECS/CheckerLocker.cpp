@@ -48,7 +48,7 @@ bool CheckerLocker::checkCollision(Entity* tile)
 void CheckerLocker::swapPiece(Entity* tile)
 {
 
-    Game::board->swap(position->getPiece(), Game::board->getchecker(tile->getComponent<TileLinker>().getPos().x, tile->getComponent<TileLinker>().getPos().y));
+    Game::board->swap(position->getPiece(), Game::board->getchecker(tile->getComponent<TileLinker>().getPos().x, tile->getComponent<TileLinker>().getPos().y), false);
 
     Game::board->allowedMoves(Game::board->getInstances('B'));
     Game::board->allowedMoves(Game::board->getInstances('R'));
@@ -83,7 +83,7 @@ void CheckerLocker::moveLogic()
                 if (checkCollision(tile))
                 {
                     //    If there's a collision, snap this checker to the other collider's position
-                    if (position->getPiece()->moves.find(tile->getComponent<TileLinker>().getPos()) != position->getPiece()->moves.end() || tile->getComponent<TileLinker>().getPos() == position->getPiece()->getPosition())
+                    if (position->getPiece()->getColor() == Game::board->getTurn() && position->getPiece()->moves.find(tile->getComponent<TileLinker>().getPos()) != position->getPiece()->moves.end() || tile->getComponent<TileLinker>().getPos() == position->getPiece()->getPosition())
                     {
                         lockPiece(tile);
 
