@@ -1,10 +1,10 @@
 #include "Game.h"
 #include "GameLogic/GameLogic.h"
 
-Game *game = nullptr;
+Game* game = nullptr;
 GameLogic gameLogic;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
@@ -29,19 +29,16 @@ int main(int argc, char *argv[])
 		}
 
 		//gameLogic.getBoard()->Display();
-		
+
   /*      cout << "Num Black: " << gameLogic.getBoard()->getInstances('B').size() << endl;
-        cout << "Num Red: " << gameLogic.getBoard()->getInstances('R').size() << endl;
-
-        if(gameLogic.getCurrPlayer() == 'R')
-            gameLogic.getPlayer().makeMove(gameLogic.getBoard());
-        else
-            gameLogic.getBot().makeMove(gameLogic.getBoard());
-
-        gameLogic.changeTurns();
-
+		cout << "Num Red: " << gameLogic.getBoard()->getInstances('R').size() << endl;
+		if(gameLogic.getCurrPlayer() == 'R')
+			gameLogic.getPlayer().makeMove(gameLogic.getBoard());
+		else
+			gameLogic.getBot().makeMove(gameLogic.getBoard());
+		gameLogic.changeTurns();
 		game->setBoard(gameLogic.getBoard());*/
-	
+
 	}
 	game->clean();
 	return 0;
