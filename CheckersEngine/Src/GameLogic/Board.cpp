@@ -195,11 +195,11 @@ void Board::swap(Checker *check1, Checker *check2, bool doubleJump){
 
     // cout << "Check 1 new position: " << check1->getPosition() << endl;
     // cout << "Check 2 new position: " << check2->getPosition() << endl;
-
-    if(!doubleJump){
-        changeTurn();
+    isAllowed(check1);
+    if(doubleJump && check1->canCapture){
+        cout << "Double Jump!" << endl;
     }
-    else if(!check1->canCapture){
+    else{
         changeTurn();
     }
     cout << "Current Turn: " << currentTurn << endl;
@@ -370,10 +370,8 @@ void Board::capture(Checker *check1, Checker *check2){
     check2->change('0');
     int calcx = check2->getPosition().x - check1->getPosition().x;
     int calcy = check2->getPosition().y - check1->getPosition().y;
-    bool doubleJump = false;
-    if(check1->canCapture){
-        doubleJump = true;
-    }
+    bool doubleJump = true;
+
 
     swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy), doubleJump);
     // check1->canCapture = false;
