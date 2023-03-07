@@ -59,7 +59,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//map = new Map();
 	
 	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
-	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+	checkboard.addComponent<SpriteComponent>("../assets/Checkerboard.png");
 	initTiles();
 	tiles = manager.getGroup(groupTiles);
 	board = new Board(8);
@@ -160,7 +160,7 @@ void Game::AddTile(int x, int y, int i, int j)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
-	tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	tile.addComponent<SpriteComponent>("../assets/blackTile.png");
 	tile.addComponent<ColliderComponent>("tile " + to_string((i*8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
