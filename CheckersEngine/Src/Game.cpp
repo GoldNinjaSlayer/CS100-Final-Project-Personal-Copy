@@ -25,6 +25,12 @@ auto& black(manager.addEntity());
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
+
+enum checkerState {
+	CAPTURE,
+	SWAP
+};
+
 enum groupLabels : std::size_t
 {
 	groupTiles,
@@ -134,8 +140,6 @@ void Game::update()
 void Game::render()
 {
 
-
-
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
@@ -186,3 +190,8 @@ void Game::initTiles()
 		}
 	}
 }
+
+//void handleLogic()
+//{
+//
+//}

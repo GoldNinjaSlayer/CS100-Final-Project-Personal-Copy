@@ -23,6 +23,7 @@ public:
 	void render();
 	void clean();
 	void setBoard(Board* board);
+	void handleLogic();
 
 	static void AddChecker(int id, int x, int y, int num, Checker* p);
 	static void AddTile(int x, int y, int i, int j);
