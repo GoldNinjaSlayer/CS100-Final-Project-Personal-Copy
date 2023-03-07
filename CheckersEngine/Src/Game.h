@@ -6,6 +6,7 @@
 #include <vector> 
 #include "ECS/ECS.h"
 #include "GameLogic/Board.h"
+#include "ECS/ECS.h"
 
 class ColliderComponent;
 
@@ -24,6 +25,7 @@ public:
 	void clean();
 	void setBoard(Board* board);
 	void handleLogic();
+	void clearPieces();
 
 	static void AddChecker(int id, int x, int y, int num, Checker* p);
 	static void AddTile(int x, int y, int i, int j);
