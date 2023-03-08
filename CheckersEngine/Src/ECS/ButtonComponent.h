@@ -11,30 +11,40 @@
 #include "SpriteComponent.h"
 
 enum ButtonState {
+    UNKNOWN = -1,
     NORMAL = 0,
     PRESSED = 1,
     HOVERED = 2
 };
 
-class ButtonComponent : public SpriteComponent{
+class ButtonComponent : public Component{
 private:
     SpriteComponent *sprite;
     TransformComponent *transform;
 
-    ButtonState currentState;
-    std::string texture;
+    ButtonState currentState = UNKNOWN;
+    const char* texturePathNormal;
+    const char* texturePathPressed;
+    const char* texturePathHovered;
 
     bool isInButton = false;
 
-    void (Game::*CallBack)();
+    void (Game::*CallBack)() = nullptr;
     Game* game;
 
-
 public:
-    ButtonComponent(std::string path){
-        currentState = NORMAL;
-        texture = path;
+    ButtonComponent(const char* normal, const char* pressed){
+        texturePathNormal = normal;
+        texturePathPressed = pressed;
+        texturePathHovered = texturePathNormal;
     };
+
+    ButtonComponent(const char* normal, const char* pressed, const char* hovered){
+        texturePathNormal = normal;
+        texturePathPressed = pressed;
+        texturePathHovered = hovered;
+    };
+
     ~ButtonComponent() {};
 
     void addCallback(Game* g, void (Game::*function)()){
@@ -43,8 +53,9 @@ public:
     }
 
     void init() override {
-        sprite = &entity->getComponent<SpriteComponent>();
+        sprite = &entity->addComponent<SpriteComponent>();
         transform = &entity->getComponent<TransformComponent>();
+        sprite->setTex(texturePathNormal);
     }
 
     void update() override {
@@ -53,8 +64,8 @@ public:
             //mouse position is only captured if it is in motion
             int mouseX = Game::event.motion.x;
             int mouseY = Game::event.motion.y;
-            int buttonWidth = transform->width;
-            int buttonHeight = transform->height;
+            int buttonWidth = transform->width * transform->scale;
+            int buttonHeight = transform->height * transform->scale;
             float buttonX = transform->position.x;
             float buttonY = transform->position.y;
 
@@ -66,11 +77,13 @@ public:
             if(Game::event.type == SDL_MOUSEBUTTONDOWN){
                 //pressed
                 currentState = PRESSED;
-
+                sprite->setTex(texturePathPressed);
             }
             else if(Game::event.type == SDL_MOUSEBUTTONUP){
                 //released
                 currentState = NORMAL;
+                sprite->setTex(texturePathNormal);
+
                 if(CallBack != nullptr){
                     (game->*CallBack)();
                 }
@@ -78,14 +91,16 @@ public:
             else if(currentState != PRESSED){
                 //hovering
                 currentState = HOVERED;
+                sprite->setTex(texturePathHovered);
             }
         }
         else{
             //not within button
+            if(currentState == NORMAL)
+                return;
             currentState = NORMAL;
+            sprite->setTex(texturePathNormal);
         }
-
-        sprite->setTex((texture + to_string(currentState) + ".png").c_str());
     }
 };
 

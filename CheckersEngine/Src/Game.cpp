@@ -58,17 +58,30 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
     //display main menu
     auto& menuBG(manager.addEntity());
-    menuBG.addComponent<TransformComponent>(-10, 0, 2560, 2560, 0.32);
-    menuBG.addComponent<SpriteComponent>("assets/menu.png");
+    menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
+    menuBG.addComponent<SpriteComponent>("assets/menu.jpeg");
+    menuBG.addGroup(groupMainMenu);
+
+    auto& logo(manager.addEntity());
+    menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
+    menuBG.addComponent<SpriteComponent>("assets/title.png");
     menuBG.addGroup(groupMainMenu);
 
     auto& buttonStart(manager.addEntity());
     buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
     buttonStart.addComponent<SpriteComponent>();
     //buttonStart.addComponent<TextComponent>("Start Game");
-    buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button");
+    buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::startGame);
     buttonStart.addGroup(groupMainMenu);
+
+
+    auto& buttonQuit(manager.addEntity());
+    buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 112, 508, 0.5);
+    //buttonQuit.addComponent<TextComponent>("Quit Game");
+    buttonQuit.addComponent<SpriteComponent>();
+    buttonQuit.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
+    buttonQuit.addGroup(groupMainMenu);
 }
 
 void Game::handleEvents()
