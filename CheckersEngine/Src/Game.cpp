@@ -81,34 +81,6 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	int x = 0;
 	int y = 0;
 
-
-
-
-
-
-
-	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	//black.addComponent<ColliderComponent>("black");
-
-	//for(int i = 0; i < 8; i++){
-	//	for(int j = 0; j < 8; j++){
-	//		if(board->getchecker(i,j)->getColor() == 'R'){
-	//			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-	//			red.addComponent<ColliderComponent>("red");
-	//		}
-	//		if(board->getchecker(i,j)->getColor() == 'B'){
-	//			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-	//			black.addComponent<ColliderComponent>("black");
-	//		}
-	//	}
-	//}
-
-	//player.addComponent<TransformComponent>();
-	//player.addComponent<SpriteComponent>("assets/lucas.png");
-	//player.addComponent<KeyboardController>();
-	//player.addComponent<ColliderComponent>("player");
-
-
 }
 
 void Game::handleEvents()

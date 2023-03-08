@@ -12,6 +12,7 @@ void CheckerLocker::init()
     transform = &entity->getComponent<TransformComponent>();
     mouse = &entity->getComponent<MouseController>();
     position = &entity->getComponent<CheckerLinker>();
+    bot.setColor('B');
 
     //cout << "In checkercontroller: " << collider->collider.x << endl;
 }
@@ -70,92 +71,136 @@ void CheckerLocker::lockPiece(Entity *tile)
 
 void CheckerLocker::moveLogic()
 {
-    if (!mouse->isMouseDragging)
+
+    if (Game::board->getTurn() == 'R')
     {
-        bool collisionDetected = false;
-
-        // Loop over all the colliders to check for a collision
-        for (auto& tile : Game::tiles)
+        if (!mouse->isMouseDragging)
         {
+            bool collisionDetected = false;
 
-            if (!position->getPiece()->canCapture)
-            {
-                if (checkCollision(tile))
-                {
-                    //    If there's a collision, snap this checker to the other collider's position
-                    bool canMove = true;
-                    for (auto c : Game::checkersEntities)
-                    {
-                        if (c->getComponent<CheckerLinker>().getPiece()->canCapture && c->getComponent<CheckerLinker>().getPiece()->getColor() == position->getPiece()->getColor())
-                        {
-                            canMove = false;
-                            break;
-                        }
-                    }
-                    if (position->getPiece()->getColor() == Game::board->getTurn() && position->getPiece()->moves.find(tile->getComponent<TileLinker>().getPos()) != position->getPiece()->moves.end() && canMove || tile->getComponent<TileLinker>().getPos() == position->getPiece()->getPosition())
-                    {
-                        lockPiece(tile);
-
-                        {
-                        if (tile->getComponent<TileLinker>().getPos() != position->getPiece()->getPosition())
-                            swapPiece(tile);
-                        }
-                        collisionDetected = true;
-                        break;
-                    }
-                }
-            }
-            else
+            // Loop over all the colliders to check for a collision
+            for (auto& tile : Game::tiles)
             {
 
-                bool correctPos = false;
-                int calcx;
-                int calcy;
-                for (auto& dest : position->getPiece()->moves)
+                if (!position->getPiece()->canCapture)
                 {
-                    calcx = dest.x - position->getPiece()->getPosition().x;
-                    calcy = dest.y - position->getPiece()->getPosition().y;
-
-                    if (tile->getComponent<TileLinker>().getPos().x == dest.x + calcx && tile->getComponent<TileLinker>().getPos().y == dest.y + calcy)
-                    {
-                        correctPos = true;
-
-                        break;
-                    }
-                }
-
-                if (correctPos)
-                {
-
                     if (checkCollision(tile))
                     {
-                        lockPiece(tile);
-
-                        for (auto& checker : Game::checkersEntities)
+                        //    If there's a collision, snap this checker to the other collider's position
+                        bool canMove = true;
+                        for (auto c : Game::checkersEntities)
                         {
-
-                            if ((checker->getComponent<CheckerLinker>().getPiece()->getPosition().x == (tile->getComponent<TileLinker>().getPos().x - calcx)) && (checker->getComponent<CheckerLinker>().getPiece()->getPosition().y == (tile->getComponent<TileLinker>().getPos().y - calcy)))
+                            if (c->getComponent<CheckerLinker>().getPiece()->canCapture && c->getComponent<CheckerLinker>().getPiece()->getColor() == position->getPiece()->getColor())
                             {
-
-                                capturePiece(checker);
+                                canMove = false;
                                 break;
                             }
                         }
-                        collisionDetected = true;
-                        break;
+                        if (position->getPiece()->getColor() == Game::board->getTurn() && position->getPiece()->moves.find(tile->getComponent<TileLinker>().getPos()) != position->getPiece()->moves.end() && canMove || tile->getComponent<TileLinker>().getPos() == position->getPiece()->getPosition())
+                        {
+                            lockPiece(tile);
+
+                            {
+                                if (tile->getComponent<TileLinker>().getPos() != position->getPiece()->getPosition())
+                                    swapPiece(tile);
+                            }
+                            collisionDetected = true;
+                            break;
+                        }
                     }
                 }
+                else
+                {
+
+                    bool correctPos = false;
+                    int calcx;
+                    int calcy;
+                    for (auto& dest : position->getPiece()->moves)
+                    {
+                        calcx = dest.x - position->getPiece()->getPosition().x;
+                        calcy = dest.y - position->getPiece()->getPosition().y;
+
+                        if (tile->getComponent<TileLinker>().getPos().x == dest.x + calcx && tile->getComponent<TileLinker>().getPos().y == dest.y + calcy)
+                        {
+                            correctPos = true;
+
+                            break;
+                        }
+                    }
+
+                    if (correctPos)
+                    {
+
+                        if (checkCollision(tile))
+                        {
+                            lockPiece(tile);
+
+                            for (auto& checker : Game::checkersEntities)
+                            {
+
+                                if ((checker->getComponent<CheckerLinker>().getPiece()->getPosition().x == (tile->getComponent<TileLinker>().getPos().x - calcx)) && (checker->getComponent<CheckerLinker>().getPiece()->getPosition().y == (tile->getComponent<TileLinker>().getPos().y - calcy)))
+                                {
+
+                                    capturePiece(checker);
+                                    break;
+                                }
+                            }
+                            collisionDetected = true;
+                            break;
+                        }
+                    }
 
 
 
 
+                }
+
+                if (!collisionDetected)
+                {
+                    lockPiece(currentTile);
+                }
             }
 
-            if (!collisionDetected)
-            {
-                lockPiece(currentTile);
-            }
         }
+    }
+    else
+    {
+        Entity* currChecker = nullptr;
+        Entity* currTile = nullptr;
+        Move move = bot.minimaxStart(*Game::board, 'B', true);
+        cout << move.piece->getPosition() << " to " << move.dest << endl;
+        
 
+        if (move.piece->canCapture)
+        {
+            cout << "test" << endl;
+        }
+        else
+        {
+            for (auto& c : Game::checkersEntities)
+            {
+                //cout << c->getComponent<CheckerLinker>().getPiece()->getPosition() << endl;
+                if (c->getComponent<CheckerLinker>().getPiece()->getPosition() == move.piece->getPosition())
+                {
+                    //cout << "IN HERE" << endl;
+                    currChecker = c;
+                    break;
+                }
+
+            }
+
+            for (auto t : Game::tiles)
+            {
+                if (t->getComponent<TileLinker>().getPos() == move.dest)
+                    currTile = t;
+            }
+
+
+           
+
+            Game::board->swap(move.piece, Game::board->getchecker(move.dest.x, move.dest.y), false);
+
+
+        }
     }
 }
