@@ -30,6 +30,17 @@ void CheckerLocker::update()
         lockPiece(currentTile);
     }
   
+    if (position->getPiece()->getisKinged())
+    {
+        if (position->getPiece()->getColor() == 'R')
+        {
+            entity->getComponent<SpriteComponent>().setTex("assets/checkersPieces/redPieceKing.png");
+        }
+        else
+        {
+            entity->getComponent<SpriteComponent>().setTex("assets/checkersPieces/blackPieceKing.png");
+        }
+    }
 
 
 }

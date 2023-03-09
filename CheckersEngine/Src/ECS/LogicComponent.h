@@ -11,6 +11,9 @@ private:
     bool mouseHovering(Entity* component);
     void swapPiece(Entity* tile, Checker* checker);
     void capturePiece(Checker* checker1, Entity* checker2);
+    void playerMove();
+    void botMove();
+    AI bot;
 
 public:
     void init() override;

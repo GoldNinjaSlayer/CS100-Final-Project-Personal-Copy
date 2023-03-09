@@ -56,6 +56,8 @@ private:
 
 public:
 	Entity(Manager& mManager): manager(mManager){}
+
+
 	void update()
 	{
 		for (auto& c : components) c->update();
@@ -162,4 +164,5 @@ public:
 		entities.emplace_back(std::move(uPtr));
 		return *e;
 	}
+
 };

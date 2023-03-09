@@ -101,6 +101,7 @@ void Game::handleEvents()
 	}
 }
 
+
 void Game::update()
 {
 	manager.refresh();

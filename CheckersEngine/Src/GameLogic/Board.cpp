@@ -108,7 +108,7 @@ Board::~Board(){
       delete [] checkers;              //To delete the outer array
                               //which contained the pointers
                               //of all the inner arrays
-      cout << "stuff was deleted" << endl;
+      //cout << "stuff was deleted" << endl;
 
 }
 
@@ -203,7 +203,7 @@ void Board::swap(Checker *check1, Checker *check2, bool doubleJump){
     else{
         changeTurn();
     }
-    cout << "Current Turn: " << currentTurn << endl;
+    //cout << "Current Turn: " << currentTurn << endl;
 }
 
  vector<Checker*> Board::getInstances(char color){   // returns vectors of instances of color
