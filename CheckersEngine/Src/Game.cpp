@@ -25,6 +25,8 @@ auto& black(manager.addEntity());
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
+auto& Logic(manager.addEntity());
+
 
 enum checkerState {
 	CAPTURE,
@@ -75,7 +77,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	checkersEntities = manager.getGroup(groupCheckers);
 	board->allowedMoves(board->getInstances('B'));
 	board->allowedMoves(board->getInstances('R'));
-
+	Logic.addComponent<LogicComponent>();
 
 
 	int x = 0;
