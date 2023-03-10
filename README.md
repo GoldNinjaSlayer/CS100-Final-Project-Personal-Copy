@@ -52,9 +52,12 @@ The AI class is capable of substituting the player class, as it is able to play 
  > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
- <img src="https://i.imgur.com/lI0hO01.png" width="860" height="800">
+ ![image](https://user-images.githubusercontent.com/100615723/224218172-b7b9e9f1-16d9-4dab-829f-cb9f8ebb7b73.png)
+ ![image](https://user-images.githubusercontent.com/100615723/224218283-ab4c86f8-ba88-466e-8a68-1784e22fafed.png)
+
  ## Installation/Usage
  > Instructions on installing and running your application
+ 
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  
