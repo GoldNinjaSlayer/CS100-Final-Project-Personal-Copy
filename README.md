@@ -23,14 +23,13 @@
 
 
 ## Class Diagram
-![image](https://user-images.githubusercontent.com/100615723/221384062-35e201ac-90d9-4330-b25e-33e9f6866aa6.png)
-Inheritance: 
+![image](https://user-images.githubusercontent.com/100615723/224221067-9bb8fb62-c24f-4926-9299-db76fd7e50a1.png)Inheritance: 
 
 The AI class inherits from the Player class. makeMove() is overridden.
 
 Composition: 
 
-Checker, Board, and Player classes aggregate to form the gameLogic class. The GameLogic class controls all the logic related to the game.
+Checker, Board, and Player classes aggregate to form the gameLogic class. The GameLogic class controls all the logic related to the game. The AI class involves the use of the move structure, which is responsible for determining different moves that the AI can make and choosing which one it will make.
 
 Aggregation:
 
