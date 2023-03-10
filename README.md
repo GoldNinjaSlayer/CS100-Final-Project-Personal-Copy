@@ -23,14 +23,13 @@
 
 
 ## Class Diagram
-![image](https://user-images.githubusercontent.com/100615723/221384062-35e201ac-90d9-4330-b25e-33e9f6866aa6.png)
-Inheritance: 
+![image](https://user-images.githubusercontent.com/100615723/224221067-9bb8fb62-c24f-4926-9299-db76fd7e50a1.png)Inheritance: 
 
 The AI class inherits from the Player class. makeMove() is overridden.
 
 Composition: 
 
-Checker, Board, and Player classes aggregate to form the gameLogic class. The GameLogic class controls all the logic related to the game.
+Checker, Board, and Player classes aggregate to form the gameLogic class. The GameLogic class controls all the logic related to the game. The AI class involves the use of the move structure, which is responsible for determining different moves that the AI can make and choosing which one it will make.
 
 Aggregation:
 
@@ -52,9 +51,12 @@ The AI class is capable of substituting the player class, as it is able to play 
  > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
- <img src="https://i.imgur.com/lI0hO01.png" width="860" height="800">
+ ![image](https://user-images.githubusercontent.com/100615723/224218172-b7b9e9f1-16d9-4dab-829f-cb9f8ebb7b73.png)
+ ![image](https://user-images.githubusercontent.com/100615723/224218283-ab4c86f8-ba88-466e-8a68-1784e22fafed.png)
+
  ## Installation/Usage
  > Instructions on installing and running your application
+ 
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  

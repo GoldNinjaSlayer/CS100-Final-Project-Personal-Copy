@@ -12,6 +12,7 @@ class TileLinker : public Component
 {
 private:
     coord pos;
+    Entity* piece;
 public:
 
     TileLinker(int x, int y)

@@ -10,11 +10,13 @@ using namespace std;
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
-
+Board* Game::board = nullptr;
 Manager manager;
 SDL_Event Game::event;
 
 std::vector<Entity*> Game::tiles;
+
+std::vector<Entity*> Game::checkersEntities;
 std::vector<ColliderComponent*> Game::colliders;
 
 auto& black(manager.addEntity());
@@ -66,19 +68,18 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
     menuBG.addComponent<SpriteComponent>("assets/title.png");
     menuBG.addGroup(groupMainMenu);
-
+	
     auto& buttonStart(manager.addEntity());
     buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
     buttonStart.addComponent<SpriteComponent>();
-    //buttonStart.addComponent<TextComponent>("Start Game");
+	//			black.addComponent<ColliderComponent>("black");
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::startGame);
     buttonStart.addGroup(groupMainMenu);
-
-
+	//}
     auto& buttonQuit(manager.addEntity());
     buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 112, 508, 0.5);
-    //buttonQuit.addComponent<TextComponent>("Quit Game");
+	//player.addComponent<TransformComponent>();
     buttonQuit.addComponent<SpriteComponent>();
     buttonQuit.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonQuit.addGroup(groupMainMenu);
@@ -90,13 +91,14 @@ void Game::handleEvents()
 
 	switch (event.type)
 	{
-	case SDL_QUIT :
+	case SDL_QUIT:
 		isRunning = false;
 		break;
 	default:
 		break;
 	}
 }
+
 
 void Game::update()
 {
@@ -131,22 +133,22 @@ void Game::AddChecker(int id, int x, int y, int num, Checker* p) {
 	piece.addComponent<ColliderComponent>("piece " + to_string(num));
 	piece.addComponent<CheckerLinker>(p);
 	piece.addComponent<CheckerLocker>();
-
+	piece.addGroup(groupCheckers);
 }
 
 void Game::AddTile(int x, int y, int i, int j)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
-	tile.addComponent<SpriteComponent>("assets/blackTile.png");
-	tile.addComponent<ColliderComponent>("tile " + to_string((i*8) + j));
+	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
+	tile.addComponent<ColliderComponent>("tile " + to_string((i * 8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
-	
+
 
 }
 
-void Game::setBoard(Board* board){
+void Game::setBoard(Board* board) {
 	this->board = board;
 }
 

@@ -49,4 +49,10 @@ public:
 	{
 		TextureManager::Draw(texture, srcRect, destRect);
 	}
+
+	void destroyTex()
+	{
+		SDL_DestroyTexture(texture);
+		texture = nullptr;
+	}
 };

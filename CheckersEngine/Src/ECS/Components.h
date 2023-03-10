@@ -9,3 +9,4 @@
 #include "CheckerLocker.h"
 #include "CheckerLinker.h"
 #include "TileLinker.h"
+#include "LogicComponent.h"

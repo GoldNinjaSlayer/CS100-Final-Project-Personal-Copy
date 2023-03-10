@@ -46,14 +46,14 @@ Board::Board(int n){
             if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'B');
-                    Game::AddChecker(1, 172 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
+                    Game::AddChecker(0, 172 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j, '0');
                 }
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'B');
-                    Game::AddChecker(1, (-63 * (i%2)) + 228 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
+                    Game::AddChecker(0, (-63 * (i%2)) + 228 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                 }
@@ -62,7 +62,7 @@ Board::Board(int n){
            if(i%2 == 0){
                 if(j% 2 == 0){
                     checkers[i][j] = new Checker(i,j,'R');
-                    Game::AddChecker(0, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
+                    Game::AddChecker(1, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                     checkers[i][j] = new Checker(i,j,'0');
                     
@@ -70,7 +70,7 @@ Board::Board(int n){
             } else{
                 if(j % 2 == 1){
                     checkers[i][j] = new Checker(i,j,'R');                                                                                                                                                                                 
-                    Game::AddChecker(0, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
+                    Game::AddChecker(1, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
                 } else{
                    checkers[i][j] = new Checker(i,j, '0');
                 }
@@ -108,7 +108,7 @@ Board::~Board(){
       delete [] checkers;              //To delete the outer array
                               //which contained the pointers
                               //of all the inner arrays
-      cout << "stuff was deleted" << endl;
+      //cout << "stuff was deleted" << endl;
 
 }
 
@@ -169,7 +169,7 @@ Checker *Board::getchecker(int x, int y){
 
 
 
-void Board::swap(Checker *check1, Checker *check2){
+void Board::swap(Checker *check1, Checker *check2, bool doubleJump){
     // cout << "Check 1 old position: " << check1->getPosition() << endl;
     // cout << "Check 2 old position: " << check2->getPosition() << endl;
     // cout << "SWAP DONE IN BOARD #" << boardNum << endl;
@@ -196,7 +196,14 @@ void Board::swap(Checker *check1, Checker *check2){
     // cout << "Check 1 new position: " << check1->getPosition() << endl;
     // cout << "Check 2 new position: " << check2->getPosition() << endl;
 
-
+    isAllowed(check1);
+    if(doubleJump && check1->canCapture){
+        cout << "Double Jump!" << endl;
+    }
+    else{
+        changeTurn();
+    }
+    //cout << "Current Turn: " << currentTurn << endl;
 }
 
  vector<Checker*> Board::getInstances(char color){   // returns vectors of instances of color
@@ -219,6 +226,8 @@ bool Board::isAllowed(Checker *checker){
     //Creating pointers to checker pieces that are in the reach of the checker piece we want to test
     Checker *checkerP = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y + 1);
     Checker *checkerM = getchecker(checker->getPosition().x + checker->direction, checker->getPosition().y -1);
+    checker->moves.clear();
+    checker->canCapture = false;
    
 
     bool canMove = false;
@@ -362,33 +371,18 @@ void Board::capture(Checker *check1, Checker *check2){
     check2->change('0');
     int calcx = check2->getPosition().x - check1->getPosition().x;
     int calcy = check2->getPosition().y - check1->getPosition().y;
+    bool doubleJump = true;
 
-    swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy));
-    // check1->canCapture = false;
 
-    // if(isAllowed(check1)){
-    //     if(check1->canCapture){
-    //         set<coord>::iterator it; 
+    swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy), doubleJump);
 
-    //         int i = 1;
-    //         for(it = check1->moves.begin(); it != check1->moves.end(); it++){
-    //             cout << i << ". " << *it << endl;
-    //             i++;
-    //         }
+}
 
-    //         int choice;
-    //         do{
-    //         cout << "Choose a move" << endl;
-    //         cin >> choice;
-    //         }while(choice <= 0 || choice > i-1);
-    //         it = check1->moves.begin();
-    //         for(int i = 0; i < choice-1; i++){
-    //             it++;
-    //         }
-
-    //         swap(check1, getchecker(it->x, it->y));
-    //         cout << "Double jump" << endl;
-    //     }
-    // }
-    // scoreBoard[currentPlayer]++;
+void Board::changeTurn(){
+    if(currentTurn == 'B'){
+            currentTurn = 'R';
+        }
+    else{
+        currentTurn = 'B';
+    }
 }

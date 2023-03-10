@@ -6,6 +6,7 @@
 #include <vector> 
 #include "ECS/ECS.h"
 #include "GameLogic/Board.h"
+#include "ECS/ECS.h"
 
 class ColliderComponent;
 
@@ -23,6 +24,8 @@ public:
 	void render();
 	void clean();
 	void setBoard(Board* board);
+	void handleLogic();
+	void clearPieces();
 
 	static void AddChecker(int id, int x, int y, int num, Checker* p);
 	static void AddTile(int x, int y, int i, int j);
@@ -30,7 +33,9 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static std::vector<Entity*> tiles;
+	static std::vector<Entity*> checkersEntities;
 	static std::vector<ColliderComponent*> colliders;
+	static Board* board; // creates board object
 	
 
 private:
