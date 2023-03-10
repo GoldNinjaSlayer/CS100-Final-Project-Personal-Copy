@@ -19,17 +19,24 @@ std::vector<Entity*> Game::tiles;
 std::vector<Entity*> Game::checkersEntities;
 std::vector<ColliderComponent*> Game::colliders;
 
-auto& black(manager.addEntity());
 
+auto& black(manager.addEntity());
+auto& Logic(manager.addEntity());
+
+auto& menuBG(manager.addEntity());
+auto& logo(manager.addEntity());
+auto& buttonStart(manager.addEntity());
+auto& buttonQuit(manager.addEntity());
 
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
 
 int groupTiles = 0;
+int groupCheckers = 1;
 int groupMainMenu = 999;
 
-vector<int> groupIds = {groupTiles, groupMainMenu};
+vector<int> groupIds = {groupTiles, groupCheckers, groupMainMenu};
 
 Game::Game()
 {}
@@ -59,30 +66,28 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	}
 
     //display main menu
-    auto& menuBG(manager.addEntity());
+
     menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
     menuBG.addComponent<SpriteComponent>("assets/menu.jpeg");
     menuBG.addGroup(groupMainMenu);
 
-    auto& logo(manager.addEntity());
-    menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
-    menuBG.addComponent<SpriteComponent>("assets/title.png");
-    menuBG.addGroup(groupMainMenu);
-	
-    auto& buttonStart(manager.addEntity());
+
+    logo.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
+    logo.addComponent<SpriteComponent>("assets/title.png");
+    logo.addGroup(groupMainMenu);
+
     buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
     buttonStart.addComponent<SpriteComponent>();
-	//			black.addComponent<ColliderComponent>("black");
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::startGame);
     buttonStart.addGroup(groupMainMenu);
-	//}
-    auto& buttonQuit(manager.addEntity());
+
     buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 112, 508, 0.5);
-	//player.addComponent<TransformComponent>();
     buttonQuit.addComponent<SpriteComponent>();
     buttonQuit.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonQuit.addGroup(groupMainMenu);
+
+    //startGame();
 }
 
 void Game::handleEvents()
@@ -144,8 +149,6 @@ void Game::AddTile(int x, int y, int i, int j)
 	tile.addComponent<ColliderComponent>("tile " + to_string((i * 8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
-
-
 }
 
 void Game::setBoard(Board* board) {
@@ -164,48 +167,20 @@ void Game::initTiles()
 }
 
 void Game::startGame() {
-    //map = new Map();
     resetScreen();
-
-    checkboard.addComponent<TransformComponent>(140,80,500,500,1);
+    checkboard.addComponent<TransformComponent>(140, 80, 500, 500, 1);
     checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
     initTiles();
     tiles = manager.getGroup(groupTiles);
     board = new Board(8);
+    checkersEntities = manager.getGroup(groupCheckers);
     board->allowedMoves(board->getInstances('B'));
     board->allowedMoves(board->getInstances('R'));
-
-    int x = 0;
-    int y = 0;
-
-    //black.addComponent<TileComponent>(200, 200, 32, 32, 0);
-    //black.addComponent<ColliderComponent>("black");
-
-    //for(int i = 0; i < 8; i++){
-    //	for(int j = 0; j < 8; j++){
-    //		if(board->getchecker(i,j)->getColor() == 'R'){
-    //			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-    //			red.addComponent<ColliderComponent>("red");
-    //		}
-    //		if(board->getchecker(i,j)->getColor() == 'B'){
-    //			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-    //			black.addComponent<ColliderComponent>("black");
-    //		}
-    //	}
-    //}
-
-    //player.addComponent<TransformComponent>();
-    //player.addComponent<SpriteComponent>("assets/lucas.png");
-    //player.addComponent<KeyboardController>();
-    //player.addComponent<ColliderComponent>("player");
+    Logic.addComponent<LogicComponent>();
 }
 
 void Game::resetScreen() {
     cout << "clearing screen..." << endl;
-    for(int i = 0; i < groupIds.size(); i++){
-        vector<Entity *> entities = manager.getGroup(groupIds[i]); //main menu
-        for(auto &entity : entities){
-            entity->destroy();
-        }
-    }
+
+    menuBG.destroy();
 }

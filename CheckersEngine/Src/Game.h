@@ -43,8 +43,6 @@ private:
 	int cnt = 0;
 	SDL_Window *window;
 
-	Board* board; // creates board object
-
     void startGame();
 
     void resetScreen();

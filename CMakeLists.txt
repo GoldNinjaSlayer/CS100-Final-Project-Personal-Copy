@@ -59,7 +59,7 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/GameLogic/GameLogic.h"
         "CheckersEngine/Src/ECS/CheckerLinker.h"
         "CheckersEngine/Src/ECS/TileLinker.h"
-        "UnitTests.cpp")
+        "UnitTests.cpp"
         "CheckersEngine/Src/ECS/TileLinker.h" 
         "CheckersEngine/Src/ECS/LogicComponent.h" 
         "CheckersEngine/Src/ECS/LogicComponent.cpp")
