@@ -49,6 +49,20 @@ public:
 		}
 	}
 
+	bool isMouseWithinComponent(Entity* component)
+	{
+		
+		int mouseX = Game::event.motion.x;
+		int mouseY = Game::event.motion.y;
+		int componentX = static_cast<int>(component->getComponent<TransformComponent>().position.x);
+		int componentY = static_cast<int>(component->getComponent<TransformComponent>().position.y);
+		int componentWidth = component->getComponent<TransformComponent>().width;
+		int componentHeight = component->getComponent<TransformComponent>().height;
+
+		return (mouseX >= componentX && mouseX < componentX + componentWidth &&
+			mouseY >= componentY && mouseY < componentY + componentHeight);
+	}
+
 private:
 	bool isMouseWithinComponent() const
 	{
@@ -63,5 +77,6 @@ private:
 			mouseY >= componentY && mouseY < componentY + componentHeight);
 	}
 
+	
 	
 };

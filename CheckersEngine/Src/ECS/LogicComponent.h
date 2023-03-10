@@ -1,63 +1,39 @@
-#include "CheckerLocker.h"
-#include "ColliderComponent.h"
-#include "MouseController.h"
-#include "TransformComponent.h"
-#include <iostream>
+#pragma once
 
-using namespace std;
-void CheckerLocker::init()
+#include "../Game.h"
+#include "ECS.h"
+#include "Components.h"
+
+class LogicComponent : public Component
 {
-    collider = &entity->getComponent<ColliderComponent>();
+private:
+	MouseController* mouse;
+    bool mouseHovering(Entity* component);
+    void swapPiece(Entity* tile, Checker* checker);
+    void capturePiece(Checker* checker1, Entity* checker2);
+    void playerMove();
+    void botMove();
+    AI bot;
 
-    transform = &entity->getComponent<TransformComponent>();
-    mouse = &entity->getComponent<MouseController>();
-    position = &entity->getComponent<CheckerLinker>();
-   
-    for (auto& tile : Game::tiles) {
-        if (position->getPiece()->getPosition() == tile->getComponent<TileLinker>().getPos())
-        {
-            currentTile = tile;
-            break;
-        }
-    }
-}
+public:
+    void init() override;
+    void update() override;
+};
 
-void CheckerLocker::update()
-{
-
-    if (!mouse->isMouseDragging)
-    {
-        lockPiece(currentTile);
-    }
-  
-    if (position->getPiece()->getisKinged())
-    {
-        if (position->getPiece()->getColor() == 'R')
-        {
-            entity->getComponent<SpriteComponent>().setTex("assets/checkersPieces/redPieceKing.png");
-        }
-        else
-        {
-            entity->getComponent<SpriteComponent>().setTex("assets/checkersPieces/blackPieceKing.png");
-        }
-    }
-
-
-}
-bool CheckerLocker::checkCollision(Entity* tile)
-{
-
-        ColliderComponent* otherCollider = &tile->getComponent<ColliderComponent>();
-        if (otherCollider != collider && Collision::AABB(*collider, *otherCollider) && otherCollider->tag != collider->tag)
-        {
-            return true;
-        }
-
-        return false;
-        
-
-}
-
+//bool CheckerLocker::checkCollision(Entity* tile)
+//{
+//
+//    ColliderComponent* otherCollider = &tile->getComponent<ColliderComponent>();
+//    if (otherCollider != collider && Collision::AABB(*collider, *otherCollider) && otherCollider->tag != collider->tag)
+//    {
+//        return true;
+//    }
+//
+//    return false;
+//
+//
+//}
+//
 //void CheckerLocker::swapPiece(Entity* tile)
 //{
 //
@@ -74,23 +50,15 @@ bool CheckerLocker::checkCollision(Entity* tile)
 //    Game::board->allowedMoves(Game::board->getInstances('B'));
 //    Game::board->allowedMoves(Game::board->getInstances('R'));
 //}
-
-void CheckerLocker::lockPiece(Entity *tile)
-{
-    transform->position.x = tile->getComponent<ColliderComponent>().collider.x + (tile->getComponent<ColliderComponent>().collider.w / 2) - (transform->width / 2);
-    transform->position.y = tile->getComponent<ColliderComponent>().collider.y + (tile->getComponent<ColliderComponent>().collider.h / 2) - (transform->height / 2);
-}
-
-void CheckerLocker::setCurrentTile(Entity* tile)
-{
-    currentTile = tile;
-}
-
+//
+//void CheckerLocker::lockPiece(Entity* tile)
+//{
+//    transform->position.x = tile->getComponent<ColliderComponent>().collider.x + (tile->getComponent<ColliderComponent>().collider.w / 2) - (transform->width / 2);
+//    transform->position.y = tile->getComponent<ColliderComponent>().collider.y + (tile->getComponent<ColliderComponent>().collider.h / 2) - (transform->height / 2);
+//}
+//
 //void CheckerLocker::moveLogic()
 //{
-//
-//    if (Game::board->getTurn() == 'R')
-//    {
 //        if (!mouse->isMouseDragging)
 //        {
 //            bool collisionDetected = false;
@@ -179,46 +147,4 @@ void CheckerLocker::setCurrentTile(Entity* tile)
 //            }
 //
 //        }
-//    }
-//    else
-//    {
-//        Entity* currChecker = nullptr;
-//        Entity* currTile = nullptr;
-//        Move move = bot.minimaxStart(*Game::board, 'B', true);
-//        cout << move.piece->getPosition() << " to " << move.dest << endl;
-//        
-//
-//        if (move.piece->canCapture)
-//        {
-//            cout << "test" << endl;
-//        }
-//        else
-//        {
-//            for (auto& c : Game::checkersEntities)
-//            {
-//                //cout << c->getComponent<CheckerLinker>().getPiece()->getPosition() << endl;
-//                if (c->getComponent<CheckerLinker>().getPiece()->getPosition() == move.piece->getPosition())
-//                {
-//                    //cout << "IN HERE" << endl;
-//                    currChecker = c;
-//                    break;
-//                }
-//
-//            }
-//
-//            for (auto t : Game::tiles)
-//            {
-//                if (t->getComponent<TileLinker>().getPos() == move.dest)
-//                    currTile = t;
-//            }
-//
-//
-//           
-//
-//            Game::board->swap(move.piece, Game::board->getchecker(move.dest.x, move.dest.y), false);
-//
-//
-//        }
-//    }
 //}
-

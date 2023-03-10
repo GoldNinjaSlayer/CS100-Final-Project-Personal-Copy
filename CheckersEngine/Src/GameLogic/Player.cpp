@@ -88,18 +88,6 @@ coord Player::chooseDestination(Checker* piece){
     
 }
 
-// void Player::captured(Checker *check1, Checker *check2, Board *board){
-//     // check1->numCaptured++;
-//     // currentPlayer->numCaptured +=1;
-//     cout << "Captured!" << endl;
-//     check2->change('0');
-//     int calcx = check2->getPosition().x - check1->getPosition().x;
-//     int calcy = check2->getPosition().y - check1->getPosition().y;
-
-//     board->swap(check1, board->getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy));
-//     // scoreBoard[currentPlayer]++;
-
-// }
 
 
 
@@ -115,6 +103,7 @@ void AI::makeMove(Board *b){
     Move move = minimaxStart(*b, getColor(), true);
     cout << "AI move:" << move.piece->getPosition() << " " << move.dest << endl;
     if(move.piece->canCapture)
+
         b->capture(move.piece, b->getchecker(move.dest.x, move.dest.y));
     else{
         cout << "swapped for ai" << endl;
@@ -169,65 +158,27 @@ Move AI::minimaxStart(Board b, char col, bool maximizing){
         possible_moves = genMoveVec(allowed);
     }
 
-    // cout <<  "POSSIBLE MOVES BEFORE MINIMAX" << endl;
-
-// ;
-//     for(vector<Move>::iterator it = possible_moves.begin(); it!=possible_moves.end(); ){
-//         if(it->piece->getPosition() == it->dest){
-//             it = possible_moves.erase(it);
-//         }else{
-//             ++it;
-//         }
-//     }
-// 
-    // Board tempBoard;
     for(auto x: possible_moves){
             Board tempBoard(b);
 
             Checker *tempCheck = tempBoard.getchecker(x.piece->getPosition().x,x.piece->getPosition().y);
             
             if(x.piece->canCapture){
-                // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
                 tempBoard.capture(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y));
-                // cout << "AI CAPTURE MOVE IN MINIMAXSTART" << endl;
-                
+
             }
             else{
-                // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
                 tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y), false);
-                // cout << "AI SWAP MOVE IN MINIMAXSTART" << endl;
+
                 
             }
-            // cout << "TEMP BOARD MINIMAXSTART" << endl;
-            // tempBoard.Display();
-
-
-            // cout << "NUM R: " << b.getInstances('R').size() << endl;
-            // cout << "NUM B: " << b.getInstances('B').size() << endl;
-            // //checking error
-            // if(b.getInstances('B').size() > 12){
-            //     cout << "<B start ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     exit(0);
-            // }
-
-            // if(b.getInstances('R').size() > 12){
-            //     cout << "<R start ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     exit(0);
-            // }
-
-            
-  
 
             heuristics.push_back(minimax(tempBoard, switchColor(col), !maximizing, depth-1, alpha, beta));    
-            // cout << "PUSHED BACK" << endl;
-   
+
 
 
     }
 
-
-
-    // cout << "OUT OF MINIMAX LOOP" << endl;
 
     double max_heuristics = -1000;
     int num_heuristics = heuristics.size();
@@ -237,13 +188,7 @@ Move AI::minimaxStart(Board b, char col, bool maximizing){
             max_heuristics = heuristics[i];
         }
     }
-    // cout << "CHECKED MAX HEURISTICS" << endl;
-    // cout << "POSSIBLE MOVES BEFORE FINAL MOVE BEFORE CLEANING" << endl;
-    // for(auto x: possible_moves){
-    //     cout << x.piece->getPosition() << " to " << x.dest << endl;
-    // }
 
-    // cout << "MOVES SIZE BEFORE " << possible_moves.size() << endl;
     for(int i = 0; i < num_heuristics; i++){
         if(heuristics[i] < max_heuristics){
         heuristics.erase(heuristics.begin() + i);
@@ -252,16 +197,11 @@ Move AI::minimaxStart(Board b, char col, bool maximizing){
         num_heuristics--;
         }
     }
-    // cout << "DELETED BAD MOVES" << endl;
-    // cout << "MOVES SIZE AFTER " << possible_moves.size() << endl;
 
     int num_moves = possible_moves.size();
-    // cout << "POSSIBLE MOVES BEFORE FINAL MOVE AFTER CLEANING" << endl;
-    // for(auto x: possible_moves){
-    //     cout << x.piece->getPosition() << " to " << x.dest << endl;
-    // }
+
     Move final_move = possible_moves[rand() % num_moves];
-    // cout << "CHOSE FINAL MOVE" << final_move.piece->getPosition() << " to " << final_move.dest << endl;
+
     return final_move;
 }
 
@@ -289,11 +229,6 @@ double AI::minimax(Board b, char col, bool maximizing, int depth, int alpha, int
     } else{
         possible_moves = genMoveVec(allowed);
     }
-    // cout <<" IN MINIMAX GOT POSSIBLE MOVES" << endl;
-    // cout << "CHECKING IF MOVES HAVE RIGHT AMOUNT" << endl;
-    // for(auto x: possible_moves){
-    //     cout << x.piece->getColor() << ": " << x.piece->getPosition() << "--" << x.dest << endl;
-    // }
 
 
     int initial = 0;
@@ -304,35 +239,15 @@ double AI::minimax(Board b, char col, bool maximizing, int depth, int alpha, int
             Checker *tempCheck = tempBoard.getchecker(x.piece->getPosition().x,x.piece->getPosition().y);
 
             if(x.piece->canCapture){
-                // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
-                // cout << "AI CAPTURE MOVE IN MINIMAX MAXIMIZING" << endl;
+
                 tempBoard.capture(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y));
                 
             }
             else{
-                // cout << x.piece->getColor() << ": " << x.piece->getPosition() << " to " << x.dest << endl;
                 tempBoard.swap(tempCheck, tempBoard.getchecker(x.dest.x, x.dest.y), false);
-                // cout << "AI SWAP MOVE IN MINIMAX MAXIMIZING" << endl;
+
             }
-            // cout << "TEMP BOARD MINIMAX" << endl;
-            //     tempBoard.Display();
 
-            // cout << "NUM R: " << b.getInstances('R').size() << endl;
-            // cout << "NUM B: " << b.getInstances('B').size() << endl;
-            // //CHECKING ERROR
-            // if(b.getInstances('B').size() > 12){
-            //     cout << "<B ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     exit(0);
-            // }
-
-            // if(b.getInstances('R').size() > 12){
-            //     cout << "<R ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     exit(0);
-            // }
-
-   
-
-            // cout << "Before result" << endl;
             int result = minimax(tempBoard, switchColor(col), !maximizing, depth - 1, alpha, beta);
             // cout << "After result" << endl;
             initial = max(result, initial);
@@ -359,38 +274,11 @@ double AI::minimax(Board b, char col, bool maximizing, int depth, int alpha, int
                 // cout << "AI SWAP MOVE IN MINIMAX MINIMIZING" << endl;
                 
             }
-            // cout << "TEMP BOARD MINIMAX" << endl;
-            // tempBoard.Display();
 
-            // cout << "NUM R: " << b.getInstances('R').size() << endl;
-            // cout << "NUM B: " << b.getInstances('B').size() << endl;
-
-
-            // //CHECKING FOR ERROR
-            // if(b.getInstances('B').size() > 12){
-            //     cout << "<B ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     // exit(0);
-            // }
-
-            // if(b.getInstances('R').size() > 12){
-            //     cout << "<R ERROR> MAX PIECE 12. Location: board #" << b.boardNum<< endl;
-            //     // exit(0);
-            // }
-
-
-            
 
             int result = minimax(tempBoard, switchColor(col), !maximizing, depth - 1, alpha, beta);
             initial = min(result, initial);
             beta = min(beta, initial);
-
-
-
-
-
-
-
-
 
             
             if (alpha >= beta) {
@@ -425,38 +313,11 @@ double AI::getHeuristic(Board board) {
         if(x->getisKinged())
             numRedKings++;
     }
-    // cout << "NUM BLACKS " << numBlack << endl;
-    // cout << "NUM RED " << numRed << endl;
-
-    // if(numBlack > 12){
-    //     cout << "ERROR> MAX PIECE 12. Location: board #" << board.boardNum<< endl;
-    //     exit(0);
-    // }
-
-    // if(numRed > 12){
-    //     cout << "ERROR> MAX PIECE 12. Location: board #" << board.boardNum<< endl;
-    //     exit(0);
-    // }
-
     
 
 
     if (getColor() == 'B') {
-       // cout << (king_weight * numBlackKings + numBlack) - (king_weight * numRedKings + numRed) << endl;
         return (king_weight * numBlackKings + numBlack) - (king_weight * numRedKings + numRed);
     }
     return (king_weight * numRedKings + numRed) - (king_weight * numBlackKings + numBlack);
 }
-
-// void AI::capture(Checker *check1, Checker *check2, Board board){
-//     // check1->numCaptured++;
-//     // currentPlayer->numCaptured +=1;
-//     cout << "Captured!" << endl;
-//     check2->change('0');
-//     int calcx = check2->getPosition().x - check1->getPosition().x;
-//     int calcy = check2->getPosition().y - check1->getPosition().y;
-
-//     board.swap(check1, board.getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy));
-//     // scoreBoard[currentPlayer]++;
-
-// }
