@@ -1,11 +1,13 @@
 #include "Game.h"
 #include "GameLogic/GameLogic.h"
-
+#include <crtdbg.h>
 Game *game = nullptr;
 GameLogic gameLogic;
 
 int main(int argc, char *argv[])
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	int* p = new int[100];
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 
@@ -44,5 +46,6 @@ int main(int argc, char *argv[])
 	
 	}
 	game->clean();
+	system("PAUSE");
 	return 0;
 }
