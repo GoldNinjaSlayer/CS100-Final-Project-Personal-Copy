@@ -6,6 +6,10 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 class Component;
 class Entity;
@@ -158,8 +162,7 @@ public:
 	Entity& addEntity()
 	{
 		Entity* e = new Entity(*this);
-		std::unique_ptr<Entity> uPtr{ e };
-		entities.emplace_back(std::move(uPtr));
+		entities.emplace_back(std::move(e));
 		return *e;
 	}
 };

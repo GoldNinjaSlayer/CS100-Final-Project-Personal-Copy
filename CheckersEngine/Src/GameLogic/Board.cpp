@@ -6,6 +6,12 @@
 #include <string>
 #include "..\TextureManager.h"
 #include "..\Game.h"
+
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 using namespace std;
 
 Board::Board(Board &b){
@@ -34,7 +40,7 @@ Board::Board(int n){
     boardNum = 1;
 
     ROWS = n;
-    int COLS = n;
+    COLS = n;
     checkers = new Checker**[ROWS];  
 
     for(int i = 0; i < ROWS; i++){
@@ -105,12 +111,13 @@ Board::Board(int n){
 // }
 
 Board::~Board(){
-      for(int i=0;i<ROWS;i++)    //To delete the inner arrays
-                delete [] checkers[i];   
-
-      delete [] checkers;              //To delete the outer array
-                              //which contained the pointers
-                              //of all the inner arrays
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            delete[] checkers[i][j];
+        }
+        delete[] checkers[i];
+    }
+    delete[] checkers;
       cout << "stuff was deleted" << endl;
 
 }

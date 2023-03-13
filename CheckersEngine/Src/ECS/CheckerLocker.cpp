@@ -7,6 +7,12 @@
 #include "TransformComponent.h"
 #include <iostream>
 
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
+
 using namespace std;
 void CheckerLocker::init()
 {
@@ -67,8 +73,9 @@ void CheckerLocker::capturePiece(Entity* checker)
 
 void CheckerLocker::lockPiece(Entity *tile)
 {
-    transform->position.x = tile->getComponent<ColliderComponent>().collider.x + (tile->getComponent<ColliderComponent>().collider.w / 2) - (transform->width / 2);
-    transform->position.y = tile->getComponent<ColliderComponent>().collider.y + (tile->getComponent<ColliderComponent>().collider.h / 2) - (transform->height / 2);
+    transform->position.x=tile->getComponent<ColliderComponent>().collider.x + (tile->getComponent<ColliderComponent>().collider.w / 2.0f) - (transform->width / 2.0f);
+    transform->position.y = tile->getComponent<ColliderComponent>().collider.y + (tile->getComponent<ColliderComponent>().collider.h / 2.0f) - (transform->height / 2.0f);
+
 }
 
 void CheckerLocker::moveLogic()

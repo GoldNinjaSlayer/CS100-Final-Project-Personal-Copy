@@ -157,10 +157,11 @@ void Game::render()
 
 void Game::clean()
 {
+	delete board;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	delete[] board;
+	
 }
 
 void Game::AddChecker(int id, int x, int y, int num, Checker* p) {
