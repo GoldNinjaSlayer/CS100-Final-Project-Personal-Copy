@@ -163,8 +163,9 @@ public:
 
 	Entity& addEntity()
 	{
-		Entity* e = new Entity(*this);
-		entities.emplace_back(std::move(e));
-		return *e;
+		auto e = std::make_unique<Entity>(*this);
+		Entity& result = *e;
+		entities.push_back(std::move(e));
+		return result;
 	}
 };
