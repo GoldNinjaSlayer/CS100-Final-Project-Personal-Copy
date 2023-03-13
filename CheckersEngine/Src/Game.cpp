@@ -1,4 +1,7 @@
 #include "Game.h"
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
