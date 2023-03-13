@@ -1,3 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "CheckerLocker.h"
 #include "ColliderComponent.h"
 #include "MouseController.h"

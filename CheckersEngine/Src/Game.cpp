@@ -8,6 +8,12 @@
 #include "Vector2D.h"
 #include "Collision.h"
 
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
+
 using namespace std;
 Map* map;
 
@@ -38,7 +44,11 @@ Game::Game()
 {}
 
 Game::~Game()
-{}
+{
+	tiles.clear();
+	checkersEntities.clear();
+	colliders.clear();
+}
 
 void Game::init(const char* title, int width, int height, bool fullscreen)
 {
