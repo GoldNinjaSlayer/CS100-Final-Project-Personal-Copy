@@ -1,0 +1,10 @@
+^C:\USERS\USER\SOURCE\REPOS\FINAL-PROJECT-CS100-FINAL-PROJECT\TESTING\CMAKEFILES\879B8F9BD6BF66ECAE4351A7425A8175\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/User/source/repos/final-project-cs100-final-project/testing -BC:/Users/User/source/repos/final-project-cs100-final-project/testing --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/User/source/repos/final-project-cs100-final-project/testing/Project.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
