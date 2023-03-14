@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\User\Source\Repos\final-project-cs100-final-project\testing\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\User\Source\Repos\final-project-cs100-final-project\testing\googletest\googletest\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
       <FullPath>C:\Users\User\source\repos\final-project-cs100-final-project\testing\Debug\test.exe</FullPath>
