@@ -34,6 +34,14 @@ auto& black(manager.addEntity());
 auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
+auto& Logic(manager.addEntity());
+
+
+enum checkerState {
+	CAPTURE,
+	SWAP
+};
+
 enum groupLabels : std::size_t
 {
 	groupTiles,
@@ -53,7 +61,7 @@ Game::~Game()
 void Game::init(const char* title, int width, int height, bool fullscreen)
 {
 	int flags = 0;
-	
+
 	if (fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -71,50 +79,23 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
-	
+
 	//map = new Map();
-	
-	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
-	checkboard.addComponent<SpriteComponent>("../assets/Checkerboard.png");
+
+	checkboard.addComponent<TransformComponent>(140, 80, 500, 500, 1);
+	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+
 	initTiles();
 	tiles = manager.getGroup(groupTiles);
 	board = new Board(8);
 	checkersEntities = manager.getGroup(groupCheckers);
 	board->allowedMoves(board->getInstances('B'));
 	board->allowedMoves(board->getInstances('R'));
-
+	Logic.addComponent<LogicComponent>();
 
 
 	int x = 0;
 	int y = 0;
-
-
-
-
-
-
-
-	//black.addComponent<TileComponent>(200, 200, 32, 32, 0);
-	//black.addComponent<ColliderComponent>("black");
-	
-	//for(int i = 0; i < 8; i++){
-	//	for(int j = 0; j < 8; j++){
-	//		if(board->getchecker(i,j)->getColor() == 'R'){
-	//			red.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 1);
-	//			red.addComponent<ColliderComponent>("red");
-	//		}
-	//		if(board->getchecker(i,j)->getColor() == 'B'){
-	//			black.addComponent<TileComponent>(160 + (55* j), 100 + (55 * i), 60, 60, 0);
-	//			black.addComponent<ColliderComponent>("black");
-	//		}
-	//	}
-	//}
-
-	//player.addComponent<TransformComponent>();
-	//player.addComponent<SpriteComponent>("assets/lucas.png");
-	//player.addComponent<KeyboardController>();
-	//player.addComponent<ColliderComponent>("player");
-
 
 }
 
@@ -126,13 +107,14 @@ void Game::handleEvents()
 
 	switch (event.type)
 	{
-	case SDL_QUIT :
+	case SDL_QUIT:
 		isRunning = false;
 		break;
 	default:
 		break;
 	}
 }
+
 
 void Game::update()
 {
@@ -146,8 +128,6 @@ void Game::update()
 
 void Game::render()
 {
-
-
 
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
@@ -179,14 +159,14 @@ void Game::AddTile(int x, int y, int i, int j)
 	auto& tile(manager.addEntity());
 	tile.addComponent<TransformComponent>(x, y, 40, 40, 1);
 	//tile.addComponent<SpriteComponent>("assets/blackTile.png");
-	tile.addComponent<ColliderComponent>("tile " + to_string((i*8) + j));
+	tile.addComponent<ColliderComponent>("tile " + to_string((i * 8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
-	
+
 
 }
 
-void Game::setBoard(Board* board){
+void Game::setBoard(Board* board) {
 	this->board = board;
 }
 
@@ -200,3 +180,8 @@ void Game::initTiles()
 		}
 	}
 }
+
+//void handleLogic()
+//{
+//
+//}

@@ -59,8 +59,8 @@ add_executable (CheckersEngine
         "CheckersEngine/Src/GameLogic/GameLogic.h"
         "CheckersEngine/Src/ECS/CheckerLinker.h"
         "CheckersEngine/Src/ECS/TileLinker.h" 
-        # "CheckersEngine/Src/ECS/LogicHandler.h"
-         )
+        "CheckersEngine/Src/ECS/LogicComponent.h" 
+        "CheckersEngine/Src/ECS/LogicComponent.cpp")
 
 target_link_libraries(CheckersEngine SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image)
 #target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/SDL2/lib/x64/SDL2.dll

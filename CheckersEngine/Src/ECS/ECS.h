@@ -60,6 +60,8 @@ private:
 
 public:
 	Entity(Manager& mManager): manager(mManager){}
+
+
 	void update()
 	{
 		for (auto& c : components) c->update();
@@ -168,4 +170,5 @@ public:
 		entities.push_back(std::move(e));
 		return result;
 	}
+
 };

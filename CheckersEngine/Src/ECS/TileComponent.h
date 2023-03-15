@@ -40,7 +40,13 @@ public:
 			path = "../assets/checkersPieces/redPieceNormal.png";
 			break;
 		case 2:
-			path = "../assets/blackTile.png";
+			path = "../assets/checkersPieces/blackPieceKing.png";
+			break;
+		case 3:
+			path = "../assets/checkersPieces/redPieceKing.png";
+			break;
+		case 4:
+			path = "assets/blackTile.png";
 			break;
 		default:
 			break;
