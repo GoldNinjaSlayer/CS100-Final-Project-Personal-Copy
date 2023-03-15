@@ -143,6 +143,38 @@ TEST(VectorTests, TestOperatorDivide) {
     ASSERT_FLOAT_EQ(vector3.y, 1.0);
 
 }
+TEST(VectorTests, TestOperatorPlusEqual) {
+    Vector2D vector1(0.5f, 0.5f);
+    Vector2D vector2(0.5f, 0.5f);
+    vector1 += vector2;
+    EXPECT_FLOAT_EQ(vector1.x, 1.0f);
+    ASSERT_FLOAT_EQ(vector1.y, 1.0);
+
+}
+TEST(VectorTests, TestOperatorMinusEqual) {
+    Vector2D vector1(0.5f, 0.5f);
+    Vector2D vector2(0.5f, 0.5f);
+    vector1 -= vector2;
+    EXPECT_FLOAT_EQ(vector1.x, 0.0f);
+    ASSERT_FLOAT_EQ(vector1.y, 0.0f);
+
+}
+TEST(VectorTests, TestOperatorTimesEqual) {
+    Vector2D vector1(0.5f, 0.5f);
+    Vector2D vector2(0.5f, 0.5f);
+    vector1 *= vector2;
+    EXPECT_FLOAT_EQ(vector1.x, 0.25f);
+    ASSERT_FLOAT_EQ(vector1.y, 0.25);
+
+}
+TEST(VectorTests, TestOperatorDivEqual) {
+    Vector2D vector1(0.5f, 0.5f);
+    Vector2D vector2(0.5f, 0.5f);
+    vector1 /= vector2;
+    EXPECT_FLOAT_EQ(vector1.x, 1.0f);
+    ASSERT_FLOAT_EQ(vector1.y, 1.0);
+
+}
 TEST(BoardTests, TestConstructor) {
 
 }
