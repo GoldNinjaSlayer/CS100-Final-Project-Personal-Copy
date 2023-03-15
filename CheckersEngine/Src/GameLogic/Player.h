@@ -3,6 +3,10 @@ using namespace std;
 
 #ifndef PLAYER_H
 #define PLAYER_H
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 #include <vector>
 #include <map>

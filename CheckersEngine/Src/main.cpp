@@ -1,11 +1,23 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Game.h"
 #include "GameLogic/GameLogic.h"
+
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 Game* game = nullptr;
 GameLogic gameLogic;
 
+
 int main(int argc, char* argv[])
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	Game* game = nullptr;
+	GameLogic gameLogic;
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 
@@ -41,5 +53,8 @@ int main(int argc, char* argv[])
 
 	}
 	game->clean();
+	delete game;
+	_CrtDumpMemoryLeaks();
+	system("PAUSE");
 	return 0;
 }
