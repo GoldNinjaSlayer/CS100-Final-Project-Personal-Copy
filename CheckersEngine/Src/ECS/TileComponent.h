@@ -3,7 +3,7 @@
 #include "ECS.h"
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
-#include "SDL.h"
+#include "../../../SDL2/include/SDL.h"
 
 
 class TileComponent : public Component
@@ -28,13 +28,13 @@ public:
 		switch (tileID)
 		{
 		case 0:
-			path = "assets/checkersPieces/blackPieceNormal.png";
+			path = "../assets/checkersPieces/blackPieceNormal.png";
 			break;
 		case 1:
-			path = "assets/checkersPieces/redPieceNormal.png";
+			path = "../assets/checkersPieces/redPieceNormal.png";
 			break;
 		case 2:
-			path = "assets/blackTile.png";
+			path = "../assets/blackTile.png";
 			break;
 		default:
 			break;

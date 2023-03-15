@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "SDL.h"
+#include "../../SDL2/include/SDL.h"
 #include "Components.h"
 #include <string>
 #include <iostream>

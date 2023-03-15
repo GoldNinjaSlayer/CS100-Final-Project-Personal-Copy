@@ -49,11 +49,11 @@ void Checker::changePosition(coord newPos){
                 isKinged = true;
     }
 
-    if(color == 'R' && pos.x == 0)
+   /* if(color == 'R' && pos.x == 0)
         isKinged = true;
     
     if(color == 'B' && pos.x == 7)
-        isKinged = true;
+        isKinged = true;*/
 }
 
 void Checker::addMove(coord move){

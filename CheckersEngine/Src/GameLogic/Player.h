@@ -9,7 +9,7 @@ using namespace std;
 #include "Checker.h"
 #include <iterator>
 // #include "Player.h"
-#include "Board.h"
+//#include "Board.h"
 #include <ctime>
 
 
@@ -36,29 +36,32 @@ class Player{
     coord chooseDestination(Checker* piece);
     // Side side;
     public:
+        Player() { color = 'R'; }
+        Player(char a) { color = a; }
+       
     void setColor(char);
     
-    virtual void makeMove(Board *b);
+    //virtual void makeMove(Board *b);
     // void captured(Checker *check1, Checker *check2, Board *board);
     char getColor();
 
 };
 
-class AI : public Player{
-    private:
-        int depth;
-    public:
-        AI() : Player(){
-            depth = 5;
-        }
-        // void capture(Checker *check1, Checker *check2, Board board);
-        void makeMove(Board *b);
-        Move minimaxStart(Board b, char col, bool maximizing);
-        double minimax(Board b, char col, bool maximizing, int depth, int alpha, int beta);
-        double getHeuristic(Board board);
-        char switchColor(char col);
-        vector<Move> genMoveVec(vector<Checker*> allowed);
-};
+//class AI : public Player{
+//    private:
+//        int depth;
+//    public:
+//        AI() : Player(){
+//            depth = 5;
+//        }
+//        // void capture(Checker *check1, Checker *check2, Board board);
+//        void makeMove(Board *b);
+//        Move minimaxStart(Board b, char col, bool maximizing);
+//        double minimax(Board b, char col, bool maximizing, int depth, int alpha, int beta);
+//        double getHeuristic(Board board);
+//        char switchColor(char col);
+//        vector<Move> genMoveVec(vector<Checker*> allowed);
+//};
 
 
 #endif /* Player_H */

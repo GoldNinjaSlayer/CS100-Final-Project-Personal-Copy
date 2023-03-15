@@ -1,8 +1,8 @@
 #pragma once
 
-#include "SDL.h"
+#include "../../SDL2/include/SDL.h"
 #include <iostream>
-#include "SDL_image.h" 
+#include "../../SDL2_image/include/SDL_image.h" 
 #include <vector> 
 #include "ECS/ECS.h"
 #include "GameLogic/Board.h"

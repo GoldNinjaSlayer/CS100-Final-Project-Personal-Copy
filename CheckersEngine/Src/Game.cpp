@@ -62,7 +62,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//map = new Map();
 	
 	checkboard.addComponent<TransformComponent>(140,80,500,500,1);
-	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+	checkboard.addComponent<SpriteComponent>("../assets/Checkerboard.png");
 	initTiles();
 	tiles = manager.getGroup(groupTiles);
 	board = new Board(8);

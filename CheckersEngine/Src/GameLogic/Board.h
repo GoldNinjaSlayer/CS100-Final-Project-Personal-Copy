@@ -21,7 +21,10 @@ class Board{
 
     public:
         Board(Board &b);
-        Board(int n);//constructor
+        Board() {
+            ROWS = 8;
+        }
+        //Board(int n);//constructor
         inline static int numBoards = 1;
         int boardNum;
 
