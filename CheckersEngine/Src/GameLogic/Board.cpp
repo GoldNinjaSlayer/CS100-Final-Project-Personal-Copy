@@ -26,66 +26,66 @@ Board::Board(Board &b){
     boardNum = numBoards;
 }
 
-//Board::Board(int n){
-//    numBoards = 1;
-//    boardNum = 1;
-//
-//    ROWS = n;
-//    int COLS = n;
-//    checkers = new Checker**[ROWS];  
-//
-//    for(int i = 0; i < ROWS; i++){
-//        //Declare a memory block of size COLS (n since a checker board is square)
-//        checkers[i] = new Checker*[COLS];
-//    }
-//    cout << "NEW BOARD CREATED" << endl;
-//    int x = 0;
-//    for(int i = 0;i < ROWS; i++){   // follows the rows
-//        for(int j = 0; j < ROWS; j++){  //follows the columns
-//            if(i < 3){                  // creating the black checkers
-//            if(i%2 == 0){
-//                if(j% 2 == 0){
-//                    checkers[i][j] = new Checker(i,j,'B');
-//                    Game::AddChecker(0, 172 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
-//                } else{
-//                    checkers[i][j] = new Checker(i,j, '0');
-//                }
-//            } else{
-//                if(j % 2 == 1){
-//                    checkers[i][j] = new Checker(i,j,'B');
-//                    Game::AddChecker(0, (-63 * (i%2)) + 228 + (j * 50), 105 + (i*59), x++, checkers[i][j]);
-//                } else{
-//                    checkers[i][j] = new Checker(i,j,'0');
-//                }
-//            }
-//            } else if(i > 4){
-//           if(i%2 == 0){
-//                if(j% 2 == 0){
-//                    checkers[i][j] = new Checker(i,j,'R');
-//                    Game::AddChecker(1, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
-//                } else{
-//                    checkers[i][j] = new Checker(i,j,'0');
-//                    
-//                }
-//            } else{
-//                if(j % 2 == 1){
-//                    checkers[i][j] = new Checker(i,j,'R');                                                                                                                                                                                 
-//                    Game::AddChecker(1, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);
-//                } else{
-//                   checkers[i][j] = new Checker(i,j, '0');
-//                }
-//            }
-//            } else{
-//                checkers[i][j] = new Checker(i,j, '0');
-//            }
-//
-//            }
-//            
-//        }
-//
-//        
-//}
-//
+Board::Board(int n){
+    numBoards = 1;
+    boardNum = 1;
+
+    ROWS = n;
+    int COLS = n;
+    checkers = new Checker**[ROWS];  
+
+    for(int i = 0; i < ROWS; i++){
+        //Declare a memory block of size COLS (n since a checker board is square)
+        checkers[i] = new Checker*[COLS];
+    }
+    cout << "NEW BOARD CREATED" << endl;
+    int x = 0;
+    for(int i = 0;i < ROWS; i++){   // follows the rows
+        for(int j = 0; j < ROWS; j++){  //follows the columns
+            if(i < 3){                  // creating the black checkers
+            if(i%2 == 0){
+                if(j% 2 == 0){
+                    checkers[i][j] = new Checker(i,j,'B');
+                   /* Game::AddChecker(0, 172 + (j * 50), 105 + (i*59), x++, checkers[i][j]);*/
+                } else{
+                    checkers[i][j] = new Checker(i,j, '0');
+                }
+            } else{
+                if(j % 2 == 1){
+                    checkers[i][j] = new Checker(i,j,'B');
+                   /* Game::AddChecker(0, (-63 * (i%2)) + 228 + (j * 50), 105 + (i*59), x++, checkers[i][j]);*/
+                } else{
+                    checkers[i][j] = new Checker(i,j,'0');
+                }
+            }
+            } else if(i > 4){
+           if(i%2 == 0){
+                if(j% 2 == 0){
+                    checkers[i][j] = new Checker(i,j,'R');
+                    /*Game::AddChecker(1, 172 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);*/
+                } else{
+                    checkers[i][j] = new Checker(i,j,'0');
+                    
+                }
+            } else{
+                if(j % 2 == 1){
+                    checkers[i][j] = new Checker(i,j,'R');                                                                                                                                                                                 
+                   /* Game::AddChecker(1, (-63 * (i % 2)) + 228 + (j * 55), 325 + ((i-4) * 59), x++, checkers[i][j]);*/
+                } else{
+                   checkers[i][j] = new Checker(i,j, '0');
+                }
+            }
+            } else{
+                checkers[i][j] = new Checker(i,j, '0');
+            }
+
+            }
+            
+        }
+
+        
+}
+
 
 
 // Board *Board::copy(){
@@ -109,7 +109,7 @@ Board::~Board(){
                               //which contained the pointers
                               //of all the inner arrays
       cout << "stuff was deleted" << endl;
-
+      isDestroyed = true;
 }
 
 void Board::Display(){

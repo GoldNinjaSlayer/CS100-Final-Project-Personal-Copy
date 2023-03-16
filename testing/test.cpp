@@ -74,8 +74,8 @@ TEST(GameLogicTests, TestChangeTurns) {
 }
 TEST(VectorTests, TestConstructor1) {
     Vector2D* vector = new Vector2D();
-    EXPECT_EQ(vector->x, 0);
-    ASSERT_EQ(vector->y, 0);
+    EXPECT_FLOAT_EQ(vector->x, 0);
+    ASSERT_FLOAT_EQ(vector->y, 0);
 }
 TEST(VectorTests, TestConstructor2) {
     Vector2D* vector = new Vector2D(0.5f,0.5f);
@@ -175,7 +175,67 @@ TEST(VectorTests, TestOperatorDivEqual) {
     ASSERT_FLOAT_EQ(vector1.y, 1.0);
 
 }
+TEST(VectorTests, TestZeroFunction) {
+    Vector2D* vector = new Vector2D(1.0f,1.0f);
+    vector->Zero();
+    EXPECT_FLOAT_EQ(vector->x, 0.0);
+    ASSERT_FLOAT_EQ(vector->y, 0.0);
+}
 TEST(BoardTests, TestConstructor) {
+    Board* board = new Board(8);
+    EXPECT_EQ(board->getchecker(0, 2)->getColor(), 'B');
+    EXPECT_EQ(board->getchecker(0, 5)->getColor(), '0');
+    EXPECT_EQ(board->getchecker(1, 3)->getColor(), 'B');
+    EXPECT_EQ(board->getchecker(1, 2)->getColor(), '0');
+    EXPECT_EQ(board->getchecker(6, 2)->getColor(), 'R');
+    EXPECT_EQ(board->getchecker(6, 3)->getColor(), '0');
+    EXPECT_EQ(board->getchecker(5, 5)->getColor(), 'R');
+}
+TEST(BoardTests, TestDestructor) {
+    Board* board = new Board(8);
+    board->~Board();
+    EXPECT_TRUE(board->isDestroyed);
+}
+TEST(BoardTests, TestGetInstancesBlack) {
+    Board* board = new Board(8);
+    EXPECT_FLOAT_EQ(board->getInstances('B')[0]->getPosition().x, 0.0 );
+    EXPECT_FLOAT_EQ(board->getInstances('B')[0]->getPosition().y, 0.0);
+
+    EXPECT_FLOAT_EQ(board->getInstances('B')[1]->getPosition().x, 0.0);
+    EXPECT_FLOAT_EQ(board->getInstances('B')[1]->getPosition().y, 2.0);
+   
+    EXPECT_FLOAT_EQ(board->getInstances('B')[2]->getPosition().x, 0.0);
+    EXPECT_FLOAT_EQ(board->getInstances('B')[2]->getPosition().y, 4.0);
+}
+TEST(BoardTests, TestGetInstancesRed) {
+    Board* board = new Board(8);
+    EXPECT_FLOAT_EQ(board->getInstances('R')[0]->getPosition().x, 5.0);
+    EXPECT_FLOAT_EQ(board->getInstances('R')[0]->getPosition().y, 1.0);
+
+    EXPECT_FLOAT_EQ(board->getInstances('R')[1]->getPosition().x, 5.0);
+    EXPECT_FLOAT_EQ(board->getInstances('R')[1]->getPosition().y, 3.0);
+
+    EXPECT_FLOAT_EQ(board->getInstances('R')[2]->getPosition().x, 5.0);
+    EXPECT_FLOAT_EQ(board->getInstances('R')[2]->getPosition().y, 5.0);
+}
+TEST(BoardTests, TestMoveIsAllowed)
+{
+
+}
+TEST(BoardTests, TestSwapPieces)
+{
+
+}
+TEST(BoardTests, TestMoveCapturePiece)
+{
+
+}
+TEST(BoardTests, TestGetTurn)
+{
+
+}
+TEST(BoardTests, TestChangeTurn)
+{
 
 }
 int main(int argc, char** argv) {

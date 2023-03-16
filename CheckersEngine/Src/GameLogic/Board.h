@@ -20,11 +20,12 @@ class Board{
 
 
     public:
+        bool isDestroyed = false;
         Board(Board &b);
         Board() {
             ROWS = 8;
         }
-        //Board(int n);//constructor
+        Board(int n);//constructor
         inline static int numBoards = 1;
         int boardNum;
 
