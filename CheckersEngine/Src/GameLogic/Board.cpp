@@ -1,17 +1,8 @@
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 #include "Board.h"
 #include <iostream>
 #include <string>
 #include "..\TextureManager.h"
 #include "..\Game.h"
-
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
-
 using namespace std;
 
 Board::Board(Board &b){
@@ -40,7 +31,7 @@ Board::Board(int n){
     boardNum = 1;
 
     ROWS = n;
-    COLS = n;
+    int COLS = n;
     checkers = new Checker**[ROWS];  
 
     for(int i = 0; i < ROWS; i++){
@@ -111,14 +102,13 @@ Board::Board(int n){
 // }
 
 Board::~Board(){
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            delete[] checkers[i][j];
-        }
-        delete[] checkers[i];
-    }
-    delete[] checkers;
-      cout << "stuff was deleted" << endl;
+      for(int i=0;i<ROWS;i++)    //To delete the inner arrays
+                delete [] checkers[i];   
+
+      delete [] checkers;              //To delete the outer array
+                              //which contained the pointers
+                              //of all the inner arrays
+      //cout << "stuff was deleted" << endl;
 
 }
 
@@ -206,13 +196,14 @@ void Board::swap(Checker *check1, Checker *check2, bool doubleJump){
     // cout << "Check 1 new position: " << check1->getPosition() << endl;
     // cout << "Check 2 new position: " << check2->getPosition() << endl;
 
-    if(!doubleJump){
+    isAllowed(check1);
+    if(doubleJump && check1->canCapture){
+        cout << "Double Jump!" << endl;
+    }
+    else{
         changeTurn();
     }
-    else if(!check1->canCapture){
-        changeTurn();
-    }
-    cout << "Current Turn: " << currentTurn << endl;
+    //cout << "Current Turn: " << currentTurn << endl;
 }
 
  vector<Checker*> Board::getInstances(char color){   // returns vectors of instances of color
@@ -380,39 +371,11 @@ void Board::capture(Checker *check1, Checker *check2){
     check2->change('0');
     int calcx = check2->getPosition().x - check1->getPosition().x;
     int calcy = check2->getPosition().y - check1->getPosition().y;
-    bool doubleJump = false;
-    if(check1->canCapture){
-        doubleJump = true;
-    }
+    bool doubleJump = true;
+
 
     swap(check1, getchecker(check2->getPosition().x + calcx, check2->getPosition().y + calcy), doubleJump);
-    // check1->canCapture = false;
 
-    // if(isAllowed(check1)){
-    //     if(check1->canCapture){
-    //         set<coord>::iterator it; 
-
-    //         int i = 1;
-    //         for(it = check1->moves.begin(); it != check1->moves.end(); it++){
-    //             cout << i << ". " << *it << endl;
-    //             i++;
-    //         }
-
-    //         int choice;
-    //         do{
-    //         cout << "Choose a move" << endl;
-    //         cin >> choice;
-    //         }while(choice <= 0 || choice > i-1);
-    //         it = check1->moves.begin();
-    //         for(int i = 0; i < choice-1; i++){
-    //             it++;
-    //         }
-
-    //         swap(check1, getchecker(it->x, it->y));
-    //         cout << "Double jump" << endl;
-    //     }
-    // }
-    // scoreBoard[currentPlayer]++;
 }
 
 void Board::changeTurn(){

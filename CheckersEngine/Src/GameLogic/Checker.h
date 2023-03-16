@@ -5,11 +5,6 @@
 #include <vector>
 #include <stack>
 #include <set>
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
-
 //#include "../ECS/Components.h"
 using namespace std;
 
@@ -61,9 +56,7 @@ class Checker{
         char cOrig;                 //holds the original color for stat reaons
         coord pOrig;                //holds original position for stat reasons
         // static int totalMoves;
-        Checker(int x, int y, char col); 
-        ~Checker() {};
-        // constructor initializes position and color
+        Checker(int x, int y, char col);    // constructor initializes position and color
         // Checker(int, int, char);
         friend ostream& operator<<(ostream& os, const Checker& check); // overrides ostream operator to display pieces color
         coord getPosition();    // returns the position as a coord 

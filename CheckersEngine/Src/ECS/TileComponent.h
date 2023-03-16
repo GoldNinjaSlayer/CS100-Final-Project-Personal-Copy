@@ -4,13 +4,7 @@
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
 #include "SDL.h"
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h> 
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
+
 
 class TileComponent : public Component
 {
@@ -34,13 +28,19 @@ public:
 		switch (tileID)
 		{
 		case 0:
-			path = "../assets/checkersPieces/blackPieceNormal.png";
+			path = "assets/checkersPieces/blackPieceNormal.png";
 			break;
 		case 1:
-			path = "../assets/checkersPieces/redPieceNormal.png";
+			path = "assets/checkersPieces/redPieceNormal.png";
 			break;
 		case 2:
-			path = "../assets/blackTile.png";
+			path = "../assets/checkersPieces/blackPieceKing.png";
+			break;
+		case 3:
+			path = "../assets/checkersPieces/redPieceKing.png";
+			break;
+		case 4:
+			path = "assets/blackTile.png";
 			break;
 		default:
 			break;

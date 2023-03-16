@@ -1,10 +1,6 @@
 #pragma once
 #include "Components.h"
 #include "../Vector2D.h"
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
 
 class TransformComponent : public Component
 {

@@ -1,18 +1,10 @@
 #include "Game.h"
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 #include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
-
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
-
+#include "ECS/ButtonComponent.h"
 
 using namespace std;
 Map* map;
@@ -50,11 +42,7 @@ Game::Game()
 {}
 
 Game::~Game()
-{
-	tiles.clear();
-	checkersEntities.clear();
-	colliders.clear();
-}
+{}
 
 void Game::init(const char* title, int width, int height, bool fullscreen)
 {
@@ -80,7 +68,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     //display main menu
 
     menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
-	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+    menuBG.addComponent<SpriteComponent>("assets/menu.jpeg");
     menuBG.addGroup(groupMainMenu);
 
 
@@ -137,11 +125,10 @@ void Game::render()
 
 void Game::clean()
 {
-	delete board;
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	
+	delete[] board;
 }
 
 void Game::AddChecker(int id, int x, int y, int num, Checker* p) {

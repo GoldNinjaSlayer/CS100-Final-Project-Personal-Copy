@@ -3,10 +3,6 @@ using namespace std;
 
 #ifndef BOARD_H
 #define BOARD_H
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
 
 #include <list>
 #include "Checker.h"
@@ -19,7 +15,6 @@ using namespace std;
 class Board{
     private:
     int ROWS;
-    int COLS;
     Checker ***checkers; //Handles the 2D array dynamically
     char currentTurn = 'R';    
 
