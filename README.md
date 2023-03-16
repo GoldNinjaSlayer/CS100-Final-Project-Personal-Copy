@@ -23,32 +23,23 @@
 
 
 ## Class Diagram
-![image](https://user-images.githubusercontent.com/100615723/224221067-9bb8fb62-c24f-4926-9299-db76fd7e50a1.png)Inheritance: 
+![image](https://user-images.githubusercontent.com/100615723/225549558-f2a13c52-3f6d-4dce-b7ea-7c7e169f8e78.png)
+
+Inheritance: 
 
 The AI class inherits from the Player class. makeMove() is overridden.
 
 Composition: 
 
-Checker, Board, and Player classes aggregate to form the gameLogic class. The GameLogic class controls all the logic related to the game. The AI class involves the use of the move structure, which is responsible for determining different moves that the AI can make and choosing which one it will make.
-
-Aggregation:
-
-The AI class is aggregated to be used in the GameLogic class.
+Checker, Board, and Player classes have an aggregation relationship with the Game class. The AI class involves the use of the move structure, which is responsible for determining different moves that the AI can make and choosing which one it will make.
 
 Diagram Updates:
 
-We seperated parts of the game class to be created as the gameLogic class, which handles all of the logical components of the game. This involves the use of the Single Responsibility Principle, as the game class is no longer responsible for both the visual elements and logical elements of our game. Instead, the game class only handles the visual elements, and works together with the new gameLogic class to make our game function. Doing so also makes it easier for us to understand which parts of our code affect the game logic, and which parts affect the visual elements.
+We seperated parts of the game class to be created as the Board, Player, and Checker class, which handle all of the logical components of the game. This involves the use of the Single Responsibility Principle, as the game class is no longer responsible for both the visual elements and logical elements of our game. Instead, the game class only handles the visual elements, and works together with the new classes to make our game function. Doing so also makes it easier for us to understand which parts of our code affect the game logic, and which parts affect the visual elements.
 
 We created the Entity, Component, and Manager classes to help handle the visual elements of our game. To fulfill the Single Responsibility Principle, we took some of the responsibilities of the game class and moved them into these new classes. Doing so makes it easier for us to code the visual elements of our game, as we can understand what each class is responsible for.
 
 The AI class is capable of substituting the player class, as it is able to play the game in place of a player. This allows us to create a singleplayer mode, where the player can choose to play alone instead of with a friend. Doing so also makes it possible for us to test our game by having an AI play it.
- 
- > ## Final deliverable
- > All group members will give a demo to the reader during lab time. ou should schedule your demo on Calendly with the same reader who took your second scrum meeting. The reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
- > Before the demo, you should do the following:
- > * Complete the sections below (i.e. Screenshots, Installation/Usage, Testing)
- > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Project board.
- > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
  
  ## Screenshots
  ![image](https://user-images.githubusercontent.com/100615723/224218172-b7b9e9f1-16d9-4dab-829f-cb9f8ebb7b73.png)
@@ -58,5 +49,4 @@ The AI class is capable of substituting the player class, as it is able to play 
  > Instructions on installing and running your application
  
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
- 
+ We tested our program by checking for memory leaks and unit testing our code. Due to our program being mostly visual, we were only able to test the game logic portions of our code.
