@@ -34,16 +34,16 @@ public:
 		switch (tileID)
 		{
 		case 0:
-			path = "../assets/checkersPieces/blackPieceNormal.png";
+			path = "assets/checkersPieces/blackPieceNormal.png";
 			break;
 		case 1:
-			path = "../assets/checkersPieces/redPieceNormal.png";
+			path = "assets/checkersPieces/redPieceNormal.png";
 			break;
 		case 2:
-			path = "../assets/checkersPieces/blackPieceKing.png";
+			path = "assets/checkersPieces/blackPieceKing.png";
 			break;
 		case 3:
-			path = "../assets/checkersPieces/redPieceKing.png";
+			path = "assets/checkersPieces/redPieceKing.png";
 			break;
 		case 4:
 			path = "assets/blackTile.png";
