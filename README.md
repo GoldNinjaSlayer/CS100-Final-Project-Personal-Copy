@@ -14,12 +14,10 @@
     * Inputs:
       * User input, controlling the game
     * Outputs:
-      * Visual and audio feedback from the game
+      * Visual feedback from the game
   * What are the features that the project provides?
-    * Our project will allow for the user to play either with a friend, or by themselves.
+    * Our project will allow for the user to play against an AI.
     * The project will allow for the user to interact with a GUI rather than a terminal.
-    * The user will be able to save and load their games.
-    * The user will be able to undo their moves if they choose to.
 
 
 ## Class Diagram
