@@ -46,6 +46,8 @@ private:
     void startGame();
 
     void resetScreen();
+
+    void setStateLevel0();
 };
 
 

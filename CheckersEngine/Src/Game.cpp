@@ -28,9 +28,15 @@ auto& logo(manager.addEntity());
 auto& buttonStart(manager.addEntity());
 auto& buttonQuit(manager.addEntity());
 
-auto& checkboard(manager.addEntity());
 auto& red(manager.addEntity());
 
+enum State {
+    Menu,
+    Level0,
+    GameInProgress
+};
+
+State state = Menu;
 
 int groupTiles = 0;
 int groupCheckers = 1;
@@ -71,7 +77,6 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     menuBG.addComponent<SpriteComponent>("assets/menu.jpeg");
     menuBG.addGroup(groupMainMenu);
 
-
     logo.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
     logo.addComponent<SpriteComponent>("assets/title.png");
     logo.addGroup(groupMainMenu);
@@ -79,15 +84,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
     buttonStart.addComponent<SpriteComponent>();
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
-    buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::startGame);
+    buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::setStateLevel0);
+    //buttonStart.addComponent<TextComponent>();
     buttonStart.addGroup(groupMainMenu);
 
     buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 112, 508, 0.5);
     buttonQuit.addComponent<SpriteComponent>();
     buttonQuit.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonQuit.addGroup(groupMainMenu);
-
-    //startGame();
 }
 
 void Game::handleEvents()
@@ -110,6 +114,10 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
+    if(state == Level0){
+        state = GameInProgress;
+        startGame();
+    }
 }
 
 
@@ -168,8 +176,14 @@ void Game::initTiles()
 
 void Game::startGame() {
     resetScreen();
+    auto& bg(manager.addEntity());
+    bg.addComponent<TransformComponent>(0, 0, 2560, 2560, 0.32);
+    bg.addComponent<SpriteComponent>("assets/bg1.jpg");
+
+    auto& checkboard(manager.addEntity());
     checkboard.addComponent<TransformComponent>(140, 80, 500, 500, 1);
     checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+
     initTiles();
     tiles = manager.getGroup(groupTiles);
     board = new Board(8);
@@ -177,10 +191,22 @@ void Game::startGame() {
     board->allowedMoves(board->getInstances('B'));
     board->allowedMoves(board->getInstances('R'));
     Logic.addComponent<LogicComponent>();
+
+    auto& caveman(manager.addEntity());
+    caveman.addComponent<TransformComponent>(550, 350, 422, 403, 1);
+    caveman.addComponent<SpriteComponent>("assets/caveman-idle.png");
+    caveman.addComponent<ButtonComponent>("assets/caveman-idle.png", "assets/caveman-idle.png", "assets/caveman-idle-hovered.png");
 }
 
 void Game::resetScreen() {
     cout << "clearing screen..." << endl;
 
     menuBG.destroy();
+    logo.destroy();
+    buttonStart.destroy();
+    buttonQuit.destroy();
+}
+
+void Game::setStateLevel0() {
+    state = Level0;
 }

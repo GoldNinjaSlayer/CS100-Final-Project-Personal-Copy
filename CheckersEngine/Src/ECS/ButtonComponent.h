@@ -85,6 +85,7 @@ public:
                 sprite->setTex(texturePathNormal);
 
                 if(CallBack != nullptr){
+                    //THIS IS BROKEN, calls the function, but messes up the components due to the way it calls back
                     (game->*CallBack)();
                 }
             }
