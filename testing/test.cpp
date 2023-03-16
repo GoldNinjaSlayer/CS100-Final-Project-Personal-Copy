@@ -218,25 +218,45 @@ TEST(BoardTests, TestGetInstancesRed) {
     EXPECT_FLOAT_EQ(board->getInstances('R')[2]->getPosition().x, 5.0);
     EXPECT_FLOAT_EQ(board->getInstances('R')[2]->getPosition().y, 5.0);
 }
-TEST(BoardTests, TestMoveIsAllowed)
+TEST(BoardTests, TestMoveIsAllowedRed)
 {
-
+    Board* board = new Board(8);
+    EXPECT_TRUE(board->isAllowed(board->getchecker(5, 5)));
+}
+TEST(BoardTests, TestMoveIsAllowedBlack)
+{
+    Board* board = new Board(8);
+    EXPECT_TRUE(!(board->isAllowed(board->getchecker(0, 2))));
 }
 TEST(BoardTests, TestSwapPieces)
 {
-
+    Board* board = new Board(8);
+    Checker* check1 = new Checker(0, 0, 'B');
+    Checker* check2 = new Checker(1, 0, 'R');
+    board->swap(check1, check2,false);
+    ASSERT_TRUE(check1->getPosition().x == 1);
+    ASSERT_TRUE(check1->getPosition().y == 0);
 }
-TEST(BoardTests, TestMoveCapturePiece)
+TEST(BoardTests, TestCapturePiece)
 {
-
+    Board* board = new Board(8);
+    Checker* check1 = new Checker(0, 0, 'B');
+    Checker* check2 = new Checker(1, 0, 'R');
+    board->capture(check1, check2);
+    ASSERT_TRUE(check1->getPosition().x == 2);
+    ASSERT_TRUE(check1->getPosition().y == 0);
 }
 TEST(BoardTests, TestGetTurn)
 {
-
+    Board* board = new Board(8);
+    EXPECT_TRUE(board->getTurn() == 'R');
 }
 TEST(BoardTests, TestChangeTurn)
 {
-
+    Board* board = new Board(8);
+    EXPECT_TRUE(board->getTurn() == 'R');
+    board->changeTurn();
+    ASSERT_TRUE(board->getTurn() == 'B');
 }
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);

@@ -1,0 +1,108 @@
+[==========] Running 35 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from CheckerTests
+[ RUN      ] CheckerTests.TestIsKingedBlack
+[       OK ] CheckerTests.TestIsKingedBlack (0 ms)
+[ RUN      ] CheckerTests.TestIsKingedRed
+[       OK ] CheckerTests.TestIsKingedRed (0 ms)
+[ RUN      ] CheckerTests.TestConstructor
+[       OK ] CheckerTests.TestConstructor (0 ms)
+[ RUN      ] CheckerTests.TestChangePosition
+[       OK ] CheckerTests.TestChangePosition (0 ms)
+[ RUN      ] CheckerTests.TestChangeColor
+[       OK ] CheckerTests.TestChangeColor (0 ms)
+[----------] 5 tests from CheckerTests (2 ms total)
+
+[----------] 2 tests from PlayerTests
+[ RUN      ] PlayerTests.TestConstructor
+[       OK ] PlayerTests.TestConstructor (0 ms)
+[ RUN      ] PlayerTests.TestChangeColor
+[       OK ] PlayerTests.TestChangeColor (0 ms)
+[----------] 2 tests from PlayerTests (1 ms total)
+
+[----------] 3 tests from GameLogicTests
+[ RUN      ] GameLogicTests.TestConstructorTurns
+[       OK ] GameLogicTests.TestConstructorTurns (0 ms)
+[ RUN      ] GameLogicTests.TestConstructorPlayer
+[       OK ] GameLogicTests.TestConstructorPlayer (0 ms)
+[ RUN      ] GameLogicTests.TestChangeTurns
+[       OK ] GameLogicTests.TestChangeTurns (0 ms)
+[----------] 3 tests from GameLogicTests (1 ms total)
+
+[----------] 15 tests from VectorTests
+[ RUN      ] VectorTests.TestConstructor1
+[       OK ] VectorTests.TestConstructor1 (0 ms)
+[ RUN      ] VectorTests.TestConstructor2
+[       OK ] VectorTests.TestConstructor2 (0 ms)
+[ RUN      ] VectorTests.TestAdd
+[       OK ] VectorTests.TestAdd (0 ms)
+[ RUN      ] VectorTests.TestSubtract
+[       OK ] VectorTests.TestSubtract (0 ms)
+[ RUN      ] VectorTests.TestMultiply
+[       OK ] VectorTests.TestMultiply (0 ms)
+[ RUN      ] VectorTests.TestDivide
+[       OK ] VectorTests.TestDivide (0 ms)
+[ RUN      ] VectorTests.TestOperatorAdd
+[       OK ] VectorTests.TestOperatorAdd (0 ms)
+[ RUN      ] VectorTests.TestOperatorSubtract
+[       OK ] VectorTests.TestOperatorSubtract (0 ms)
+[ RUN      ] VectorTests.TestOperatorMultiply
+[       OK ] VectorTests.TestOperatorMultiply (0 ms)
+[ RUN      ] VectorTests.TestOperatorDivide
+[       OK ] VectorTests.TestOperatorDivide (0 ms)
+[ RUN      ] VectorTests.TestOperatorPlusEqual
+[       OK ] VectorTests.TestOperatorPlusEqual (0 ms)
+[ RUN      ] VectorTests.TestOperatorMinusEqual
+[       OK ] VectorTests.TestOperatorMinusEqual (0 ms)
+[ RUN      ] VectorTests.TestOperatorTimesEqual
+[       OK ] VectorTests.TestOperatorTimesEqual (0 ms)
+[ RUN      ] VectorTests.TestOperatorDivEqual
+[       OK ] VectorTests.TestOperatorDivEqual (0 ms)
+[ RUN      ] VectorTests.TestZeroFunction
+[       OK ] VectorTests.TestZeroFunction (0 ms)
+[----------] 15 tests from VectorTests (35 ms total)
+
+[----------] 10 tests from BoardTests
+[ RUN      ] BoardTests.TestConstructor
+NEW BOARD CREATED
+[       OK ] BoardTests.TestConstructor (0 ms)
+[ RUN      ] BoardTests.TestDestructor
+NEW BOARD CREATED
+stuff was deleted
+[       OK ] BoardTests.TestDestructor (1 ms)
+[ RUN      ] BoardTests.TestGetInstancesBlack
+NEW BOARD CREATED
+[       OK ] BoardTests.TestGetInstancesBlack (0 ms)
+[ RUN      ] BoardTests.TestGetInstancesRed
+NEW BOARD CREATED
+[       OK ] BoardTests.TestGetInstancesRed (1 ms)
+[ RUN      ] BoardTests.TestMoveIsAllowedRed
+NEW BOARD CREATED
+[       OK ] BoardTests.TestMoveIsAllowedRed (0 ms)
+[ RUN      ] BoardTests.TestMoveIsAllowedBlack
+NEW BOARD CREATED
+[       OK ] BoardTests.TestMoveIsAllowedBlack (1 ms)
+[ RUN      ] BoardTests.TestSwapPieces
+NEW BOARD CREATED
+Current Turn: B
+[       OK ] BoardTests.TestSwapPieces (1 ms)
+[ RUN      ] BoardTests.TestCapturePiece
+NEW BOARD CREATED
+Captured!
+Current Turn: B
+[       OK ] BoardTests.TestCapturePiece (8 ms)
+[ RUN      ] BoardTests.TestGetTurn
+NEW BOARD CREATED
+[       OK ] BoardTests.TestGetTurn (0 ms)
+[ RUN      ] BoardTests.TestChangeTurn
+NEW BOARD CREATED
+[       OK ] BoardTests.TestChangeTurn (1 ms)
+[----------] 10 tests from BoardTests (39 ms total)
+
+[----------] Global test environment tear-down
+[==========] 35 tests from 5 test suites ran. (90 ms total)
+[  PASSED  ] 35 tests.
+
+C:\Users\User\Source\Repos\final-project-cs100-final-project\testing\Debug\test.exe (process 30208) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .

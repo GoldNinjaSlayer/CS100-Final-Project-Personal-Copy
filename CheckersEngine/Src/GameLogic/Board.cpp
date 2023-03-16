@@ -368,8 +368,8 @@ void Board::capture(Checker *check1, Checker *check2){
     if(boardNum == 1)
         cout << "Captured!" << endl;
     check2->change('0');
-    int calcx = check2->getPosition().x - check1->getPosition().x;
-    int calcy = check2->getPosition().y - check1->getPosition().y;
+    float calcx = check2->getPosition().x - check1->getPosition().x;
+    float calcy = check2->getPosition().y - check1->getPosition().y;
     bool doubleJump = false;
     if(check1->canCapture){
         doubleJump = true;
