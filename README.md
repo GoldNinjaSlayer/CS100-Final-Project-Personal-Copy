@@ -44,7 +44,7 @@ The AI class is capable of substituting the player class, as it is able to play 
  ![image](https://user-images.githubusercontent.com/100615723/224218283-ab4c86f8-ba88-466e-8a68-1784e22fafed.png)
 
  ## Installation/Usage
- > Instructions on installing and running your application
+Download the zip folder from the release, unzip it, and run the CheckersEngine.exe file located within it.
  
  ## Testing
  We tested our program by checking for memory leaks and unit testing our code. Due to our program being mostly visual, we were only able to test the game logic portions of our code.
