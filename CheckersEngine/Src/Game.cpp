@@ -81,16 +81,16 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     logo.addComponent<SpriteComponent>("assets/title.png");
     logo.addGroup(groupMainMenu);
 
-    buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 112, 508, 0.5);
+    buttonStart.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40, 278, 580, 0.5);
     buttonStart.addComponent<SpriteComponent>();
     buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
     buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::setStateLevel0);
     //buttonStart.addComponent<TextComponent>();
     buttonStart.addGroup(groupMainMenu);
 
-    buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 112, 508, 0.5);
+    buttonQuit.addComponent<TransformComponent>(width/2 - 508/4, height/2 + 40 + 112/2 + 10, 278, 580, 0.5);
     buttonQuit.addComponent<SpriteComponent>();
-    buttonQuit.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
+    buttonQuit.addComponent<ButtonComponent>("assets/GUI/quit-button.png", "assets/GUI/quit-button-pressed.png", "assets/GUI/quit-button-hovered.png");
     buttonQuit.addGroup(groupMainMenu);
 }
 
