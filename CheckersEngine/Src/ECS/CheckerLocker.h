@@ -4,6 +4,10 @@
 #include "ColliderComponent.h"
 #include <vector>
 #include "CheckerLinker.h"
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 
 //#include "../Game.h"
@@ -21,16 +25,18 @@ private:
     Entity* currentTile;
 
     //Helper functions
-    bool checkCollision(Entity* tile);
-    void swapPiece(Entity* tile);
+    //bool checkCollision(Entity* tile);
+    //void swapPiece(Entity* tile);
     void lockPiece(Entity* tile);
-    void capturePiece(Entity* checker);
+    //void capturePiece(Entity* checker);
 
 
 public:
     void init() override;
     void update() override;
     void moveLogic();
+    bool checkCollision(Entity* tile);
+    void setCurrentTile(Entity* tile);
 };
 
 //todo: Need to gain access to a pieces available moves and only highlight the tiles that piece can go to

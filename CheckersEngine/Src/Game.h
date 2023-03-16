@@ -24,6 +24,7 @@ public:
 	void render();
 	void clean();
 	void setBoard(Board* board);
+	void handleLogic();
 	void clearPieces();
 
 	static void AddChecker(int id, int x, int y, int num, Checker* p);

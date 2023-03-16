@@ -6,6 +6,10 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 class Component;
 class Entity;
@@ -56,6 +60,8 @@ private:
 
 public:
 	Entity(Manager& mManager): manager(mManager){}
+
+
 	void update()
 	{
 		for (auto& c : components) c->update();
@@ -86,16 +92,18 @@ public:
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... mArgs)
 	{
-		T* c(new T(std::forward<TArgs>(mArgs)...));
+		auto c = std::make_unique<T>(std::forward<TArgs>(mArgs)...);
 		c->entity = this;
-		std::unique_ptr<Component> uPtr{ c };
-		components.emplace_back(std::move(uPtr));
 
-		componentArray[getComponentTypeID<T>()] = c;
+		T& result = *c;
+		components.push_back(std::move(c));
+
+		componentArray[getComponentTypeID<T>()] = &result;
 		componenetBitSet[getComponentTypeID<T>()] = true;
 
-		c->init();
-		return *c;
+		result.init();
+		return result;
+
 	}
 
 	template <typename T> T& getComponent() const
@@ -157,9 +165,10 @@ public:
 
 	Entity& addEntity()
 	{
-		Entity* e = new Entity(*this);
-		std::unique_ptr<Entity> uPtr{ e };
-		entities.emplace_back(std::move(uPtr));
-		return *e;
+		auto e = std::make_unique<Entity>(*this);
+		Entity& result = *e;
+		entities.push_back(std::move(e));
+		return result;
 	}
+
 };

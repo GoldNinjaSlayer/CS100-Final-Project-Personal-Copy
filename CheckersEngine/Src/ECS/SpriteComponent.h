@@ -2,6 +2,10 @@
 #include "Components.h"
 #include "SDL.h"
 #include "../TextureManager.h"
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
 
 class SpriteComponent : public Component
 {
