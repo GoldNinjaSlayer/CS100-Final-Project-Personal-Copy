@@ -1,8 +1,17 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Board.h"
 #include <iostream>
 #include <string>
 #include "..\TextureManager.h"
 #include "..\Game.h"
+
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 using namespace std;
 
 Board::Board(Board &b){
@@ -31,7 +40,7 @@ Board::Board(int n){
     boardNum = 1;
 
     ROWS = n;
-    int COLS = n;
+    COLS = n;
     checkers = new Checker**[ROWS];  
 
     for(int i = 0; i < ROWS; i++){
@@ -109,7 +118,6 @@ Board::~Board(){
                               //which contained the pointers
                               //of all the inner arrays
       //cout << "stuff was deleted" << endl;
-
 }
 
 void Board::Display(){
