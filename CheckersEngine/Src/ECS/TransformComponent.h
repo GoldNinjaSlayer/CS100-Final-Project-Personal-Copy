@@ -1,10 +1,6 @@
 #pragma once
 #include "Components.h"
 #include "../Vector2D.h"
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
 
 class TransformComponent : public Component
 {
@@ -14,7 +10,7 @@ public:
 	Vector2D velocity;
 	int height = 32;
 	int width = 32;
-	int scale = 1;
+	float scale = 1;
 
 
 	int speed = 3;
@@ -38,7 +34,7 @@ public:
 		position.y = y;
 	}
 
-	TransformComponent(float x, float y, int h, int w, int sc)
+	TransformComponent(float x, float y, int h, int w, float sc)
 	{
 		position.x = x;
 		position.y = y;

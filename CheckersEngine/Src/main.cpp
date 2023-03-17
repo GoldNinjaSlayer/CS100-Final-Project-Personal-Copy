@@ -15,9 +15,6 @@ GameLogic gameLogic;
 
 int main(int argc, char* argv[])
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	Game* game = nullptr;
-	GameLogic gameLogic;
 	const int FPS = 60;
 	const int frameDelay = 1000 / FPS;
 

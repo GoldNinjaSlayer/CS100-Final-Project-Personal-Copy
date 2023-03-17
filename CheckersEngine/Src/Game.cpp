@@ -7,6 +7,7 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
+#include "ECS/ButtonComponent.h"
 
 #ifdef _DEBUG
 #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
@@ -27,26 +28,30 @@ std::vector<Entity*> Game::tiles;
 std::vector<Entity*> Game::checkersEntities;
 std::vector<ColliderComponent*> Game::colliders;
 
+
 auto& black(manager.addEntity());
-
-
-
-auto& checkboard(manager.addEntity());
-auto& red(manager.addEntity());
-
 auto& Logic(manager.addEntity());
 
+auto& menuBG(manager.addEntity());
+auto& logo(manager.addEntity());
+auto& buttonStart(manager.addEntity());
+auto& buttonQuit(manager.addEntity());
 
-enum checkerState {
-	CAPTURE,
-	SWAP
+auto& red(manager.addEntity());
+
+enum State {
+    Menu,
+    Level0,
+    GameInProgress
 };
 
-enum groupLabels : std::size_t
-{
-	groupTiles,
-	groupCheckers,
-};
+State state = Menu;
+
+int groupTiles = 0;
+int groupCheckers = 1;
+int groupMainMenu = 999;
+
+vector<int> groupIds = {groupTiles, groupCheckers, groupMainMenu};
 
 Game::Game()
 {}
@@ -61,7 +66,7 @@ Game::~Game()
 void Game::init(const char* title, int width, int height, bool fullscreen)
 {
 	int flags = 0;
-
+	
 	if (fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -79,30 +84,31 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 		isRunning = true;
 	}
 
+    //display main menu
 
-	//map = new Map();
+    menuBG.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
+    menuBG.addComponent<SpriteComponent>("assets/menu.jpeg");
+    menuBG.addGroup(groupMainMenu);
 
-	checkboard.addComponent<TransformComponent>(140, 80, 500, 500, 1);
-	checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+    logo.addComponent<TransformComponent>(-15, 0, 2560, 2560, 0.32);
+    logo.addComponent<SpriteComponent>("assets/title.png");
+    logo.addGroup(groupMainMenu);
 
-	initTiles();
-	tiles = manager.getGroup(groupTiles);
-	board = new Board(8);
-	checkersEntities = manager.getGroup(groupCheckers);
-	board->allowedMoves(board->getInstances('B'));
-	board->allowedMoves(board->getInstances('R'));
-	Logic.addComponent<LogicComponent>();
+    buttonStart.addComponent<TransformComponent>(width/2 - 100, height/2, 278, 580, 0.35);
+    buttonStart.addComponent<SpriteComponent>();
+    buttonStart.addComponent<ButtonComponent>("assets/GUI/Green_Button.png", "assets/GUI/Green_Button_Pressed.png", "assets/GUI/Green_Button_Hovered.png");
+    buttonStart.getComponent<ButtonComponent>().addCallback(this, &Game::setStateLevel0);
+    //buttonStart.addComponent<TextComponent>();
+    buttonStart.addGroup(groupMainMenu);
 
-
-	int x = 0;
-	int y = 0;
-
+    buttonQuit.addComponent<TransformComponent>(width/2 - 100, height/2 + 278/2 + 10, 278, 580, 0.35);
+    buttonQuit.addComponent<SpriteComponent>();
+    buttonQuit.addComponent<ButtonComponent>("assets/GUI/quit-button.png", "assets/GUI/quit-button-pressed.png", "assets/GUI/quit-button-hovered.png");
+    buttonQuit.addGroup(groupMainMenu);
 }
 
 void Game::handleEvents()
 {
-
-
 	SDL_PollEvent(&event);
 
 	switch (event.type)
@@ -121,6 +127,10 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
+    if(state == Level0){
+        state = GameInProgress;
+        startGame();
+    }
 }
 
 
@@ -128,7 +138,6 @@ void Game::update()
 
 void Game::render()
 {
-
 	SDL_RenderClear(renderer);
 	//map->DrawMap();
 	manager.draw();
@@ -162,8 +171,6 @@ void Game::AddTile(int x, int y, int i, int j)
 	tile.addComponent<ColliderComponent>("tile " + to_string((i * 8) + j));
 	tile.addComponent<TileLinker>(i, j);
 	tile.addGroup(groupTiles);
-
-
 }
 
 void Game::setBoard(Board* board) {
@@ -181,7 +188,39 @@ void Game::initTiles()
 	}
 }
 
-//void handleLogic()
-//{
-//
-//}
+void Game::startGame() {
+    resetScreen();
+    auto& bg(manager.addEntity());
+    bg.addComponent<TransformComponent>(0, 0, 2560, 2560, 0.32);
+    bg.addComponent<SpriteComponent>("assets/bg1.jpg");
+
+    auto& checkboard(manager.addEntity());
+    checkboard.addComponent<TransformComponent>(140, 80, 500, 500, 1);
+    checkboard.addComponent<SpriteComponent>("assets/Checkerboard.png");
+
+    initTiles();
+    tiles = manager.getGroup(groupTiles);
+    board = new Board(8);
+    checkersEntities = manager.getGroup(groupCheckers);
+    board->allowedMoves(board->getInstances('B'));
+    board->allowedMoves(board->getInstances('R'));
+    Logic.addComponent<LogicComponent>();
+
+    auto& caveman(manager.addEntity());
+    caveman.addComponent<TransformComponent>(550, 350, 422, 403, 1);
+    caveman.addComponent<SpriteComponent>("assets/caveman-idle.png");
+    caveman.addComponent<ButtonComponent>("assets/caveman-idle.png", "assets/caveman-idle.png", "assets/caveman-idle-hovered.png");
+}
+
+void Game::resetScreen() {
+    cout << "clearing screen..." << endl;
+
+    menuBG.destroy();
+    logo.destroy();
+    buttonStart.destroy();
+    buttonQuit.destroy();
+}
+
+void Game::setStateLevel0() {
+    state = Level0;
+}

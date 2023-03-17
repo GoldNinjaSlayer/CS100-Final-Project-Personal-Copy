@@ -43,8 +43,11 @@ private:
 	int cnt = 0;
 	SDL_Window *window;
 
-	
-	
+    void startGame();
+
+    void resetScreen();
+
+    void setStateLevel0();
 };
 
 

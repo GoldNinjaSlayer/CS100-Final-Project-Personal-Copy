@@ -6,10 +6,6 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
-#ifdef _DEBUG
-#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DEBUG_NEW
-#endif
 
 class Component;
 class Entity;
@@ -64,7 +60,7 @@ public:
 
 	void update()
 	{
-		for (auto& c : components) c->update();
+        for (auto& c : components) c->update();
 	}
 	void draw()
 	{
@@ -92,18 +88,16 @@ public:
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... mArgs)
 	{
-		auto c = std::make_unique<T>(std::forward<TArgs>(mArgs)...);
+		T* c(new T(std::forward<TArgs>(mArgs)...));
 		c->entity = this;
+		std::unique_ptr<Component> uPtr{ c };
+		components.emplace_back(std::move(uPtr));
 
-		T& result = *c;
-		components.push_back(std::move(c));
-
-		componentArray[getComponentTypeID<T>()] = &result;
+		componentArray[getComponentTypeID<T>()] = c;
 		componenetBitSet[getComponentTypeID<T>()] = true;
 
-		result.init();
-		return result;
-
+		c->init();
+		return *c;
 	}
 
 	template <typename T> T& getComponent() const
@@ -165,10 +159,10 @@ public:
 
 	Entity& addEntity()
 	{
-		auto e = std::make_unique<Entity>(*this);
-		Entity& result = *e;
-		entities.push_back(std::move(e));
-		return result;
+		Entity* e = new Entity(*this);
+		std::unique_ptr<Entity> uPtr{ e };
+		entities.emplace_back(std::move(uPtr));
+		return *e;
 	}
 
 };
