@@ -46,5 +46,12 @@ The AI class is capable of substituting the player class, as it is able to play 
  ## Installation/Usage
 Download the zip folder from the release, unzip it, and run the CheckersEngine.exe file located within it.
  
- ## Testing
+ ## Testing Procedure
  We tested our program by checking for memory leaks and unit testing our code. Due to our program being mostly visual, we were only able to test the game logic portions of our code.
+ Classes that were tested make up the main game objects. These include 
+ -Checker class: Constructor tested, tested if red pice can be kinged, tested if black piece can be kinged, tested if a piece can change color.
+ -Player class: tested constructor, test if player can change color
+ -GameLogic class: tested constructor for turn, tested constructor for players, tested change turn logic
+ -Board class: tested constructor, tested destructor, tested get instances of red pieces and black pieces, tested get checker piece, tested swap checker pieces, test if a piece on the board can capture another piece, test wether certain pieces are allowed to move.
+ -Vector2D class: tested all vector mathematical functions and overloaded operators. vector class functions are responsible for object movement.
+All functions that do not rely on the SDL2 graphic library have been tested. To acieve this, some classes and functions have been modified in the Agora-gtest class to remove SDL2 dependencies
