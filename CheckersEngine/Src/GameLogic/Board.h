@@ -15,6 +15,7 @@ using namespace std;
 class Board{
     private:
     int ROWS;
+    int COLS;
     Checker ***checkers; //Handles the 2D array dynamically
     char currentTurn = 'R';    
 
